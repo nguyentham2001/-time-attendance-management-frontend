@@ -6,13 +6,18 @@ import axiosClient from '@apis/api';
 
 import actions from '../actions';
 
-function* loginSaga(email, password) {
+function* loginSaga({email, password}) {
   try {
-    const { accessToken } = yield apis.auth.login(email, password);
-    axiosClient.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
-    setCookie('accessToken', accessToken, A_WEEK);
-    yield put(actions.auth.loginSuccess(accessToken));
+    // const { accessToken } = yield apis.auth.login(email, password);
+    console.log({email, password});
+    if(email === 'abc@gmail.com' && password === '1234') {
+      const accessToken = 'faketoken';
+      setCookie('accessToken', accessToken, A_WEEK);
+      yield put(actions.auth.loginSuccess(accessToken));
+    }
+    // axiosClient.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
   } catch (error) {
+    console.log(error)
     yield put(actions.auth.loginFailure());
   }
 }
