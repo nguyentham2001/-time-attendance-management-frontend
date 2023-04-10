@@ -17,7 +17,15 @@ export default function authReducer(state = initialState, action) {
     }
 
     case actionTypes.LOGIN_FAILURE: {
-      return { ...state, isLoggingIn: false, error: 'Đăng nhập không thành công' };
+      return {
+        ...state,
+        isLoggingIn: false,
+        error: 'Đăng nhập không thành công',
+      };
+    }
+
+    case actionTypes.LOGOUT: {
+      return { ...initialState };
     }
 
     default:

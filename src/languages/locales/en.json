@@ -1,4 +1,16 @@
 {
   "learnReact": "Learn React",
-  "login": "Login"
+  "login": "Login",
+  "paginationText": "Showing {{start}} to {{end}} of {{total}}",
+  "add": "Add",
+  "no":"No",
+  "id":"Employee ID",
+  "name":"Name",
+  "phoneNumber":"PhoneNumber",
+  "email":"Email",
+  "address":"Address",
+  "position":"Position",
+  "actions":"Action",
+  "employee":"Manage_employee_list"
+ 
 }

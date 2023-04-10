@@ -2,12 +2,24 @@
 import React from 'react';
 import ROUTES from '@src/constants/route';
 import { Icon } from '@mui/material';
+import MenuBookIcon from '@mui/icons-material/MenuBook';
+import WorkHistoryIcon from '@mui/icons-material/WorkHistory';
+import KeyboardIcon from '@mui/icons-material/Keyboard';
+import YardIcon from '@mui/icons-material/Yard';
+import CardGiftcardIcon from '@mui/icons-material/CardGiftcard';
+import SwitchAccountIcon from '@mui/icons-material/SwitchAccount';
+import ReportIcon from '@mui/icons-material/Report';
 
 export const sidebarMenu = [
   {
     key: 'Employee',
     heading: 'Quản lý danh sách nhân viên',
-    icon: <Icon>Employee</Icon>,
+    icon: (
+      <Icon>
+        {' '}
+        <MenuBookIcon />
+      </Icon>
+    ),
     role: ['user'],
     route: ROUTES.HOME,
     // subMenu: [
@@ -28,7 +40,11 @@ export const sidebarMenu = [
   {
     key: 'Shift',
     heading: 'Quản lý ca làm việc',
-    icon: <Icon>Shift</Icon>,
+    icon: (
+      <Icon>
+        <WorkHistoryIcon />
+      </Icon>
+    ),
     role: ['user'],
     route: ROUTES.SHIFT,
     // subMenu: [
@@ -49,7 +65,11 @@ export const sidebarMenu = [
   {
     key: 'Time',
     heading: 'Quản lý chấm công',
-    icon: <Icon>Time</Icon>,
+    icon: (
+      <Icon>
+        <KeyboardIcon />
+      </Icon>
+    ),
     role: ['user'],
     route: ROUTES.TIME,
     // subMenu: [
@@ -95,7 +115,11 @@ export const sidebarMenu = [
   {
     key: 'Salary',
     heading: 'Quản lý lương',
-    icon: <Icon>Salary</Icon>,
+    icon: (
+      <Icon>
+        <YardIcon />
+      </Icon>
+    ),
     role: ['user'],
     route: ROUTES.SALARY,
   },
@@ -103,7 +127,11 @@ export const sidebarMenu = [
   {
     key: 'Leave',
     heading: 'Quản lý nghỉ phép trong năm',
-    icon: <Icon>LEAVE</Icon>,
+    icon: (
+      <Icon>
+        <CardGiftcardIcon />
+      </Icon>
+    ),
     role: ['user'],
     route: ROUTES.LEAVE,
   },
@@ -111,7 +139,11 @@ export const sidebarMenu = [
   {
     key: 'Account',
     heading: 'Quản lý tài khoản người dùng',
-    icon: <Icon>Account</Icon>,
+    icon: (
+      <Icon>
+        <SwitchAccountIcon />
+      </Icon>
+    ),
     role: ['user'],
     route: ROUTES.ACCOUNT,
   },
@@ -119,7 +151,11 @@ export const sidebarMenu = [
   {
     key: 'Report',
     heading: 'Báo cáo và thống kê',
-    icon: <Icon>Report</Icon>,
+    icon: (
+      <Icon>
+        <ReportIcon />
+      </Icon>
+    ),
     role: ['user'],
     route: ROUTES.REPORT,
   },

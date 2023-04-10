@@ -27,7 +27,7 @@ const hasChildren = (item) => {
 };
 
 const PlaceRightBottom = ({ isSubGroup, item, onItemClick, selectedKeys }) => {
-  const { t } = useTranslation(['layout']);
+  const { t } = useTranslation();
 
   const handleClick = (route, isGroupMenu) => {
     if (isGroupMenu) return;
@@ -87,7 +87,7 @@ const SingleLevel = ({
   selectedKeys,
   level,
 }) => {
-  const { t } = useTranslation(['layout']);
+  const { t } = useTranslation();
 
   const isMenuActive = useMemo(() => {
     const [lastKey] = selectedKeys.slice(-1);
@@ -125,7 +125,7 @@ const MultiLevel = ({
 }) => {
   const { subMenu: children } = item;
 
-  const { t } = useTranslation(['layout']);
+  const { t } = useTranslation();
 
   const [open, setOpen] = useState(false);
 

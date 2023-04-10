@@ -1,5 +1,17 @@
 {
   "learnReact": "Học React",
-  "login": "Đăng nhập"
+  "login": "Đăng nhập",
+  "paginationText": "Hiển thị từ {{start}} đến {{end}} của {{total}}",
+  "add": "Thêm",
+  "no":"STT",
+  "id":"Mã số nhân viên",
+  "name":"Họ và tên",
+  "phoneNumber":"Số điện thoại",
+  "email":"Email",
+  "address":"Địa chỉ",
+  "position":"Chức vụ",
+  "actions":"Thao tác",
+  "employee":"Quản lý danh sách nhân viên"
+  
 }
 

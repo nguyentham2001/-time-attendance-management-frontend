@@ -1,41 +1,37 @@
 import styled from 'styled-components';
 
 export default styled.div`
-  text-align: center;
-
-  .app-logo {
-    height: 40vmin;
-    pointer-events: none;
+  background-color: while;
+  width: 100%;
+  top: 0;
+  left: 0;
+  box-shadow: 2px 2px 4px #2222;
+  padding: 16px 8px;
+  .employee-button {
   }
-
-  @media (prefers-reduced-motion: no-preference) {
-    .app-logo {
-      animation: app-logo-spin infinite 20s linear;
-    }
+  #search-employee {
+    height: 5px;
   }
-
-  .app-header {
-    background-color: #282c34;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: calc(10px + 2vmin);
-    color: white;
+  .input-employee {
+    width: 500px;
   }
-
-  .app-link {
-    color: #61dafb;
+  .employee-add {
+    margin-left: 20px;
   }
-
-  @keyframes app-logo-spin {
-    from {
-      transform: rotate(0deg);
-    }
-    to {
-      transform: rotate(360deg);
-    }
+  .employee-button {
+    margin-left: 350px;
+  }
+  .css-sghohy-MuiButtonBase-root-MuiButton-root {
+    background: #cdcdcd;
+  }
+  .css-sghohy-MuiButtonBase-root-MuiButton-root:hover {
+    background: #cdcdcd;
+  }
+  .css-sghohy-MuiButtonBase-root-MuiButton-root:focus {
+    background: #fff;
+    color: #222;
+  }
+  .employee-container {
+    margin-top: 20px;
   }
 `;
-

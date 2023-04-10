@@ -16,13 +16,10 @@ export const StyledNavbar = styled('div')`
   .button {
     color: #fff;
     font-weight: bold;
-    
-
   }
-  #logo-img{
-    
-    width:40px;
-    height:40px;
+  #logo-img {
+    width: 40px;
+    height: 40px;
   }
   .lang-btn {
     color: #000;
@@ -45,20 +42,18 @@ export const StyledNavbar = styled('div')`
     margin-left: 30px;
     display: flex;
     flex-direction: row;
-  
   }
-  .Search-input{
+
+  .Search-input {
     width: 550px;
-  
   }
-  #Search{
-    height: 10px;    
+  #Search {
+    height: 10px;
   }
-  #icon-search{
+  #icon-search {
     fornt-size: 40px;
   }
- 
- 
+
   .phone {
     display: flex;
     flex-direction: row;

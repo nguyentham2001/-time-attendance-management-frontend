@@ -84,9 +84,11 @@ export const StyledSidebar = styled('div')`
     margin: 0px;
     transition: all 0.33s cubic-bezier(0.685, 0.0473, 0.346, 1) 0s;
     color: #6e6b7b;
+    white-space: initial;
     & span {
       font-size: 16px;
       font-weight: 500;
+      text-overflow: clip;
     }
   }
   .primary {
@@ -143,7 +145,7 @@ export const StyledSidebar = styled('div')`
     & p {
       margin-left: 10px;
       margin-bottom: 0px;
-      font-size: 14px;
+      font-size: 10px;
       line-height: 14px;
       color: #babfc7;
       font-weight: bold;

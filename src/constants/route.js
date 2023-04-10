@@ -1,7 +1,7 @@
 export default {
   HOME: '/',
   LOGIN: '/login',
-  LEAVE: 'leave',
+  LEAVE: '/leave',
   SHIFT: '/shift',
   TIME: '/time',
   EMPLOYEE: '/employee',

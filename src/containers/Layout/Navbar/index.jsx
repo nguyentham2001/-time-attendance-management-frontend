@@ -22,13 +22,15 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import { ROUTES } from '@src/constants';
 import { StyledMenuItem, StyledNavbar } from './index.style';
 import SearchIcon from '@mui/icons-material/Search';
+import actions from '@src/redux/actions';
+import { useDispatch } from 'react-redux';
 const languages = [
   { value: 'en-US', label: 'English' },
   { value: 'vi', label: 'Vietnamese' },
 ];
 
 const CustomMenu = ({ anchorEl, handleClose, items, handleClick }) => {
-  const { t } = useTranslation(['layout']);
+  const { t } = useTranslation();
   return (
     <Menu
       anchorEl={anchorEl}
@@ -41,9 +43,6 @@ const CustomMenu = ({ anchorEl, handleClose, items, handleClick }) => {
     >
       {items.map((item) => (
         <MenuItem key={item.value} onClick={() => handleClick(item.value)}>
-          <ListItemIcon className="menu-item-icon">
-            {/* <img src={`/img/${item.iconPath}`} alt={item.value} /> */}
-          </ListItemIcon>
           <Typography variant="inherit"> {t(item.label)}</Typography>
         </MenuItem>
       ))}
@@ -52,7 +51,7 @@ const CustomMenu = ({ anchorEl, handleClose, items, handleClick }) => {
 };
 
 const LanguageSelect = () => {
-  const { t } = useTranslation(['layout']);
+  const { t } = useTranslation();
   const [anchorEl, setAnchorEl] = useState(null);
 
   const handleChangeLanguage = (value) => {
@@ -60,9 +59,9 @@ const LanguageSelect = () => {
     setAnchorEl(null);
   };
 
-  // const handleOpenLanguage = (e) => {
-  //   setAnchorEl(e.currentTarget);
-  // };
+  const handleOpenLanguage = (e) => {
+    setAnchorEl(e.currentTarget);
+  };
 
   const handleCloseLanguage = () => {
     setAnchorEl(null);
@@ -80,10 +79,7 @@ const LanguageSelect = () => {
         color="inherit"
         aria-haspopup="true"
         className="lang-btn"
-        // startIcon={
-        //   <img src={`/img/${getLanguageIcon(i18n.language)}`} alt="diamond" />
-        // }
-        // onClick={handleOpenLanguage}
+        onClick={handleOpenLanguage}
       >
         <Typography className="lang-text">{t(i18n.language)}</Typography>
       </Button>
@@ -98,8 +94,10 @@ const LanguageSelect = () => {
 };
 
 const Account = () => {
-  const { t } = useTranslation(['layout']);
+  const { t } = useTranslation();
   const [anchorEl, setAnchorEl] = useState(null);
+
+  const dispath = useDispatch();
 
   const handleClickOpenPopover = (event) => {
     setAnchorEl(event.currentTarget);
@@ -111,6 +109,10 @@ const Account = () => {
 
   const handleViewInfo = () => {
     window.open(`${IAM_URL}/auth/realms/${IAM_REALM}/account`, '_blank');
+  };
+
+  const handleLogout = () => {
+    dispath(actions.auth.logout());
   };
 
   const renderAvatar = () => {
@@ -141,7 +143,7 @@ const Account = () => {
             <AssignmentIndIcon className="info-icon" />
             <Typography>{t('accountInfo')}</Typography>
           </StyledMenuItem>
-          <StyledMenuItem>
+          <StyledMenuItem onClick={handleLogout}>
             <LogoutIcon className="logout-icon" />
             <Typography>{t('logout')}</Typography>
           </StyledMenuItem>
@@ -166,7 +168,7 @@ const Account = () => {
 };
 
 const Navbar = () => {
-  const { t } = useTranslation(['layout']);
+  const { t } = useTranslation();
   const { enqueueSnackbar } = useSnackbar();
   const location = useLocation();
   const history = useHistory();
@@ -201,27 +203,7 @@ const Navbar = () => {
         </div>
       </div>
       <div className="content righ-container">
-        {/* <IconButton aria-label="notification" size="medium">
-          <Badge
-            badgeContent={4}
-            color="primary"
-            classes={{
-              badge: 'badge',
-            }}
-          >
-            <img src="/img/notification-icon.svg" alt="notification" />
-          </Badge>
-        </IconButton> */}
         <LanguageSelect />
-        {/* <div className="phone">
-          <IconButton aria-label="phone" size="medium">
-            <img
-              src="/img/phone-icon.svg"
-              alt="phone"
-              className="phone-image"
-            />
-          </IconButton>
-        </div> */}
         <Account />
       </div>
     </StyledNavbar>
