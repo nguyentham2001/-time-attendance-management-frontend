@@ -8,4 +8,9 @@ export default {
   REPORT: '/report',
   ACCOUNT: '/account',
   SALARY: '/salary',
+  SYN: '/syn',
+  DATA: '/data',
+  DETAIL: '/detail',
+  GENERAL: '/general',
+  TIMESHEETDATA: '/timesheetdata',
 };

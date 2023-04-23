@@ -7,24 +7,33 @@ export default styled.div`
   left: 0;
   box-shadow: 2px 2px 4px #2222;
   padding: 16px 8px;
-  .shift-title {
+  .timesheet-title {
     font-size: 18.72px;
     font-weight: bold;
     color: #0000ff;
   }
-  .shift-button {
+  .search-left {
+    margin-top: 30px;
+  }
+  .input-time {
+    width: 400px;
+  }
+  #search-time {
+    height: 7px;
+  }
+  .select-timesheet {
     float: right;
-    background: #1e90ff;
-  }
-  .shift-button:hover {
-    background: #1e90ff;
-  }
-  #search-shift {
     width: 300px;
-    height: 5px;
   }
-  .input-shift {
+  .calendar {
+    float: right;
+    height: 20px;
+  }
+  .css-o9k5xi-MuiInputBase-root-MuiOutlinedInput-root {
+    width: 300px;
+    height: 40px;
+  }
+  .timesheet-footer {
     margin-top: 20px;
-    margin-bottom: 20px;
   }
 `;

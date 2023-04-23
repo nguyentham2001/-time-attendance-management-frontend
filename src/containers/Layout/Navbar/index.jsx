@@ -189,7 +189,7 @@ const Navbar = () => {
           <TextField
             id="Search"
             variant="outlined"
-            placeholder={t('Search.....')}
+            placeholder={t('search-nabar')}
             type="text"
             className="Search-input"
             InputProps={{

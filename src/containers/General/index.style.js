@@ -7,26 +7,26 @@ export default styled.div`
   left: 0;
   box-shadow: 2px 2px 4px #2222;
   padding: 16px 8px;
-  .time-title {
+  .general-title {
     font-size: 18.72px;
     font-weight: bold;
     color: #0000ff;
   }
-  .time-button {
+  .general-button {
     float: right;
     background: #1e90ff;
   }
-  .time-button:hover {
+  .general-button:hover {
     background: #1e90ff;
   }
-  .time-container {
+  .general-container {
     margin-top: 20px;
     margin-bottom: 20px;
   }
-  .input-time {
+  .input-general {
     width: 400px;
   }
-  #search-time {
+  #search-general {
     height: 5px;
   }
 `;

@@ -7,26 +7,32 @@ export default styled.div`
   left: 0;
   box-shadow: 2px 2px 4px #2222;
   padding: 16px 8px;
-  .time-title {
+  .detail-button {
+    float: right;
+    background: #1e90ff;
+  }
+  .detail-button:hover {
+    background: #1e90ff;
+  }
+  .select-detail {
+    float: right;
+    height: 5px;
+  }
+  .detail-title {
     font-size: 18.72px;
     font-weight: bold;
     color: #0000ff;
   }
-  .time-button {
-    float: right;
-    background: #1e90ff;
-  }
-  .time-button:hover {
-    background: #1e90ff;
-  }
-  .time-container {
+  .detail-search {
     margin-top: 20px;
     margin-bottom: 20px;
   }
-  .input-time {
-    width: 400px;
-  }
-  #search-time {
+  #search-detail {
+    width: 300px;
     height: 5px;
+  }
+
+  .btt-savecancel{
+    float-right;
   }
 `;

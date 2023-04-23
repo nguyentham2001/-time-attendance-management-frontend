@@ -4,11 +4,10 @@ import { TableCell } from '@mui/material';
 export const StyledTableCell = styled(TableCell)`
   &.MuiTableCell-head {
     white-space: nowrap;
-    background-color: #f6f9fc;
-    font-weight: 600;
+    background-color: #87cefa;
+    font-weight: bold;
     font-size: 15px;
-    text-transform: uppercase;
-    color: #6e6b7b;
+    color: #696969;
     border: ${(props) =>
       props.border ? '1px solid rgba(224, 224, 224, 1)' : 'none'};
   }

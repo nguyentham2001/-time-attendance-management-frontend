@@ -9,6 +9,7 @@ import YardIcon from '@mui/icons-material/Yard';
 import CardGiftcardIcon from '@mui/icons-material/CardGiftcard';
 import SwitchAccountIcon from '@mui/icons-material/SwitchAccount';
 import ReportIcon from '@mui/icons-material/Report';
+import AcUnitIcon from '@mui/icons-material/AcUnit';
 
 export const sidebarMenu = [
   {
@@ -47,20 +48,25 @@ export const sidebarMenu = [
     ),
     role: ['user'],
     route: ROUTES.SHIFT,
-    // subMenu: [
-    //   {
-    //     key: 'AutoCallReport',
-    //     heading: 'autoCall',
-    //     route: ROUTES.AUTO_CALL_REPORT,
-    //     role: ['user'],
-    //   },
-    // {
-    //   key: 'StaffReport',
-    //   heading: 'staff',
-    //   route: ROUTES.STAFF_REPORT,
-    //   role: ['user'],
-    // },
-    // ],
+    subMenu: [
+      {
+        key: 'Syn',
+        heading: 'Bảng phân ca tổng hợp',
+        route: ROUTES.SYN,
+      },
+      {
+        key: 'detail',
+        heading: 'Phân ca chi tiết',
+        route: ROUTES.DETAIL,
+        role: ['user'],
+      },
+      {
+        key: 'work',
+        heading: 'Ca làm việc',
+        role: ['user'],
+        route: ROUTES.SHIFT,
+      },
+    ],
   },
   {
     key: 'Time',
@@ -72,45 +78,26 @@ export const sidebarMenu = [
     ),
     role: ['user'],
     route: ROUTES.TIME,
-    // subMenu: [
-    //   {
-    //     key: 'Overview',
-    //     heading: 'overview',
-    //     route: ROUTES.API_OVERVIEW,
-    //   },
-    //   {
-    //     key: 'Application',
-    //     heading: 'application',
-    //     route: ROUTES.API_APPLICATION,
-    //     role: ['user'],
-    //   },
-    //   {
-    //     key: 'Call',
-    //     heading: 'call',
-    //     role: ['user'],
-    //     route: ROUTES.HOME,
-    //     subMenu: [
-    //       {
-    //         key: 'voiceBroadcasting',
-    //         heading: 'voiceBroadcasting',
-    //         route: ROUTES.API_VOICE_BROADCASTING,
-    //         role: ['user'],
-    //       },
-    //       {
-    //         key: 'CallByCampaign',
-    //         heading: 'callByCampaign',
-    //         route: ROUTES.API_CALL_BY_CAMPAIGN,
-    //         role: ['user'],
-    //       },
-    //       {
-    //         key: 'OTPVerify',
-    //         heading: 'otpVerify',
-    //         route: ROUTES.API_VOICE_OTP,
-    //         role: ['user'],
-    //       },
-    //     ],
-    //   },
-    // ],
+    subMenu: [
+      {
+        key: 'detailedtimesheer',
+        heading: 'Bảng chấm công chi tiết',
+        route: ROUTES.TIME,
+        role: ['user'],
+      },
+      {
+        key: 'Timesyn',
+        heading: 'Bảng chấm công tổng hợp',
+        route: ROUTES.GENERAL,
+        role: ['user'],
+      },
+      {
+        key: 'Timedata',
+        heading: 'Dữ liệu chấm công',
+        route: ROUTES.TIMESHEETDATA,
+        role: ['user'],
+      },
+    ],
   },
   {
     key: 'Salary',
@@ -126,7 +113,7 @@ export const sidebarMenu = [
 
   {
     key: 'Leave',
-    heading: 'Quản lý nghỉ phép trong năm',
+    heading: 'Quản lý đơn nghỉ trong năm',
     icon: (
       <Icon>
         <CardGiftcardIcon />
@@ -134,6 +121,68 @@ export const sidebarMenu = [
     ),
     role: ['user'],
     route: ROUTES.LEAVE,
+    subMenu: [
+      {
+        key: 'Salary',
+        heading: 'Đơn xin nghỉ',
+        route: ROUTES.SALARY,
+        role: ['user'],
+      },
+      {
+        key: 'Salary',
+        heading: 'Đăng ký đi muộn, về sớm',
+        route: ROUTES.SALARY,
+        role: ['user'],
+      },
+      {
+        key: 'Salary',
+        heading: 'Đăng ký làm thêm',
+        route: ROUTES.SALARY,
+        role: ['user'],
+      },
+      {
+        key: 'Salary',
+        heading: 'Đề nghị đi công tác',
+        route: ROUTES.SALARY,
+        role: ['user'],
+      },
+      {
+        key: 'Salary',
+        heading: 'Đề nghị cập nhật công',
+        route: ROUTES.SALARY,
+        role: ['user'],
+      },
+      {
+        key: 'Salary',
+        heading: 'Đề nghị đổi ca',
+        route: ROUTES.SALARY,
+        role: ['user'],
+      },
+      {
+        key: 'Salary',
+        heading: 'Phê duyệt chấm công',
+        route: ROUTES.SALARY,
+        role: ['user'],
+      },
+      {
+        key: 'Salary',
+        heading: 'Bảng tổng hợp nghỉ phép',
+        route: ROUTES.SALARY,
+        role: ['user'],
+      },
+      {
+        key: 'Salary',
+        heading: 'Bảng tổng hợp nghỉ bù',
+        route: ROUTES.SALARY,
+        role: ['user'],
+      },
+      {
+        key: 'Salary',
+        heading: 'Kế hoạch nghỉ phép',
+        route: ROUTES.SALARY,
+        role: ['user'],
+      },
+    ],
   },
 
   {

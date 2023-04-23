@@ -1,3 +1,4 @@
+import { Dialog } from '@mui/material';
 import styled from 'styled-components';
 
 export default styled.div`
@@ -9,29 +10,32 @@ export default styled.div`
   padding: 16px 8px;
   .employee-button {
   }
+  .employee-header {
+    color: #0000ff;
+  }
   #search-employee {
     height: 5px;
   }
   .input-employee {
-    width: 500px;
+    width: 400px;
   }
-  .employee-add {
-    margin-left: 20px;
-  }
-  .employee-button {
-    margin-left: 350px;
+
+  #employee-btt {
+    margin-left: 500px;
   }
   .css-sghohy-MuiButtonBase-root-MuiButton-root {
-    background: #cdcdcd;
+    background: #1e90ff;
   }
   .css-sghohy-MuiButtonBase-root-MuiButton-root:hover {
-    background: #cdcdcd;
-  }
-  .css-sghohy-MuiButtonBase-root-MuiButton-root:focus {
-    background: #fff;
-    color: #222;
+    background: #1e90ff;
   }
   .employee-container {
     margin-top: 20px;
+  }
+  .imformation-employee {
+    font-size: 16px;
+  }
+  .css-bdhsul-MuiTypography-root-MuiDialogTitle-root {
+    color: #0000ff;
   }
 `;

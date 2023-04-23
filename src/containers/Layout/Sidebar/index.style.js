@@ -92,7 +92,7 @@ export const StyledSidebar = styled('div')`
     }
   }
   .primary {
-    color: #fc6634;
+    color: #0000ff;
   }
   .background-primary {
     background-color: #f5f5f5;

@@ -1,17 +1,15 @@
 import React, { useEffect, useState } from 'react';
+import StyledGeneral from './index.style';
 import { useTranslation } from 'react-i18next';
-import StyledTime from './index.style';
 import { Button, TextField, InputAdornment } from '@mui/material';
 import ControlPointIcon from '@mui/icons-material/ControlPoint';
 import SearchIcon from '@mui/icons-material/Search';
 import CustomTable from 'src/components/CustomTable';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
-import CreateDetailedTimesheer from './CreateDetailedTimesheet';
 const limit = 10;
-const Time = () => {
+const General = () => {
   const { t } = useTranslation();
-
   const [data, setData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [total, setTotal] = useState(15);
@@ -83,29 +81,30 @@ const Time = () => {
       onClick: () => {},
     },
   ];
-
   return (
-    <StyledTime>
-      <div className="time-home">
-        <div className="time-header">
-          <label className="time-title">{t('Bảng chấm công chi tiết')}</label>
+    <StyledGeneral>
+      <div className="general-home">
+        <div className="general-header">
+          <lable className="general-title">
+            {t(' Bảng chấm công tổng hợp')}
+          </lable>
           <Button
             variant="contained"
-            className="time-button"
+            className="general-button"
             color="primary"
-            onClick={handleOpenDialog}
+            // onClick={handleOpenDialog}
             startIcon={<ControlPointIcon />}
           >
             {t('add')}
           </Button>
         </div>
-        <div className="time-container">
+        <div className="general-container">
           <TextField
-            id="search-time"
+            id="search-general"
             variant="outlined"
             placeholder={t('search-nabar')}
             type="text"
-            className="input-time"
+            className="input-general"
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
@@ -115,7 +114,7 @@ const Time = () => {
             }}
           />
         </div>
-        <div className="time-footer">
+        <div className="general-footer">
           <CustomTable
             heads={heads}
             items={data}
@@ -130,9 +129,8 @@ const Time = () => {
           />
         </div>
       </div>
-      <CreateDetailedTimesheer open={open} handleClose={handleClose} />
-    </StyledTime>
+    </StyledGeneral>
   );
 };
 
-export default Time;
+export default General;

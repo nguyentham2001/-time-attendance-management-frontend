@@ -6,7 +6,11 @@ import Time from '@src/pages/Time';
 import Salary from '@src/pages/Salary';
 import Shift from '@src/pages/Shift';
 import Account from '@src/pages/Account';
+import TimesheetData from '@src/pages/TimesheetData';
 
+import Syn from '@src/pages/Syn';
+import Detail from '@src/pages/Detail';
+import General from '@src/pages/General';
 import routes from '@src/constants/route';
 
 export default [
@@ -67,6 +71,37 @@ export default [
   {
     path: routes.ACCOUNT,
     component: Account,
+    exact: true,
+    restricted: false,
+    isPrivate: true,
+  },
+
+  {
+    path: routes.SYN,
+    component: Syn,
+    exact: true,
+    restricted: false,
+    isPrivate: true,
+  },
+
+  {
+    path: routes.DETAIL,
+    component: Detail,
+    exact: true,
+    restricted: false,
+    isPrivate: true,
+  },
+
+  {
+    path: routes.GENERAL,
+    component: General,
+    exact: true,
+    restricted: false,
+    isPrivate: true,
+  },
+  {
+    path: routes.TIMESHEETDATA,
+    component: TimesheetData,
     exact: true,
     restricted: false,
     isPrivate: true,

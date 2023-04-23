@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import StyledApp from './index.style';
-import { Button, TextField, InputAdornment, Icon } from '@mui/material';
+import StyledHome from './index.style';
+import { Button, TextField, InputAdornment } from '@mui/material';
 import ControlPointIcon from '@mui/icons-material/ControlPoint';
 import SearchIcon from '@mui/icons-material/Search';
 import EditIcon from '@mui/icons-material/Edit';
@@ -9,14 +9,30 @@ import DeleteIcon from '@mui/icons-material/Delete';
 
 import CustomTable from 'src/components/CustomTable';
 
+import CreateEmployee from './CreateEmployee';
+
 const limit = 10;
 
-const App = () => {
+// const VIEWS = { LIST: 'LIST', ADD: 'ADD' };
+
+const Home = () => {
   const { t } = useTranslation();
 
   const [data, setData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [total, setTotal] = useState(15);
+
+  // const [view, setView] = useState(VIEWS.LIST);
+
+  const [open, setOpen] = React.useState(false);
+
+  const handleOpenDialog = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   useEffect(() => {
     setData([
@@ -42,12 +58,12 @@ const App = () => {
       align: 'left',
     },
     {
-      label: t('name'),
+      label: t('id'),
       valueName: 'name',
       align: 'left',
     },
     {
-      label: t('accountId'),
+      label: t('name'),
       valueName: 'accountId',
       align: 'left',
     },
@@ -63,22 +79,27 @@ const App = () => {
       minWidth: 100,
     },
     {
-      label: t('permission'),
+      label: t('address'),
       valueName: 'permission',
       align: 'left',
     },
     {
-      label: t('permission'),
+      label: t('position'),
       valueName: 'permission',
       align: 'left',
     },
     {
-      label: t('permission'),
+      label: t('datesign'),
       valueName: 'permission',
       align: 'left',
     },
     {
-      label: t('common:::actions'),
+      label: t('datestart'),
+      valueName: 'permission',
+      align: 'left',
+    },
+    {
+      label: t('actions'),
       valueName: 'actions',
       align: 'center',
     },
@@ -95,26 +116,25 @@ const App = () => {
     },
   ];
 
+  // if (view == VIEWS.ADD)
+  //   return (
+  //     <div>
+  //       <Button onClick={() => setView(VIEWS.LIST)}>Back</Button>
+  //     </div>
+  //   );
+
   return (
-    <StyledApp>
+    <StyledHome>
       <div className="home">
         <div className="home-employee">
-          <div className="employee-header">
-            <h3>Quản lý danh sách nhân viên</h3>
+          <div>
+            <h3 className="employee-header">{t('manage-employee-list')}</h3>
           </div>
           <div className="employee-add">
-            <Button
-              variant="contained"
-              className="employee-button"
-              color="primary"
-              startIcon={<ControlPointIcon />}
-            >
-              {t('add')}
-            </Button>
             <TextField
               id="search-employee"
               variant="outlined"
-              placeholder={t('Tìm kiếm mã hoặc tên nhân viên')}
+              placeholder={t('search')}
               type="text"
               className="input-employee"
               InputProps={{
@@ -125,6 +145,17 @@ const App = () => {
                 ),
               }}
             />
+            <Button
+              id="employee-btt"
+              variant="contained"
+              className="employee-button"
+              color="primary"
+              startIcon={<ControlPointIcon />}
+              onClick={handleOpenDialog}
+              // onClick={() => setView(VIEWS.ADD)}
+            >
+              {t('add')}
+            </Button>
           </div>
           <div className="employee-container">
             <CustomTable
@@ -142,8 +173,10 @@ const App = () => {
           </div>
         </div>
       </div>
-    </StyledApp>
+
+      <CreateEmployee open={open} handleClose={handleClose} />
+    </StyledHome>
   );
 };
 
-export default App;
+export default Home;
