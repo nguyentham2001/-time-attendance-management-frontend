@@ -5,6 +5,8 @@ import actions from '@redux/actions';
 import { Button, TextField, Link } from '@mui/material';
 import StyledLogin from './index.style';
 import { enqueueSnackbar } from 'notistack';
+import { LoadingButton } from '@mui/lab';
+import SubmitButton from 'src/components/SubmitButton';
 
 const Login = () => {
   const { t } = useTranslation();
@@ -18,14 +20,10 @@ const Login = () => {
     if (error) {
       enqueueSnackbar({
         variant: 'error',
-        message: error,
+        message: t(error),
       });
     }
   }, [error]);
-
-  console.log('isLoggingIn', isLoggingIn);
-
-  if (isLoggingIn) return <p>loading...</p>;
 
   const handleChangeEmail = (e) => {
     const { value } = e.target;
@@ -77,9 +75,9 @@ const Login = () => {
               <Link href="#"> forget password?</Link>
             </div>
             <div className="Login-btt">
-              <Button variant="contained" onClick={handleLogin}>
+              <SubmitButton loading={isLoggingIn} onClick={handleLogin}>
                 {t('login')}
-              </Button>
+              </SubmitButton>
             </div>
           </div>
         </div>

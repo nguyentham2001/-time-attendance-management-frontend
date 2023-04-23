@@ -23,32 +23,11 @@ import { ROUTES } from '@src/constants';
 import { StyledMenuItem, StyledNavbar } from './index.style';
 import SearchIcon from '@mui/icons-material/Search';
 import actions from '@src/redux/actions';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 const languages = [
   { value: 'en-US', label: 'English' },
   { value: 'vi', label: 'Vietnamese' },
 ];
-
-const CustomMenu = ({ anchorEl, handleClose, items, handleClick }) => {
-  const { t } = useTranslation();
-  return (
-    <Menu
-      anchorEl={anchorEl}
-      keepMounted={false}
-      open={Boolean(anchorEl)}
-      onClose={handleClose}
-      PaperProps={{
-        style: { transform: 'translateX(10px) translateY(50px)' },
-      }}
-    >
-      {items.map((item) => (
-        <MenuItem key={item.value} onClick={() => handleClick(item.value)}>
-          <Typography variant="inherit"> {t(item.label)}</Typography>
-        </MenuItem>
-      ))}
-    </Menu>
-  );
-};
 
 const LanguageSelect = () => {
   const { t } = useTranslation();
@@ -67,6 +46,8 @@ const LanguageSelect = () => {
     setAnchorEl(null);
   };
 
+  const openPopover = Boolean(anchorEl);
+
   // const getLanguageIcon = (value) => {
   //   const langValue = value || 'en-US';
   //   const language = languages.find((lang) => lang.value === langValue);
@@ -83,12 +64,28 @@ const LanguageSelect = () => {
       >
         <Typography className="lang-text">{t(i18n.language)}</Typography>
       </Button>
-      <CustomMenu
+
+      <Popover
+        id={'language-popover'}
+        open={openPopover}
         anchorEl={anchorEl}
-        handleClose={handleCloseLanguage}
-        items={languages}
-        handleClick={handleChangeLanguage}
-      />
+        onClose={handleCloseLanguage}
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'left',
+        }}
+      >
+        <MenuList>
+          {languages.map((item) => (
+            <StyledMenuItem
+              key={item.value}
+              onClick={() => handleChangeLanguage(item.value)}
+            >
+              <Typography variant="inherit"> {t(item.label)}</Typography>
+            </StyledMenuItem>
+          ))}
+        </MenuList>
+      </Popover>
     </>
   );
 };
@@ -96,6 +93,9 @@ const LanguageSelect = () => {
 const Account = () => {
   const { t } = useTranslation();
   const [anchorEl, setAnchorEl] = useState(null);
+
+  const { user } = useSelector((state) => state.auth);
+  const { name } = user;
 
   const dispath = useDispatch();
 
@@ -161,7 +161,7 @@ const Account = () => {
         onClick={handleClickOpenPopover}
       >
         <Typography className="text name-text">{name}</Typography>
-        <Typography className="text profile-text">{t('profile')}</Typography>
+        {/* <Typography className="text profile-text">{t('profile')}</Typography> */}
       </Box>
     </div>
   );

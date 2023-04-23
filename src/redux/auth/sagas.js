@@ -1,4 +1,4 @@
-import { put, all, takeLatest } from 'redux-saga/effects';
+import { put, all, takeLatest, takeEvery } from 'redux-saga/effects';
 import apis from '@apis';
 import { setCookie } from '@src/utils/cookie';
 import { A_WEEK } from '@src/constants';
@@ -8,17 +8,18 @@ import actions from '../actions';
 
 function* loginSaga({ email, password }) {
   try {
-    // const { accessToken } = yield apis.auth.login(email, password);
-    console.log({ email, password });
-    if (email === 'abc@gmail.com' && password === '1234') {
-      const accessToken = 'faketoken';
-      setCookie('accessToken', accessToken, A_WEEK);
-      yield put(actions.auth.loginSuccess(accessToken));
-    }
-    // axiosClient.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
+    const resp = yield apis.auth.login(email, password);
+
+    const {
+      result: { accessToken },
+    } = resp;
+
+    setCookie('accessToken', accessToken, A_WEEK);
+    yield put(actions.auth.loginSuccess(accessToken));
+    axiosClient.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
   } catch (error) {
-    console.log(error);
-    yield put(actions.auth.loginFailure());
+    const { message } = error;
+    yield put(actions.auth.loginFailure(message));
   }
 }
 
@@ -26,7 +27,22 @@ function* logoutSaga() {
   setCookie('accessToken', '');
 }
 
+function* verifyTokenSaga({ accessToken }) {
+  try {
+    const resp = yield apis.auth.verifyToken(accessToken);
+    const {
+      result: { user },
+    } = resp;
+    yield put(actions.auth.verifyTokenSucess(accessToken, user));
+  } catch (error) {
+    yield put(actions.auth.verifyTokenFailure());
+  }
+}
+
 export default function* rootSaga() {
-  yield all([takeLatest(actions.auth.actionTypes.LOGIN, loginSaga)]);
-  yield all([takeLatest(actions.auth.actionTypes.LOGOUT, logoutSaga)]);
+  yield all([
+    takeLatest(actions.auth.actionTypes.LOGIN, loginSaga),
+    takeEvery(actions.auth.actionTypes.VERIFY_TOKEN, verifyTokenSaga),
+    takeLatest(actions.auth.actionTypes.LOGOUT, logoutSaga),
+  ]);
 }

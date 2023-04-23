@@ -57,5 +57,12 @@
   "timeday":"Working hours",
   "everyday":"Weekday rate",
   "restday":"Weekend rate",
-  "holiday":"Holiday rate"
+  "holiday":"Holiday rate",
+  "badRequest": "Bad Request",
+  "unauthorized": "Unauthorized",
+  "forbidden": "Forbidden",
+  "notFound": "Not found",
+  "serverError": "Server error, please try again.",
+  "userNotFound": "User not found",
+  "wrongPassword": "Wrong password"
 }

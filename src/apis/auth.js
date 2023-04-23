@@ -9,4 +9,15 @@ const login = async (email, password) => {
   return loginInfo;
 };
 
-export { login };
+const verifyToken = async (accessToken) => {
+  const response = await api({
+    method: 'GET',
+    url: '/auths/verify',
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+  return response;
+};
+
+export { login, verifyToken };

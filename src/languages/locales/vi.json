@@ -57,6 +57,13 @@
   "timeday":"Giờ công",
   "everyday":"Hệ số ngày thường",
   "restday":"Hệ số ngày nghỉ",
-  "holiday":"Hệ số ngày lễ"
+  "holiday":"Hệ số ngày lễ",
+  "badRequest": "Yêu cầu không hợp lệ",
+  "unauthorized": "Không xác thực",
+  "forbidden": "Không được phép truy cập",
+  "notFound": "Không tìm thấy",
+  "serverError": "Máy chủ lỗi, vui lòng thử lại sau.",
+  "userNotFound": "Người dùng không tồn tại",
+  "wrongPassword": "Mật khẩu không chính xác"
 }
 

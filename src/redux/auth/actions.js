@@ -3,6 +3,9 @@ export const actionTypes = {
   LOGIN_SUCCESS: 'LOGIN_SUCCESS',
   LOGIN_FAILURE: 'LOGIN_FAILURE',
   LOGOUT: 'LOGOUT',
+  VERIFY_TOKEN: 'VERIFY_TOKEN',
+  VERIFY_TOKEN_SUCCESS: 'VERIFY_TOKEN_SUCCESS',
+  VERIFY_TOKEN_FAILURE: 'VERIFY_TOKEN_FAILURE',
 };
 
 const login = (email, password) => ({
@@ -16,12 +19,36 @@ const loginSuccess = (accessToken) => ({
   accessToken,
 });
 
-const loginFailure = () => ({
+const loginFailure = (message) => ({
   type: actionTypes.LOGIN_FAILURE,
+  message: message,
 });
 
 const logout = () => ({
   type: actionTypes.LOGOUT,
 });
 
-export { login, loginSuccess, loginFailure, logout };
+const verifyToken = (accessToken) => ({
+  type: actionTypes.VERIFY_TOKEN,
+  accessToken,
+});
+
+const verifyTokenSucess = (accessToken, user) => ({
+  type: actionTypes.VERIFY_TOKEN_SUCCESS,
+  accessToken,
+  user,
+});
+
+const verifyTokenFailure = () => ({
+  type: actionTypes.VERIFY_TOKEN_FAILURE,
+});
+
+export {
+  login,
+  loginSuccess,
+  loginFailure,
+  logout,
+  verifyToken,
+  verifyTokenSucess,
+  verifyTokenFailure,
+};

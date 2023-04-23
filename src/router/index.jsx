@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Switch, Redirect } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import nprogress from 'nprogress';
 import 'nprogress/nprogress.css';
 
@@ -12,6 +12,7 @@ import appRoutes from './appRoutes';
 
 import PrivateRoute from './PrivateRoute';
 import PublicRoute from './PublicRoute';
+import actions from '@src/redux/actions';
 
 const PrivateApp = () => {
   const privateRoutes = appRoutes.filter((route) => route.isPrivate);
@@ -34,6 +35,8 @@ const PrivateApp = () => {
 };
 
 const AppRouter = () => {
+  const dispatch = useDispatch();
+
   const [isFirstTime, setIsFirstTime] = useState(true);
 
   const { accessToken, verifying } = useSelector((state) => state.auth);
@@ -48,7 +51,7 @@ const AppRouter = () => {
     if (!accessToken) {
       const accessTokenFromCookie = getCookie('accessToken');
       if (accessTokenFromCookie) {
-        // TODO dispatch action verify token
+        dispatch(actions.auth.verifyToken(accessTokenFromCookie));
       }
     }
 

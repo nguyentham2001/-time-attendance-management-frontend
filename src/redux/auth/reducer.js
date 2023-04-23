@@ -3,6 +3,8 @@ import { actionTypes } from './actions';
 export const initialState = {
   accessToken: null,
   isLoggingIn: false,
+  verifying: false,
+  user: null,
   error: null,
 };
 
@@ -17,11 +19,26 @@ export default function authReducer(state = initialState, action) {
     }
 
     case actionTypes.LOGIN_FAILURE: {
+      const { message } = action;
+
       return {
         ...state,
         isLoggingIn: false,
-        error: 'Đăng nhập không thành công',
+        error: message,
       };
+    }
+
+    case actionTypes.VERIFY_TOKEN: {
+      return { ...state, verifying: true, error: null };
+    }
+
+    case actionTypes.VERIFY_TOKEN_SUCCESS: {
+      const { accessToken, user } = action;
+      return { ...state, verifying: false, accessToken, user };
+    }
+
+    case actionTypes.VERIFY_TOKEN_FAILURE: {
+      return { ...state, verifying: false };
     }
 
     case actionTypes.LOGOUT: {

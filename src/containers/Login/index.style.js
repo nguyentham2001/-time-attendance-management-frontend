@@ -59,12 +59,7 @@ align-items: center;
   }
   .Login-btt button{
     width:100%;
-    font-size: 16px;
-      font-weight: 600;
-      color: #fff;
-      margin-bottom: 8px;
-      text-transform: unset;
-      display:block;
+    margin-bottom: 8px;
   }
   .Login-btt {
     width:100%;
