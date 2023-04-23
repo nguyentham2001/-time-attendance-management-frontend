@@ -95,7 +95,7 @@ const Account = () => {
   const [anchorEl, setAnchorEl] = useState(null);
 
   const { user } = useSelector((state) => state.auth);
-  const { name } = user;
+  const { name } = user || {};
 
   const dispath = useDispatch();
 
