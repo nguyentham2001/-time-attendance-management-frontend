@@ -14,8 +14,8 @@ export default function authReducer(state = initialState, action) {
       return { ...state, isLoggingIn: true, error: null };
 
     case actionTypes.LOGIN_SUCCESS: {
-      const { accessToken } = action;
-      return { ...state, isLoggingIn: false, accessToken, error: null };
+      const { accessToken, user } = action;
+      return { ...state, isLoggingIn: false, accessToken, user, error: null };
     }
 
     case actionTypes.LOGIN_FAILURE: {

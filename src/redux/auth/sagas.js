@@ -15,8 +15,14 @@ function* loginSaga({ email, password }) {
     } = resp;
 
     setCookie('accessToken', accessToken, A_WEEK);
-    yield put(actions.auth.loginSuccess(accessToken));
     axiosClient.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
+
+    const userRes = yield apis.auth.verifyToken(accessToken);
+    const {
+      result: { user },
+    } = userRes;
+
+    yield put(actions.auth.loginSuccess(accessToken, user));
   } catch (error) {
     const { message } = error;
     yield put(actions.auth.loginFailure(message));

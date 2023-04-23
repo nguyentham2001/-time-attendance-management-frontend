@@ -14,9 +14,10 @@ const login = (email, password) => ({
   password,
 });
 
-const loginSuccess = (accessToken) => ({
+const loginSuccess = (accessToken, user) => ({
   type: actionTypes.LOGIN_SUCCESS,
   accessToken,
+  user,
 });
 
 const loginFailure = (message) => ({
