@@ -7,9 +7,15 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import ControlPointIcon from '@mui/icons-material/ControlPoint';
 import SearchIcon from '@mui/icons-material/Search';
+import CreateShift from './CreateShift';
+import StyledCreateShift from './index.style';
+import { VIEW } from 'src/constants';
 const limit = 10;
 const Shift = () => {
   const { t } = useTranslation();
+
+  const [view, setView] = useState(VIEW.LIST);
+
   const [data, setData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [total, setTotal] = useState(15);
@@ -115,6 +121,14 @@ const Shift = () => {
     },
   ];
 
+  if (view == VIEW.ADD) {
+    return (
+      <StyledCreateShift>
+        <CreateShift onBack={() => setView(VIEW.LIST)} />
+      </StyledCreateShift>
+    );
+  }
+
   return (
     <StyledShift>
       <div className="shift-home">
@@ -125,6 +139,7 @@ const Shift = () => {
             className="shift-button"
             color="primary"
             startIcon={<ControlPointIcon />}
+            onClick={() => setView(VIEW.ADD)}
           >
             {t('add')}
           </Button>

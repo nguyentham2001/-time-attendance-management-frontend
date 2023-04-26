@@ -23,7 +23,7 @@ const limit = 10;
 const Detail = () => {
   const { t } = useTranslation();
 
-  const [view, setView] = useState(VIEW.LIST);
+  const [view, setView] = useState(VIEW.ADD);
 
   const [data, setData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);

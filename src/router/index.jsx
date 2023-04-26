@@ -51,7 +51,7 @@ const AppRouter = () => {
     if (!accessToken) {
       const accessTokenFromCookie = getCookie('accessToken');
       if (accessTokenFromCookie) {
-        dispatch(actions.auth.verifyToken(accessTokenFromCookie));
+        // dispatch(actions.auth.verifyToken(accessTokenFromCookie));
       }
     }
 

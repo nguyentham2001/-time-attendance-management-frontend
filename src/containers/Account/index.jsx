@@ -7,8 +7,8 @@ import { useTranslation } from 'react-i18next';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import CustomTable from 'src/components/CustomTable';
-import CreateAccount from './CreateAccount';
 
+import CreateAccount from './CreateAccount';
 const limit = 10;
 const Account = () => {
   const { t } = useTranslation();
