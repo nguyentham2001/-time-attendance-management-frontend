@@ -13,4 +13,6 @@ export default {
   DETAIL: '/detail',
   GENERAL: '/general',
   TIMESHEETDATA: '/timesheetdata',
+  LATEEARLY: '/late-in-early-out',
+  REGISTEROVERTIME: '/reagister-overtime',
 };

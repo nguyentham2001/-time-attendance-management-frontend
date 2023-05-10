@@ -7,53 +7,41 @@ export default styled.div`
   left: 0;
   box-shadow: 2px 2px 4px #2222;
   padding: 16px 8px;
-  .leave-title {
+  .title-register {
     font-size: 18.72px;
     font-weight: bold;
     color: #0000ff;
   }
-  .leave-button {
+  .register-button {
     float: right;
-    background: #1e90ff;
   }
-  .leave-button:hover {
-    background: #1e90ff;
-  }
-  .leave-container {
+  .registerovertime-container {
     margin-top: 30px;
     border: 1px groove;
     background-color: #ffffff;
     padding: 20px 20px 20px 20px;
     border-radius: 4px;
   }
-  .leave-search {
+  .search-register {
     display: flex;
-  }
-  .table-leave {
-    margin-top: 15px;
   }
   .status {
     display: flex;
     margin-left: 250px;
   }
-  .select-leave {
-    margin-left: 30px;
-  }
-  .status-all {
-    margin-left: 10px;
-  }
-  .title-status {
-    margin-top: 5px;
-  }
-  #search-leave {
-    height: 5px;
-  }
-
-  .css-19sovsq-JoySelect-button {
-    overflow: hidden;
-  }
-
   .css-714lxt-JoyFormControl-root {
     width: 140px;
+  }
+  #search-late {
+    height: 5px;
+  }
+  .select-register {
+    margin-left: 30px;
+  }
+  .status-register {
+    margin-left: 10px;
+  }
+  .table-registerovertime {
+    margin-top: 15px;
   }
 `;

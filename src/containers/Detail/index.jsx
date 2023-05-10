@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import StyledDetail from './index.style';
-import { Button, TextField, InputAdornment, Grid, Box } from '@mui/material';
+import { Button, TextField, InputAdornment } from '@mui/material';
 
 import ControlPointIcon from '@mui/icons-material/ControlPoint';
 import SearchIcon from '@mui/icons-material/Search';
@@ -9,9 +9,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import Select, { selectClasses } from '@mui/joy/Select';
 import Option from '@mui/joy/Option';
 import KeyboardArrowDown from '@mui/icons-material/KeyboardArrowDown';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import CancelIcon from '@mui/icons-material/Cancel';
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+
 import StyledCreateDetail from './index.style';
 
 import CustomTable from 'src/components/CustomTable';

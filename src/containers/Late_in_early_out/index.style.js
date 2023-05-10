@@ -7,53 +7,47 @@ export default styled.div`
   left: 0;
   box-shadow: 2px 2px 4px #2222;
   padding: 16px 8px;
-  .leave-title {
+  .lateearly-button {
+    float: right;
+  }
+  .title-lateearly {
     font-size: 18.72px;
     font-weight: bold;
     color: #0000ff;
   }
-  .leave-button {
-    float: right;
-    background: #1e90ff;
-  }
-  .leave-button:hover {
-    background: #1e90ff;
-  }
-  .leave-container {
+  .lateearly-container {
     margin-top: 30px;
     border: 1px groove;
     background-color: #ffffff;
     padding: 20px 20px 20px 20px;
     border-radius: 4px;
   }
-  .leave-search {
+  .search-lateearly {
     display: flex;
-  }
-  .table-leave {
-    margin-top: 15px;
   }
   .status {
     display: flex;
     margin-left: 250px;
   }
-  .select-leave {
-    margin-left: 30px;
+  .css-714lxt-JoyFormControl-root {
+    width: 140px;
   }
-  .status-all {
-    margin-left: 10px;
-  }
-  .title-status {
-    margin-top: 5px;
-  }
-  #search-leave {
+  #search-late {
     height: 5px;
   }
-
+  .status-late {
+    margin-left: 5px;
+  }
+  .select-late {
+    margin-left: 20px;
+  }
   .css-19sovsq-JoySelect-button {
     overflow: hidden;
   }
-
-  .css-714lxt-JoyFormControl-root {
-    width: 140px;
+  .table-lateearly {
+    margin-top: 15px;
+  }
+  .title-status {
+    margin-top: 7px;
   }
 `;

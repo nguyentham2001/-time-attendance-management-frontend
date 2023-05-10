@@ -123,21 +123,21 @@ export const sidebarMenu = [
     route: ROUTES.LEAVE,
     subMenu: [
       {
-        key: 'Salary',
+        key: 'Aplication',
         heading: 'Đơn xin nghỉ',
-        route: ROUTES.SALARY,
+        route: ROUTES.LEAVE,
         role: ['user'],
       },
       {
-        key: 'Salary',
+        key: 'lateearly',
         heading: 'Đăng ký đi muộn, về sớm',
-        route: ROUTES.SALARY,
+        route: ROUTES.LATEEARLY,
         role: ['user'],
       },
       {
         key: 'Salary',
         heading: 'Đăng ký làm thêm',
-        route: ROUTES.SALARY,
+        route: ROUTES.REGISTEROVERTIME,
         role: ['user'],
       },
       {

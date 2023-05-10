@@ -166,17 +166,17 @@ margin-left: 20px;
   margin-left: 30px;
 }
 .allow-latecoming{
-  margin-left: 20px;
+  margin-left: 10px;
 }
 .allow-earlycoming{
-  margin-left: 20px;
+  margin-left: 10px;
   margin-top: 15px;
 }
 .minute-latecoming{
   margin-left: 15px;
 }
 .penalty{
-  margin-left: 15px;
+  margin-left: 10px;
   margin-top: 15px;
 }
 .table-penalty{
@@ -190,4 +190,7 @@ margin-left: 20px;
  font-weight: bold;
 }
 
+.checkbox-overtime{
+  margin-left: 10px;
+}
 `;

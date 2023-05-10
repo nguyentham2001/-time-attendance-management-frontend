@@ -1,7 +1,7 @@
 import React from 'react';
-
+import SynContainer from '../containers/Syn';
 const Syn = () => {
-  return <div>Syn</div>;
+  return <SynContainer />;
 };
 
 export default Syn;

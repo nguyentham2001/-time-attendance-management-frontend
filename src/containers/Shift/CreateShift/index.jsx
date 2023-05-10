@@ -13,9 +13,33 @@ import Checkbox from '@mui/material/Checkbox';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import CustomTable from 'src/components/CustomTable';
 import DeleteIcon from '@mui/icons-material/Delete';
-import AddIcon from '@mui/icons-material/Add';
+
+import CreateHoliday from './CreateHoliday';
+import FormGroup from '@mui/material/FormGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControl from '@mui/material/FormControl';
+import FormLabel from '@mui/material/FormLabel';
+
+const CALCULATE = { CLOCK_IN: 'CLOCK_IN', CLOCK_OUT: 'CLOCK_OUT' };
+
 const CreateShift = ({ onBack }) => {
   const { t } = useTranslation();
+
+  const handleOpenDialog = () => {
+    setOpen(true);
+  };
+  const [appcalculate, setCalculate] = useState(CALCULATE);
+  const handleCalculateChanged = (event) => {
+    const { value } = event.target;
+    setCalculate(value);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
+  const [open, setOpen] = React.useState(false);
+
   const [data, setData] = useState([]);
   const onPageChange = (page) => {
     console.log('page', page);
@@ -58,12 +82,12 @@ const CreateShift = ({ onBack }) => {
     {
       label: t('Giờ công bị trừ(giờ)'),
       valueName: 'deductedhour',
-      align: 'left',
+      align: 'center',
     },
     {
       label: t('Ngày công bị trừ(ngày)'),
       valueName: 'deducteday',
-      align: 'left',
+      align: 'center',
     },
     {
       label: t(''),
@@ -552,11 +576,13 @@ const CreateShift = ({ onBack }) => {
               <div className="publicity-workhours">
                 <div className="hours">
                   <label className="title-hours"> {t('Giờ công')}</label>
-                  <input className="input-hours" type="number" />
+
+                  <TextField className="input-hours" type="number" />
                 </div>
                 <div className="hours-right">
                   <label className="work-day"> {t('Ngày công')}</label>
-                  <input className="input-hoursright" type="number" />
+
+                  <TextField className="input-hoursright" type="number" />
                 </div>
               </div>
               <div className="publicity-workhours">
@@ -564,49 +590,66 @@ const CreateShift = ({ onBack }) => {
                   <label className="title-hours">
                     {t('Hệ số ngày thường')}
                   </label>
-                  <input className="input-relax" type="number" />
+                  <TextField className="input-relax" type="number" />
                 </div>
                 <div className="relax-right">
                   <label className="work-day"> {t('Hệ số ngày nghỉ')}</label>
-                  <input className="input-relax" type="number" />
+
+                  <TextField className="input-relax" type="number" />
                 </div>
               </div>
               <div className="publicity-workhours">
                 <div className="relax-left">
                   <label className="title-hours">{t('Hệ số ngày lễ')}</label>
-                  <input className="input-holiday" type="number" />
+
+                  <TextField className="input-holiday" type="number" />
                 </div>
-                <Button className="btt-holiday">
+                <Button className="btt-holiday" onClick={handleOpenDialog}>
                   {t('Thiết lập riêng cho từng ngày lễ')}
                 </Button>
               </div>
+
               <div className="checkbox-createshif">
-                <Checkbox defaultChecked />
-                <label>{t('Nếu không có giờ vào thì bị trừ lương')}</label>
-                <div className="hoursday-works">
-                  <div className="hours-works">
-                    <label className="title-hourswork">{t('Giờ công')}</label>
-                    <input className="input-hourswork" type="number" />
+                <FormGroup onChange={handleCalculateChanged}>
+                  <FormControlLabel
+                    control={<Checkbox />}
+                    label={t('Nếu không có giờ vào thì bị trừ lương')}
+                    onChangePagination={onPageChange}
+                  />
+                  <FormControlLabel
+                    control={<Checkbox />}
+                    label={t('Nếu không có giờ ra thì bị trừ lương')}
+                    onChangePagination={onPageChange}
+                  />
+                </FormGroup>
+                {appcalculate === CALCULATE.CLOCK_IN && (
+                  <div className="hoursday-works">
+                    <div className="hours-works">
+                      <label className="title-hourswork">{t('Giờ công')}</label>
+                      <TextField className="input-hourswork" type="number" />
+                    </div>
+                    <div className="days-works">
+                      <label className="title-daysswork">
+                        {t('Ngày công')}
+                      </label>
+                      <TextField className="input-dayswork" type="number" />
+                    </div>
                   </div>
-                  <div className="days-works">
-                    <label className="title-daysswork">{t('Ngày công')}</label>
-                    <input className="input-dayswork" type="number" />
+                )}
+                {appcalculate === CALCULATE.CLOCK_OUT && (
+                  <div className="hoursday-works">
+                    <div className="hours-works">
+                      <label className="title-hourswork">{t('Giờ công')}</label>
+                      <TextField className="input-hourswork" type="number" />
+                    </div>
+                    <div className="days-works">
+                      <label className="title-daysswork">
+                        {t('Ngày công')}
+                      </label>
+                      <TextField className="input-dayswork" type="number" />
+                    </div>
                   </div>
-                </div>
-              </div>
-              <div className="checkbox-createshif">
-                <Checkbox defaultChecked />
-                <label>{t('Nếu không có giờ ra thì bị trừ lương')}</label>
-                <div className="hoursday-works">
-                  <div className="hours-works">
-                    <label className="title-hourswork">{t('Giờ công')}</label>
-                    <input className="input-hourswork" type="number" />
-                  </div>
-                  <div className="days-works">
-                    <label className="title-daysswork">{t('Ngày công')}</label>
-                    <input className="input-dayswork" type="number" />
-                  </div>
-                </div>
+                )}
               </div>
             </Grid>
             <Grid xs={4}>
@@ -614,24 +657,100 @@ const CreateShift = ({ onBack }) => {
                 <label>{t('Tùy chỉnh nâng cao')}</label>
               </div>
               <div className="late-early">
-                <Checkbox defaultChecked />
-                <label>{t('Đi muộn về sớm')}</label>
+                <FormGroup>
+                  <FormControlLabel
+                    control={<Checkbox defaultChecked />}
+                    label={t('Đi muộn về sớm')}
+                  />
+
+                  <FormControlLabel
+                    control={<Checkbox />}
+                    label={t('Làm thêm giờ')}
+                  />
+                  <div className="checkbox-overtime">
+                    <FormGroup>
+                      <FormControlLabel
+                        control={<Checkbox size="small" />}
+                        label={t('Trước ca')}
+                      />
+                      <div className="before-shif">
+                        <FormControl>
+                          <FormLabel id="demo-row-radio-buttons-group-label">
+                            {t('Thời điểm kết thúc làm thêm')}
+                          </FormLabel>
+                          <RadioGroup
+                            row
+                            aria-labelledby="demo-row-radio-buttons-group-label"
+                            name="row-radio-buttons-group"
+                          >
+                            <FormControlLabel
+                              control={<Radio size="small" />}
+                              label={t('Trước ca làm việc')}
+                            />
+                            <FormControlLabel
+                              control={<Radio size="small" />}
+                              label={t('Trước thời điểm cụ thể')}
+                            />
+                          </RadioGroup>
+                        </FormControl>
+                      </div>
+                      <FormControlLabel
+                        control={<Checkbox size="small" />}
+                        label={t('Sau ca')}
+                      />
+                      <div className="after-shift">
+                        <FormControl>
+                          <FormLabel id="demo-row-radio-buttons-group-label">
+                            {t('Thời điểm bắt đầu tính làm thêm')}
+                          </FormLabel>
+                          <RadioGroup
+                            row
+                            aria-labelledby="demo-row-radio-buttons-group-label"
+                            name="row-radio-buttons-group"
+                          >
+                            <FormControlLabel
+                              control={<Radio size="small" />}
+                              label={t('Sau ca làm việc')}
+                            />
+                            <FormControlLabel
+                              control={<Radio size="small" />}
+                              label={t('Sau thời điểm cụ thể')}
+                            />
+                          </RadioGroup>
+                        </FormControl>
+                      </div>
+                      <FormControlLabel
+                        control={<Checkbox size="small" />}
+                        label={t('Nghỉ giữa ca')}
+                      />
+                    </FormGroup>
+                  </div>
+                  <FormControlLabel control={<Checkbox />} label="Công ăn ca" />
+                  <FormControlLabel
+                    control={<Checkbox />}
+                    label="Công điều động"
+                  />
+                </FormGroup>
+              </div>
+              {/* <div className="late-early">
                 <div className="allow-latecoming">
                   <lable className="title-latecoming">
                     {t('Cho phép đi muộn')}
                   </lable>
-                  <input className="input-latecoming" type="number" />
+                  <TextField className="input-latecoming" type="number" />
+
                   <lable className="minute-latecoming">{t('Phút')}</lable>
                 </div>
                 <div className="allow-earlycoming">
                   <lable className="title-earlyoming">
                     {t('Cho phép về sớm')}
                   </lable>
-                  <input className="input-earlycoming" type="number" />
+                  <TextField className="input-earlycoming" type="number" />
+
                   <lable className="minute-latecoming">{t('Phút')}</lable>
                 </div>
                 <div className="penalty">
-                  <Checkbox defaultChecked />
+                  <Checkbox />
                   <label>{t('Phạt đi sớm về muộn')}</label>
 
                   <Button className="btt-penalty" startIcon={<AddIcon />}>
@@ -647,24 +766,12 @@ const CreateShift = ({ onBack }) => {
                     />
                   </div>
                 </div>
-              </div>
-
-              <div className="overtime">
-                <Checkbox defaultChecked />
-                <label>{t('Làm thêm giờ')}</label>
-              </div>
-              <div className="shift-meal">
-                <Checkbox defaultChecked />
-                <label>{t('Công ăn ca')}</label>
-              </div>
-              <div className="secondment">
-                <Checkbox defaultChecked />
-                <label>{t('Công điều động')}</label>
-              </div>
+              </div> */}
             </Grid>
           </Grid>
         </Box>
       </div>
+      <CreateHoliday open={open} handleClose={handleClose} />
     </StyledCreateShift>
   );
 };

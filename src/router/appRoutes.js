@@ -7,7 +7,8 @@ import Salary from '@src/pages/Salary';
 import Shift from '@src/pages/Shift';
 import Account from '@src/pages/Account';
 import TimesheetData from '@src/pages/TimesheetData';
-
+import Late_in_early_out from '@src/pages/Late_in_early_out';
+import Register_overtime from '@src/pages/Register_overtime';
 import Syn from '@src/pages/Syn';
 import Detail from '@src/pages/Detail';
 import General from '@src/pages/General';
@@ -102,6 +103,20 @@ export default [
   {
     path: routes.TIMESHEETDATA,
     component: TimesheetData,
+    exact: true,
+    restricted: false,
+    isPrivate: true,
+  },
+  {
+    path: routes.LATEEARLY,
+    component: Late_in_early_out,
+    exact: true,
+    restricted: false,
+    isPrivate: true,
+  },
+  {
+    path: routes.REGISTEROVERTIME,
+    component: Register_overtime,
     exact: true,
     restricted: false,
     isPrivate: true,

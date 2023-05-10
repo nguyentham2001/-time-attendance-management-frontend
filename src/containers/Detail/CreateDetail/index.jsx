@@ -27,7 +27,7 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
 import DeleteIcon from '@mui/icons-material/Delete';
 import CreateTableEmployee from './CreateTableEmployee';
-
+import Checkbox from '@mui/material/Checkbox';
 import CustomTable from 'src/components/CustomTable';
 import { REPEAT_TIME } from 'src/constants';
 
@@ -337,15 +337,31 @@ const CreateDetail = ({ onBack }) => {
                     {repeatTime == REPEAT_TIME.DAY && (
                       <>
                         <div className="loop-cycle">
-                          <input className="radio-repeat" type="radio" />
+                          <Radio
+                            className="radio-repeat"
+                            name="radio-buttons"
+                            size="small"
+                          />
+
                           <label className="loop-left">
                             {t(' Chu kì lặp')}
                           </label>
-                          <input className="number-day" type="number" />
+                          <TextField
+                            className="number-day"
+                            type="number"
+                            InputLabelProps={{
+                              shrink: true,
+                            }}
+                          />
+
                           <lable className="loop-right">{t(' Ngày')}</lable>
                         </div>
                         <div className="days-work">
-                          <input className="radio-repeat" type="radio" />
+                          <Radio
+                            className="radio-repeat"
+                            name="radio-buttons"
+                            size="small"
+                          />
                           <label>{t('Ngày làm việc từ thứ 2 đến thứ 6')}</label>
                         </div>
                       </>
@@ -356,43 +372,39 @@ const CreateDetail = ({ onBack }) => {
                           <label className="loop-week">
                             {t('Chu kì lặp ')}
                           </label>
-                          <input className="input-weeks" type="number" />
+                          <TextField
+                            id="outlined-weeks"
+                            className="input-weeks"
+                            type="number"
+                            InputLabelProps={{
+                              shrink: true,
+                            }}
+                          />
+
                           <label className="weekend">{t('Tuần')}</label>
                         </div>
 
                         <div className="weekend-day">
                           <div className="monday-friday">
-                            <input
-                              className="checkbox-monday"
-                              type="checkbox"
-                            />
+                            <Checkbox className="checkbox-monday" />
                             <label className="lable-weekend">
                               {t('Thứ 2')}
                             </label>
                           </div>
                           <div className="weeks">
-                            <input
-                              className="checkbox-weekend"
-                              type="checkbox"
-                            />
+                            <Checkbox className="checkbox-weekend" />
                             <label className="lable-weekend">
                               {t('Thứ 3')}
                             </label>
                           </div>
                           <div className="weeks">
-                            <input
-                              className="checkbox-weekend"
-                              type="checkbox"
-                            />
+                            <Checkbox className="checkbox-weekend" />
                             <label className="lable-weekend">
                               {t('Thứ 4')}
                             </label>
                           </div>
                           <div className="weeks">
-                            <input
-                              className="checkbox-weekend"
-                              type="checkbox"
-                            />
+                            <Checkbox className="checkbox-weekend" />
                             <label className="lable-weekend">
                               {t('Thứ 5')}
                             </label>
@@ -400,28 +412,19 @@ const CreateDetail = ({ onBack }) => {
                         </div>
                         <div className="weekend-day">
                           <div className="monday-friday">
-                            <input
-                              className="checkbox-monday"
-                              type="checkbox"
-                            />
+                            <Checkbox className="checkbox-monday" />
                             <label className="lable-weekend">
                               {t('Thứ 6')}
                             </label>
                           </div>
                           <div className="weeks">
-                            <input
-                              className="checkbox-weekend"
-                              type="checkbox"
-                            />
+                            <Checkbox className="checkbox-weekend" />
                             <label className="lable-weekend">
                               {t('Thứ 7')}
                             </label>
                           </div>
                           <div className="weeks">
-                            <input
-                              className="checkbox-weekend"
-                              type="checkbox"
-                            />
+                            <Checkbox className="checkbox-weekend" />
                             <label className="lable-weekend">
                               {t('Chủ nhật')}
                             </label>
@@ -435,12 +438,24 @@ const CreateDetail = ({ onBack }) => {
                           <label className="loop-week">
                             {t('Chu kì lặp ')}
                           </label>
-                          <input className="input-month" type="number" />
+                          <TextField
+                            className="input-month"
+                            type="number"
+                            InputLabelProps={{
+                              shrink: true,
+                            }}
+                          />
+
                           <label className="month">{t('Tháng')}</label>
                         </div>
                         <div className="onmonthday">
                           <div>
-                            <input className="radio-month " type="radio" />
+                            <Radio
+                              className="radio-month "
+                              name="radio-buttons"
+                              size="small"
+                            />
+
                             <label className=" radio-on">{t('Vào')}</label>
                           </div>
 
@@ -467,7 +482,12 @@ const CreateDetail = ({ onBack }) => {
                         </div>{' '}
                         <div className="onmonthday">
                           <div>
-                            <input className="radio-month " type="radio" />
+                            <Radio
+                              className="radio-month "
+                              name="radio-buttons"
+                              size="small"
+                            />
+
                             <label className="onday">{t('Vào ngày')}</label>
                           </div>
 

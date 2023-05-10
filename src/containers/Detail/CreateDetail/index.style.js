@@ -6,7 +6,7 @@ width: 100%;
 top: 0;
 left: 0;
 
-padding: 16px 8px;
+
   .btt-savecancel {
     float: right;
   }
@@ -120,7 +120,11 @@ margin-left: 15px;
 }
 .number-day{
   width: 88px;
-  height: 30px;
+margin-bottom: 5px;
+}
+.css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input{
+  height: 5px; 
+
 }
 .loop-left{
   margin-right: 10px;
@@ -161,6 +165,7 @@ margin-left: 15px;
 .input-weeks{
   width: 150px;
   height: 30px;
+  margin-bottom: 5px;
 
 }
 .weekend-day{
@@ -171,7 +176,7 @@ margin-left: 15px;
    margin-left: 16px;
 }
 .lable-weekend{
-  margin-left: 10px;
+  margin-left: 5px;
 }
 .select-monthday{
   width: 120px;
@@ -187,7 +192,7 @@ margin-left: 15px;
   margin-left: 40px;
 }
 .input-month{
-  width: 88px;
+  width: 100px;
   height: 30px; 
 }
 .onfirstlast{
@@ -248,7 +253,13 @@ background-color:#DCDCDC;
 .table-unit{
   margin-top:20px;
 }
-
+.createdetail-container{
+  margin-top: 30px;
+  border: 1px groove;
+  background-color: #ffffff;
+  padding: 35px 35px 35px 35px;
+  border-radius: 4px; 
+}
 
 
 `;
