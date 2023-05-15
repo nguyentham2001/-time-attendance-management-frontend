@@ -43,6 +43,9 @@ padding: 16px 8px;
     font-weight: bold;
    
 }
+.table-public{
+    margin-top: 15px;
+}
 .button-public{
 margin-left: 280px;
 }
@@ -61,8 +64,15 @@ margin-left: 280px;
 #btt-new{
     background:#f86c6b;
 }
-
-
+.icon-listmenu{
+    display: flex;
+    margin-top: 15px;
+}
+.title-list{
+    margin-left: 10px;
+    font-size: 18px;
+    font-weight: bold; 
+}
 
 
 

@@ -10,7 +10,7 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import AdjustIcon from '@mui/icons-material/Adjust';
 import BlockIcon from '@mui/icons-material/Block';
 import CustomTable from 'src/components/CustomTable';
-
+import MenuIcon from '@mui/icons-material/Menu';
 const limit = 10;
 const PublicDeatail = () => {
   const { t } = useTranslation();
@@ -187,9 +187,14 @@ const heads = [
           
           
         </div>
+        <div className='icon-listmenu'>
+          <div className='icon-list'>
+         < MenuIcon/>
+          </div>
+        <lable className='title-list'>{t('Báo cáo thời gian làm việc')}</lable>
 
-      </div>
-      <div className='table-public'>
+        </div>
+        <div className='table-public'>
       <CustomTable
               heads={heads}
               items={data}
@@ -203,6 +208,8 @@ const heads = [
             />
 
       </div>
+      </div>
+    
     </div>
   </StyledPublicDetail>
   );

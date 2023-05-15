@@ -57,7 +57,7 @@ export const sidebarMenu = [
       {
         key: 'detail',
         heading: 'Tăng ca',
-        route: ROUTES.DETAIL,
+        route: ROUTES.OVERTIME,
         role: ['user'],
       },
       {

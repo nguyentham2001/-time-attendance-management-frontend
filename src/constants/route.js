@@ -19,4 +19,5 @@ export default {
   UPDATEWORKING: '/request-update-working',
 
   PUBLICDETAIL: '/public-detail',
+  OVERTIME:'/overtime',
 };

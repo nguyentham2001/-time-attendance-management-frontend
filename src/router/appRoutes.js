@@ -16,7 +16,9 @@ import Detail from '@src/pages/Detail';
 import General from '@src/pages/General';
 
 import Public_detail from '@src/pages/Public_detail';
+import OVERTIME from '@src/pages/OverTime';
 import routes from '@src/constants/route';
+import OverTime from 'src/containers/OverTime';
 
 export default [
   {
@@ -143,6 +145,13 @@ export default [
   {
     path: routes.PUBLICDETAIL,
     component: Public_detail,
+    exact: true,
+    restricted: false,
+    isPrivate: true,
+  },
+  {
+    path: routes.OVERTIME,
+    component: OverTime,
     exact: true,
     restricted: false,
     isPrivate: true,
