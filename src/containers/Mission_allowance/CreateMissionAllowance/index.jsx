@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import StyledCreateRegisterOvertime from './index.style';
+import StyledCreateMissionAllowance from './index.style';
 import { Button, TextField, InputAdornment } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
@@ -13,27 +13,25 @@ import KeyboardArrowDown from '@mui/icons-material/KeyboardArrowDown';
 import { DemoContainer, DemoItem } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import dayjs from 'dayjs';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
+import dayjs from 'dayjs';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-
-const CreateRegisterOvertime = ({ onBack }) => {
+const CreateMissionAllowance = ({ onBack }) => {
   const { t } = useTranslation();
   const tomorrow = dayjs().add(1, 'day');
   return (
-    <StyledCreateRegisterOvertime>
-      <div className="createleave-header">
+    <StyledCreateMissionAllowance>
+      <div className="createmission-header">
         <Button onClick={onBack} startIcon={<ArrowBackIcon />}></Button>
-        <lable className="title-createleave">
-          {' '}
-          {t('Thêm mới đơn đăng ký làm thêm')}
+        <lable className="title-createmission">
+          {t('Thêm mới đơn đề nghị đi công tác')}
         </lable>
-        <div className="button-leave">
+        <div className="button-createmission">
           <Button
             id="cancel-detail"
             color="primary"
             variant="contained"
-            className="detail-cancel"
+            className="mission-cancel"
             startIcon={<CancelIcon />}
           >
             {t('cancel')}
@@ -49,7 +47,7 @@ const CreateRegisterOvertime = ({ onBack }) => {
           </Button>
         </div>
       </div>
-      <div className="createleave-container">
+      <div className="createmission-container">
         <Box sx={{ width: '100%' }}>
           <Grid
             container
@@ -57,16 +55,16 @@ const CreateRegisterOvertime = ({ onBack }) => {
             columnSpacing={{ xs: 1, sm: 2, md: 3 }}
           >
             <Grid item xs={6}>
-              <div className="leave-left">
-                <div className="applicants">
-                  <label>{t('Người nộp đơn')}</label>
+              <div className="mission-left">
+                <div className="regester">
+                  <label>{t('Người đề nghị')}</label>
                   <span className="reqiued">*</span>
                   <TextField
                     id="search-leave"
                     variant="outlined"
                     placeholder={t('')}
                     type="text"
-                    className="input-applicants"
+                    className="input-regester"
                   />
                 </div>
                 <div className="unitworks">
@@ -81,10 +79,10 @@ const CreateRegisterOvertime = ({ onBack }) => {
                   />
                 </div>
 
-                <div className="single-day">
-                  <label>{t('Ngày nộp đơn')}</label>
+                <div className="regest-day">
+                  <label>{t('Ngày đề nghị')}</label>
                   <span className="reqiued">*</span>
-                  <div className="calendar-leave">
+                  <div className="calendar-mission">
                     <LocalizationProvider dateAdapter={AdapterDayjs}>
                       <DemoContainer components={['DateTimePicker']}>
                         <DemoItem>
@@ -98,10 +96,10 @@ const CreateRegisterOvertime = ({ onBack }) => {
                     </LocalizationProvider>
                   </div>
                 </div>
-                <div className="today">
-                  <label>{t('Làm thêm từ')}</label>
+                <div className="start-date">
+                  <label>{t('Ngày đi')}</label>
                   <span className="reqiued">*</span>
-                  <div className="calendar-today">
+                  <div className="calendar-start">
                     <LocalizationProvider dateAdapter={AdapterDayjs}>
                       <DemoContainer components={['DateTimePicker']}>
                         <DemoItem>
@@ -115,10 +113,10 @@ const CreateRegisterOvertime = ({ onBack }) => {
                     </LocalizationProvider>
                   </div>
                 </div>
-                <div className="fromday">
-                  <label>{t('Nghỉ giữa ca từ')}</label>
+                <div className="start-date">
+                  <label>{t('Ngày về')}</label>
                   <span className="reqiued">*</span>
-                  <div className="calendar-fromdays">
+                  <div className="calendar-endday">
                     <LocalizationProvider dateAdapter={AdapterDayjs} className>
                       <DemoContainer components={['DateTimePicker']}>
                         <DemoItem>
@@ -132,82 +130,33 @@ const CreateRegisterOvertime = ({ onBack }) => {
                     </LocalizationProvider>
                   </div>
                 </div>
-                <div className="leavefrom">
-                  <label>{t('Nghỉ giữa ca đến ')}</label>
-                  <span className="reqiued">*</span>
-                  <div className="calendar-leavefrom">
-                    <LocalizationProvider dateAdapter={AdapterDayjs} className>
-                      <DemoContainer components={['DateTimePicker']}>
-                        <DemoItem>
-                          <DateTimePicker
-                            defaultValue={tomorrow}
-                            disableFuture
-                            views={['year', 'month', 'day', 'hours', 'minutes']}
-                          />
-                        </DemoItem>
-                      </DemoContainer>
-                    </LocalizationProvider>
-                  </div>
-                </div>
-                <div className="from-ot">
-                  <label>{t('Làm thêm đến')}</label>
-                  <span className="reqiued">*</span>
-                  <div className="calendar-fromdot">
-                    <LocalizationProvider dateAdapter={AdapterDayjs} className>
-                      <DemoContainer components={['DateTimePicker']}>
-                        <DemoItem>
-                          <DateTimePicker
-                            defaultValue={tomorrow}
-                            disableFuture
-                            views={['year', 'month', 'day', 'hours', 'minutes']}
-                          />
-                        </DemoItem>
-                      </DemoContainer>
-                    </LocalizationProvider>
-                  </div>
-                </div>
-                <div className="overtime">
-                  <label>{t('Thời điểm làm thêm')}</label>
-                  <span className="reqiued">*</span>
-                  <div className="select-register">
-                    <Select
-                      className="select-overtime"
-                      placeholder={t('')}
-                      indicator={<KeyboardArrowDown />}
-                      sx={{
-                        width: 240,
-                        [`& .${selectClasses.indicator}`]: {
-                          transition: '0.2s',
-                          [`&.${selectClasses.expanded}`]: {
-                            transform: 'rotate(-180deg)',
-                          },
-                        },
+                <div className="start-date">
+                  <label>{t('Số ngày đi công tác ')}</label>
+                  <div className="calendar-business">
+                    <TextField
+                      id="outlined-number"
+                      type="number"
+                      InputLabelProps={{
+                        shrink: true,
                       }}
-                    >
-                      <Option value="beforeshift">{t('Trước ca')}</Option>
-                      <Option value="aftershift">{t('Sau ca')}</Option>
-                      <Option value="centershift">{t('Nghỉ giữa ca')}</Option>
-                      <Option value="holiday">{t('Ngày nghỉ')}</Option>
-                    </Select>
+                    />
                   </div>
                 </div>
-                <div className="applicable-case">
-                  <label>{t('Ca áp dụng')}</label>
+                <div className="start-date">
+                  <label>{t('Địa điểm công tác')}</label>
                   <span className="reqiued">*</span>
-                  <TextField
-                    id="search-leave"
-                    variant="outlined"
-                    placeholder={t('')}
-                    type="text"
-                    className="input-case"
-                  />
+                  <div className="place-business">
+                    <TextField
+                      id="search-reason"
+                      variant="outlined"
+                      placeholder={t('')}
+                      type="text"
+                      className="input-business"
+                    />
+                  </div>
                 </div>
-              </div>
-            </Grid>
-            <Grid item xs={6}>
-              <div className="createleave-right">
                 <div className="reason">
-                  <label>{t('Lý do')}</label>
+                  <label>{t('Lý do công tác')}</label>
                   <span className="reqiued">*</span>
                   <TextField
                     id="search-reason"
@@ -217,7 +166,33 @@ const CreateRegisterOvertime = ({ onBack }) => {
                     className="input-reason"
                   />
                 </div>
-                <div className="approved">
+              </div>
+            </Grid>
+            <Grid item xs={6}>
+              <div className="createmission-right">
+                <div className="suport">
+                  <label>{t('Yêu cầu hỗ trợ')}</label>
+                  <span className="reqiued">*</span>
+                  <TextField
+                    id="search-reason"
+                    variant="outlined"
+                    placeholder={t('')}
+                    type="text"
+                    className="input-suport"
+                  />
+                </div>
+                <div className="mission-right">
+                  <label>{t('Người hỗ trợ')}</label>
+
+                  <TextField
+                    id="inputsuporter"
+                    variant="outlined"
+                    placeholder={t('')}
+                    type="text"
+                    className="input-suporter"
+                  />
+                </div>
+                <div className="mission-right">
                   <label>{t('Người duyệt')}</label>
                   <span className="reqiued">*</span>
                   <TextField
@@ -228,18 +203,7 @@ const CreateRegisterOvertime = ({ onBack }) => {
                     className="inputapproved"
                   />
                 </div>
-                <div className="approved">
-                  <label>{t('Người thay thế')}</label>
-
-                  <TextField
-                    id="inputsubstitute"
-                    variant="outlined"
-                    placeholder={t('')}
-                    type="text"
-                    className="input-substitute"
-                  />
-                </div>
-                <div className="approved">
+                <div className="mission-right">
                   <label>{t('Người liên quan')}</label>
 
                   <TextField
@@ -250,7 +214,7 @@ const CreateRegisterOvertime = ({ onBack }) => {
                     className="input-peopleinvolved"
                   />
                 </div>
-                <div className="status-leave">
+                <div className="status">
                   <label>{t('Trạng thái')}</label>
                   <span className="reqiued">*</span>
                   <div className="select-status">
@@ -279,7 +243,7 @@ const CreateRegisterOvertime = ({ onBack }) => {
           </Grid>
         </Box>
       </div>
-      <div className="createleave-footer">
+      <div className="mission-footer">
         <lable className="titile-note">{t('Ghi chú')}</lable>
         <div className="not-createleave">
           <div className="icon-note" id="note-icon">
@@ -290,12 +254,13 @@ const CreateRegisterOvertime = ({ onBack }) => {
               placeholder={t('Nhập ghi chú')}
               type="text"
               className="inputnote"
+              id="not-input"
             />
           </div>
         </div>
       </div>
-    </StyledCreateRegisterOvertime>
+    </StyledCreateMissionAllowance>
   );
 };
 
-export default CreateRegisterOvertime;
+export default CreateMissionAllowance;

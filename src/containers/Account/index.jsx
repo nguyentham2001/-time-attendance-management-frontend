@@ -121,15 +121,19 @@ const Account = () => {
                 ),
               }}
             />
-            <Button
-              variant="contained"
-              className="employee-button"
-              color="primary"
-              onClick={handleOpenDialog}
-              startIcon={<ControlPointIcon />}
-            >
+            <div className='btt-employee'>
+              <Button
+              id='employee-btt'
+                variant="contained"
+                className="employee-button"
+                color="primary"
+                onClick={handleOpenDialog}
+                startIcon={<ControlPointIcon />}
+              >
               {t('add')}
-            </Button>
+              </Button>
+            </div>
+            
           </div>
           <div className="account-container">
             <CustomTable

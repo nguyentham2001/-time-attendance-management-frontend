@@ -38,5 +38,8 @@ const StyledDialog = styled(Dialog)`
   #cancel {
     background: #6e6b7b;
   }
+  .css-wahqcs-JoySelect-root{
+    border-radius: 4px;
+  }
 `;
 export default StyledDialog;

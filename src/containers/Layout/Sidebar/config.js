@@ -40,7 +40,7 @@ export const sidebarMenu = [
   },
   {
     key: 'Shift',
-    heading: 'Quản lý ca làm việc',
+    heading: 'Chấm công',
     icon: (
       <Icon>
         <WorkHistoryIcon />
@@ -51,55 +51,24 @@ export const sidebarMenu = [
     subMenu: [
       {
         key: 'Syn',
-        heading: 'Bảng phân ca tổng hợp',
-        route: ROUTES.SYN,
+        heading: 'Chi tiết công',
+        route: ROUTES.PUBLICDETAIL,
       },
       {
         key: 'detail',
-        heading: 'Phân ca chi tiết',
+        heading: 'Tăng ca',
         route: ROUTES.DETAIL,
         role: ['user'],
       },
       {
         key: 'work',
-        heading: 'Ca làm việc',
+        heading: 'Tổng hợp công',
         role: ['user'],
         route: ROUTES.SHIFT,
       },
     ],
   },
-  {
-    key: 'Time',
-    heading: 'Quản lý chấm công',
-    icon: (
-      <Icon>
-        <KeyboardIcon />
-      </Icon>
-    ),
-    role: ['user'],
-    route: ROUTES.TIME,
-    subMenu: [
-      {
-        key: 'detailedtimesheer',
-        heading: 'Bảng chấm công chi tiết',
-        route: ROUTES.TIME,
-        role: ['user'],
-      },
-      {
-        key: 'Timesyn',
-        heading: 'Bảng chấm công tổng hợp',
-        route: ROUTES.GENERAL,
-        role: ['user'],
-      },
-      {
-        key: 'Timedata',
-        heading: 'Dữ liệu chấm công',
-        route: ROUTES.TIMESHEETDATA,
-        role: ['user'],
-      },
-    ],
-  },
-  {
+   {
     key: 'Salary',
     heading: 'Quản lý lương',
     icon: (
@@ -109,11 +78,42 @@ export const sidebarMenu = [
     ),
     role: ['user'],
     route: ROUTES.SALARY,
+    subMenu: [
+      {
+        key: 'salaryadvance',
+        heading: 'Tạm ứng lương',
+        route: ROUTES.SYN,
+      },
+      {
+        key: 'rewardandpunishment',
+        heading: 'Thưởng và phạt',
+        route: ROUTES.DETAIL,
+        role: ['user'],
+      },
+      {
+        key: 'salaryprocess',
+        heading: 'Quá trình lương',
+        role: ['user'],
+        route: ROUTES.SHIFT,
+      },
+      {
+        key: 'salarymonth',
+        heading: 'Lương tháng',
+        role: ['user'],
+        route: ROUTES.SHIFT,
+      },
+      {
+        key: 'salarythirteen',
+        heading: 'Lương tháng 13',
+        role: ['user'],
+        route: ROUTES.SHIFT,
+      },
+    ],
   },
 
   {
     key: 'Leave',
-    heading: 'Quản lý đơn nghỉ trong năm',
+    heading: 'Đơn xin nghỉ',
     icon: (
       <Icon>
         <CardGiftcardIcon />
@@ -124,88 +124,19 @@ export const sidebarMenu = [
     subMenu: [
       {
         key: 'Aplication',
-        heading: 'Đơn xin nghỉ',
+        heading: 'Tạo đơn nghỉ',
         route: ROUTES.LEAVE,
         role: ['user'],
       },
       {
         key: 'lateearly',
-        heading: 'Đăng ký đi muộn, về sớm',
+        heading: 'Tổng hợp nghỉ phép',
         route: ROUTES.LATEEARLY,
-        role: ['user'],
-      },
-      {
-        key: 'Salary',
-        heading: 'Đăng ký làm thêm',
-        route: ROUTES.REGISTEROVERTIME,
-        role: ['user'],
-      },
-      {
-        key: 'Salary',
-        heading: 'Đề nghị đi công tác',
-        route: ROUTES.SALARY,
-        role: ['user'],
-      },
-      {
-        key: 'Salary',
-        heading: 'Đề nghị cập nhật công',
-        route: ROUTES.SALARY,
-        role: ['user'],
-      },
-      {
-        key: 'Salary',
-        heading: 'Đề nghị đổi ca',
-        route: ROUTES.SALARY,
-        role: ['user'],
-      },
-      {
-        key: 'Salary',
-        heading: 'Phê duyệt chấm công',
-        route: ROUTES.SALARY,
-        role: ['user'],
-      },
-      {
-        key: 'Salary',
-        heading: 'Bảng tổng hợp nghỉ phép',
-        route: ROUTES.SALARY,
-        role: ['user'],
-      },
-      {
-        key: 'Salary',
-        heading: 'Bảng tổng hợp nghỉ bù',
-        route: ROUTES.SALARY,
-        role: ['user'],
-      },
-      {
-        key: 'Salary',
-        heading: 'Kế hoạch nghỉ phép',
-        route: ROUTES.SALARY,
         role: ['user'],
       },
     ],
   },
 
-  {
-    key: 'Account',
-    heading: 'Quản lý tài khoản người dùng',
-    icon: (
-      <Icon>
-        <SwitchAccountIcon />
-      </Icon>
-    ),
-    role: ['user'],
-    route: ROUTES.ACCOUNT,
-  },
+  
 
-  {
-    key: 'Report',
-    heading: 'Báo cáo và thống kê',
-    icon: (
-      <Icon>
-        <ReportIcon />
-      </Icon>
-    ),
-    role: ['user'],
-    route: ROUTES.REPORT,
-  },
 ];

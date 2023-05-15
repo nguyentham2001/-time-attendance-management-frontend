@@ -36,4 +36,7 @@ export default styled.div`
   .timesheet-footer {
     margin-top: 20px;
   }
+  .css-wahqcs-JoySelect-root{
+    border-radius: 4px;
+  }
 `;

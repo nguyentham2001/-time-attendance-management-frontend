@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import StyledRegisterOvertime from './index.style';
+import StyledUpdeteWorking from './index.style';
 import { useTranslation } from 'react-i18next';
 import { Button, TextField, InputAdornment } from '@mui/material';
 import ControlPointIcon from '@mui/icons-material/ControlPoint';
@@ -12,153 +12,156 @@ import CustomTable from 'src/components/CustomTable';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { VIEW } from 'src/constants';
-import StyledCreateRegisterOvertime from './index.style';
-import CreateRegisterOvertime from './CreateRegisterOvertime';
+import StyledCreateUpdate from './index.style';
+import CreateUpdate from './CreateUpdate';
 const limit = 10;
-const RegisterOvertime = () => {
-  const { t } = useTranslation();
+const UpdeteWorking = () => {
+    const { t } = useTranslation();
 
-  const [view, setView] = useState(VIEW.LIST);
+    const [view, setView] = useState(VIEW.LIST);
 
-  const [data, setData] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [total, setTotal] = useState(15);
-
-  useEffect(() => {
-    setData([
+    const [data, setData] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [total, setTotal] = useState(15);
+  
+    useEffect(() => {
+      setData([
+        {
+          id: 'id',
+          name: 'Nguyễn Văn A',
+        },
+      ]);
+    }, []);
+  
+    const onPageChange = (page) => {
+      console.log('page', page);
+    };
+  
+    const heads = [
       {
-        id: 'id',
-        name: 'Nguyễn Văn A',
+        label: t('id'),
+        valueName: 'id',
+        align: 'left',
       },
-    ]);
-  }, []);
+      {
+        label: t('Người đề nghị'),
+        valueName: 'name',
+        align: 'left',
+      },
+      {
+        label: t('Vị trí công việc'),
+        valueName: 'positiom',
+        align: 'left',
+      },
+      {
+        label: t('Đơn vị công tác'),
+        valueName: 'workunit',
+        align: 'left',
+        minWidth: 100,
+      },
+      {
+        label: t('Ngày đề nghị'),
+        valueName: 'requestdate',
+        align: 'left',
+      },
+      {
+        label: t('Ngày làm việc'),
+        valueName: 'startdate',
+        align: 'left',
+      },
+      {
+        label: t('Ca làm việc'),
+        valueName: 'enddate',
+        align: 'left',
+      },
+      {
+        label: t('Giờ vào đầu ca'),
+        valueName: 'numberdate',
+        align: 'left',
+      },
+      {
+        label: t('Giờ ra đầu ca'),
+        valueName: 'addressbusiness',
+        align: 'left',
+      },
+      {
+        label: t('Giờ vào giữa ca'),
+        valueName: 'reason',
+        align: 'left',
+      },
+      {
+        label: t('Giờ ra giữa ca'),
+        valueName: 'suport',
+        align: 'left',
+      },
+      {
+        label: t('Lý do cập nhật'),
+        valueName: 'sporter',
+        align: 'left',
+      },
+      {
+        label: t('Người duyệt'),
+        valueName: 'stust',
+        align: 'left',
+      },
+      {
+        label: t('Trạng thái'),
+        valueName: 'status',
+        align: 'left',
+      },
+      {
+        label: t('actions'),
+        valueName: 'actions',
+        align: 'center',
+      },
+    ];
+  
+    const actions = [
+      {
+        icon: <EditIcon />,
+        onClick: (item) => {},
+      },
+      {
+        icon: <DeleteIcon className="delete-icon" />,
+        onClick: () => {},
+      },
+    ];
+  
+    if (view == VIEW.ADD) {
+      return (
+        <StyledCreateUpdate>
+          <CreateUpdate onBack={() => setView(VIEW.LIST)} />
+        </StyledCreateUpdate>
+      );
+    }
 
-  const onPageChange = (page) => {
-    console.log('page', page);
-  };
 
-  const heads = [
-    {
-      label: t('id'),
-      valueName: 'id',
-      align: 'left',
-    },
-    {
-      label: t('name'),
-      valueName: 'name',
-      align: 'left',
-    },
-    {
-      label: t('Vị trí công việc'),
-      valueName: 'positiom',
-      align: 'left',
-    },
-    {
-      label: t('Đơn vị công tác'),
-      valueName: 'workunit',
-      align: 'left',
-      minWidth: 100,
-    },
-    {
-      label: t('Ngày nộp đơn'),
-      valueName: 'dateofapplication',
-      align: 'left',
-    },
-    {
-      label: t('Làm thêm từ'),
-      valueName: 'otfrom',
-      align: 'left',
-    },
-    {
-      label: t('Nghỉ giữa ca từ'),
-      valueName: 'shiftbreakfrom',
-      align: 'left',
-    },
-    {
-      label: t('Nghỉ giữa ca đến'),
-      valueName: 'shiftbackto',
-      align: 'left',
-    },
-    {
-      label: t('Thời điểm làm thêm'),
-      valueName: 'otto',
-      align: 'left',
-    },
-    {
-      label: t('Ca áp dụng'),
-      valueName: 'ottime',
-      align: 'left',
-    },
-    {
-      label: t('Lý do làm thêm'),
-      valueName: 'applicableshift',
-      align: 'left',
-    },
-    {
-      label: t('Người duyệt'),
-      valueName: 'stust',
-      align: 'left',
-    },
-    {
-      label: t('Người liên quan'),
-      valueName: 'pprover',
-      align: 'left',
-    },
-    {
-      label: t('Trạng thái'),
-      valueName: 'status',
-      align: 'left',
-    },
-    {
-      label: t('actions'),
-      valueName: 'actions',
-      align: 'center',
-    },
-  ];
-
-  const actions = [
-    {
-      icon: <EditIcon />,
-      onClick: (item) => {},
-    },
-    {
-      icon: <DeleteIcon className="delete-icon" />,
-      onClick: () => {},
-    },
-  ];
-
-  if (view == VIEW.ADD) {
-    return (
-      <StyledCreateRegisterOvertime>
-        <CreateRegisterOvertime onBack={() => setView(VIEW.LIST)} />
-      </StyledCreateRegisterOvertime>
-    );
-  }
   return (
-    <StyledRegisterOvertime>
-      <div className="register-home">
-        <div className="register-header">
-          <label className="title-register">
-            {t('Danh sách nhân viên làm thêm')}
+  <StyledUpdeteWorking>
+    <div className='updateworking-home'>
+        <div className='update-header'>
+            <label className="title-update">
+            {t('Danh sách nhân viên đi công tác')}
           </label>
           <Button
             variant="contained"
-            className="register-button"
+            className="update-button"
             color="primary"
             startIcon={<ControlPointIcon />}
             onClick={() => setView(VIEW.ADD)}
           >
             {t('add')}
           </Button>
+
         </div>
-        <div className="registerovertime-container">
-          <div className="search-register">
+        <div className='update-container'>
+          <div className='updateworking-search'>
             <TextField
-              id="search-late"
+              id="search-mission"
               variant="outlined"
               placeholder={t('search-nabar')}
               type="text"
-              className="input-register"
+              className="input-working"
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
@@ -171,7 +174,7 @@ const RegisterOvertime = () => {
               <div className="title-status">
                 <label>{t('Trạng thái')}</label>
               </div>
-              <div className="status-register">
+              <div className="status-update">
                 <FormControl sx={{ width: 240 }}>
                   <Select
                     defaultValue="Tất cả"
@@ -192,7 +195,7 @@ const RegisterOvertime = () => {
                 </FormControl>
               </div>
             </div>
-            <div className="select-register">
+            <div className="select-update">
               <Select
                 className="select"
                 placeholder={t('names-of-units')}
@@ -224,9 +227,10 @@ const RegisterOvertime = () => {
                 </Option>
               </Select>
             </div>
+
           </div>
-          <div className="table-registerovertime">
-            <CustomTable
+          <div className='table-update'>
+          <CustomTable
               heads={heads}
               items={data}
               actions={actions}
@@ -238,11 +242,14 @@ const RegisterOvertime = () => {
               }}
               onChangePagination={onPageChange}
             />
+
           </div>
+
         </div>
-      </div>
-    </StyledRegisterOvertime>
+
+    </div>
+  </StyledUpdeteWorking> 
   );
 };
 
-export default RegisterOvertime;
+export default UpdeteWorking;

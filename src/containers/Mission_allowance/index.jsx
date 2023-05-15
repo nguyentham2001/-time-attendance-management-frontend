@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import StyledRegisterOvertime from './index.style';
+import StyledMissionAllowance from './index.style';
 import { useTranslation } from 'react-i18next';
 import { Button, TextField, InputAdornment } from '@mui/material';
 import ControlPointIcon from '@mui/icons-material/ControlPoint';
@@ -12,10 +12,10 @@ import CustomTable from 'src/components/CustomTable';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { VIEW } from 'src/constants';
-import StyledCreateRegisterOvertime from './index.style';
-import CreateRegisterOvertime from './CreateRegisterOvertime';
+import StyledCreateMissionAllowance from './index.style';
+import CreateMissionAllowance from './CreateMissionAllowance';
 const limit = 10;
-const RegisterOvertime = () => {
+const MissionAllowance = () => {
   const { t } = useTranslation();
 
   const [view, setView] = useState(VIEW.LIST);
@@ -60,38 +60,43 @@ const RegisterOvertime = () => {
       minWidth: 100,
     },
     {
-      label: t('Ngày nộp đơn'),
-      valueName: 'dateofapplication',
+      label: t('Ngày đề nghị'),
+      valueName: 'requestdate',
       align: 'left',
     },
     {
-      label: t('Làm thêm từ'),
-      valueName: 'otfrom',
+      label: t('Ngày đi'),
+      valueName: 'startdate',
       align: 'left',
     },
     {
-      label: t('Nghỉ giữa ca từ'),
-      valueName: 'shiftbreakfrom',
+      label: t('Ngày về'),
+      valueName: 'enddate',
       align: 'left',
     },
     {
-      label: t('Nghỉ giữa ca đến'),
-      valueName: 'shiftbackto',
+      label: t('Số ngày đi công tác'),
+      valueName: 'numberdate',
       align: 'left',
     },
     {
-      label: t('Thời điểm làm thêm'),
-      valueName: 'otto',
+      label: t('Địa điểm công tác'),
+      valueName: 'addressbusiness',
       align: 'left',
     },
     {
-      label: t('Ca áp dụng'),
-      valueName: 'ottime',
+      label: t('Lý do công tác'),
+      valueName: 'reason',
       align: 'left',
     },
     {
-      label: t('Lý do làm thêm'),
-      valueName: 'applicableshift',
+      label: t('Yêu cầu hỗ trợ'),
+      valueName: 'suport',
+      align: 'left',
+    },
+    {
+      label: t('Người hỗ trợ'),
+      valueName: 'sporter',
       align: 'left',
     },
     {
@@ -101,7 +106,7 @@ const RegisterOvertime = () => {
     },
     {
       label: t('Người liên quan'),
-      valueName: 'pprover',
+      valueName: 'approver',
       align: 'left',
     },
     {
@@ -129,21 +134,22 @@ const RegisterOvertime = () => {
 
   if (view == VIEW.ADD) {
     return (
-      <StyledCreateRegisterOvertime>
-        <CreateRegisterOvertime onBack={() => setView(VIEW.LIST)} />
-      </StyledCreateRegisterOvertime>
+      <StyledCreateMissionAllowance>
+        <CreateMissionAllowance onBack={() => setView(VIEW.LIST)} />
+      </StyledCreateMissionAllowance>
     );
   }
+
   return (
-    <StyledRegisterOvertime>
-      <div className="register-home">
-        <div className="register-header">
-          <label className="title-register">
-            {t('Danh sách nhân viên làm thêm')}
+    <StyledMissionAllowance>
+      <div className="mission-home">
+        <div className="mission-header">
+          <label className="title-mission">
+            {t('Danh sách nhân viên đi công tác')}
           </label>
           <Button
             variant="contained"
-            className="register-button"
+            className="mission-button"
             color="primary"
             startIcon={<ControlPointIcon />}
             onClick={() => setView(VIEW.ADD)}
@@ -151,14 +157,14 @@ const RegisterOvertime = () => {
             {t('add')}
           </Button>
         </div>
-        <div className="registerovertime-container">
-          <div className="search-register">
+        <div className="mission-container">
+          <div className="mission-search">
             <TextField
-              id="search-late"
+              id="search-mission"
               variant="outlined"
               placeholder={t('search-nabar')}
               type="text"
-              className="input-register"
+              className="input-mission"
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
@@ -171,7 +177,7 @@ const RegisterOvertime = () => {
               <div className="title-status">
                 <label>{t('Trạng thái')}</label>
               </div>
-              <div className="status-register">
+              <div className="status-mission">
                 <FormControl sx={{ width: 240 }}>
                   <Select
                     defaultValue="Tất cả"
@@ -192,7 +198,7 @@ const RegisterOvertime = () => {
                 </FormControl>
               </div>
             </div>
-            <div className="select-register">
+            <div className="select-mission">
               <Select
                 className="select"
                 placeholder={t('names-of-units')}
@@ -225,7 +231,7 @@ const RegisterOvertime = () => {
               </Select>
             </div>
           </div>
-          <div className="table-registerovertime">
+          <div className="mission-table">
             <CustomTable
               heads={heads}
               items={data}
@@ -241,8 +247,8 @@ const RegisterOvertime = () => {
           </div>
         </div>
       </div>
-    </StyledRegisterOvertime>
+    </StyledMissionAllowance>
   );
 };
 
-export default RegisterOvertime;
+export default MissionAllowance;

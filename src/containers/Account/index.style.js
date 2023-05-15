@@ -17,13 +17,19 @@ export default styled.div`
     width: 400px;
   }
 
-  .employee-button {
-    float: right;
-  }
+
+}
+.AjVtV #employee-btt {
+  margin-left: 0px;
+}
+  
+ 
+  
   .account-add {
     margin-bottom: 20px;
   }
   .css-sghohy-MuiButtonBase-root-MuiButton-root {
+ 
     background: #1e90ff;
   }
   .css-sghohy-MuiButtonBase-root-MuiButton-root:hover {

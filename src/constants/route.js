@@ -15,4 +15,8 @@ export default {
   TIMESHEETDATA: '/timesheetdata',
   LATEEARLY: '/late-in-early-out',
   REGISTEROVERTIME: '/reagister-overtime',
+  MISSIONALLOWANCE: '/mission-allowance',
+  UPDATEWORKING: '/request-update-working',
+
+  PUBLICDETAIL: '/public-detail',
 };

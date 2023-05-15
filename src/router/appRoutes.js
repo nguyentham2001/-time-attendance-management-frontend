@@ -9,9 +9,13 @@ import Account from '@src/pages/Account';
 import TimesheetData from '@src/pages/TimesheetData';
 import Late_in_early_out from '@src/pages/Late_in_early_out';
 import Register_overtime from '@src/pages/Register_overtime';
+import Mission_allowance from '@src/pages/Mission_allowance';
+import Update_working from '@src/pages/Update_working';
 import Syn from '@src/pages/Syn';
 import Detail from '@src/pages/Detail';
 import General from '@src/pages/General';
+
+import Public_detail from '@src/pages/Public_detail';
 import routes from '@src/constants/route';
 
 export default [
@@ -117,6 +121,28 @@ export default [
   {
     path: routes.REGISTEROVERTIME,
     component: Register_overtime,
+    exact: true,
+    restricted: false,
+    isPrivate: true,
+  },
+  {
+    path: routes.MISSIONALLOWANCE,
+    component: Mission_allowance,
+    exact: true,
+    restricted: false,
+    isPrivate: true,
+  },
+  {
+    path: routes.UPDATEWORKING,
+    component: Update_working,
+    exact: true,
+    restricted: false,
+    isPrivate: true,
+  },
+
+  {
+    path: routes.PUBLICDETAIL,
+    component: Public_detail,
     exact: true,
     restricted: false,
     isPrivate: true,

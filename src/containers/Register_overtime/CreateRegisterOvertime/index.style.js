@@ -59,63 +59,36 @@ export default styled.div`
     margin-top: 15px;
   }
   .calendar-today {
-    margin-left: 95px;
+    margin-left: 68px;
   }
-  .calendar-fromday {
-    margin-left: 85px;
+  .calendar-fromdays {
+    margin-left: 46px;
   }
-  .number-holiday {
-    display: flex;
-    margin-top: 15px;
+  .calendar-leavefrom {
+    margin-left: 37px;
   }
   .css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root {
     width: 320px;
     height: 40px;
   }
-  .text-holiday {
-    margin-left: 68px;
-  }
-  .type-holiday {
-    display: flex;
-    margin-top: 15px;
-  }
-  .select {
-    width: 320px;
-  }
-  .select-type {
-    margin-left: 84px;
-  }
   .css-wahqcs-JoySelect-root {
     border-radius: 4px;
-  }
-  .salary-rate {
-    display: flex;
-    margin-top: 15px;
-  }
-  .input-salaryrate {
-    margin-left: 10px;
+    width: 320px;
   }
   .reqiued {
     color: red;
-  }
-  .applicable {
-    display: flex;
-    margin-top: 15px;
-  }
-  .select-applicable {
-    margin-left: 70px;
   }
   .applicable-case {
     margin-top: 15px;
   }
   .input-case {
-    margin-left: 75px;
+    margin-left: 70px;
   }
   .reason {
     margin-top: 15px;
   }
   .input-reason {
-    margin-left: 113px;
+    margin-left: 115px;
   }
   .input-latecoming {
     margin-left: 11px;
@@ -146,6 +119,24 @@ export default styled.div`
   }
   .input-peopleinvolved {
     margin-left: 50px;
+  }
+  .leavefrom {
+    display: flex;
+    margin-top: 15px;
+  }
+  .overtime {
+    display: flex;
+    margin-top: 15px;
+  }
+  .select-register {
+    margin-left: 20px;
+  }
+  .from-ot {
+    display: flex;
+    margin-top: 15px;
+  }
+  .calendar-fromdot {
+    margin-left: 55px;
   }
   .status-leave {
     margin-top: 15px;

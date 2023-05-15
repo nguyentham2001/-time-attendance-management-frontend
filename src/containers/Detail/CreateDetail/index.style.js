@@ -260,6 +260,9 @@ background-color:#DCDCDC;
   padding: 35px 35px 35px 35px;
   border-radius: 4px; 
 }
+.css-wahqcs-JoySelect-root{
+  border-radius: 4px;
+}
 
 
 `;
