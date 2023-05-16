@@ -7,46 +7,52 @@ top: 0;
 left: 0;
 box-shadow: 2px 2px 4px #2222;
 padding: 16px 8px;
-.title-salary{
+.salary13-header{
     font-size: 20px;
     font-weight: bold;
     color: #0000ff;
+}
+.salary13-container{
+    margin-top: 30px;
+    border: 1px groove;
+    background-color: #ffffff;
+    padding: 20px 20px 20px 20px;
+    border-radius: 4px;
+}
+.tittle-calendar{
+    font-size: 18px;
+    font-weight: bold;
 }
 .css-o9k5xi-MuiInputBase-root-MuiOutlinedInput-root{
     width: 200px;
     height: 40px;
 }
-.css-sghohy-MuiButtonBase-root-MuiButton-root{
-    text-transform: none
-  }
-.month{
+.icon-month{
+    color: red;
+}
+.calendars-years{
     display: flex;
     margin-top: 15px;
 }
-.tittle-condition{
-    font-size: 18px;
-    font-weight: bold;
+.css-sghohy-MuiButtonBase-root-MuiButton-root{
+    text-transform: none
+  }
+  .calendar-month{
+    margin-left: 20px;
+  }
+  #btt-search{
+    background:#1e90ff;
 }
-.salary-container{
-    margin-top: 30px;
-    border: 1px groove;
-    background-color: #ffffff;
-    padding: 20px 20px 20px 20px;
-    border-radius: 4px;  
+#btt-create{
+    background: #f86c6b;
 }
-.requied{
-    color: red;
-}
-.calendar-month{
-    margin-left:20px;
-}
-.button-month{
-  margin-left: 450px;
+.button-salary13{
+    margin-left: 470px;
 }
 .new-button{
     margin-left: 10px;
 }
-.icon-salary{
+.icon-listmenu{
     margin-top: 25px;
     display: flex;
 }
@@ -58,23 +64,12 @@ padding: 16px 8px;
     font-size: 18px;
     font-weight: bold; 
 }
-#btt-search{
-    background:#1e90ff;
-}
-#btt-create{
-    background: #f86c6b;
-}
 .export-file{
-    margin-left: 680px;
+    margin-left: 550px;
 }
-.table-salary{
+.table-salary13{
     margin-top: 15px;
 }
-
-
-
-
-
 
 
 `;

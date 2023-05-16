@@ -3,7 +3,7 @@ import StyledPublicDetail from './index.style';
 import { useTranslation } from 'react-i18next';
 import { Button, TextField, InputAdornment } from '@mui/material';
 import dayjs from 'dayjs';
-import { DemoContainer, DemoItem } from '@mui/x-date-pickers/internals/demo';
+import { DemoItem } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
@@ -11,15 +11,14 @@ import AdjustIcon from '@mui/icons-material/Adjust';
 import BlockIcon from '@mui/icons-material/Block';
 import CustomTable from 'src/components/CustomTable';
 import MenuIcon from '@mui/icons-material/Menu';
-const limit = 10;
+
 const PublicDeatail = () => {
   const { t } = useTranslation();
 
 const yesterday = dayjs().subtract(1, 'day');
 
 const [data, setData] = useState([]);
-const [currentPage, setCurrentPage] = useState(1);
-const [total, setTotal] = useState(15);
+
 
 useEffect(() => {
   setData([
@@ -160,7 +159,8 @@ const heads = [
 
           </div>
           <div className='button-public'>
-          <Button
+          
+            <Button
             variant="contained"
             className="search-button"
             id='btt-search'
@@ -170,8 +170,8 @@ const heads = [
           >
             {t('Tìm kiếm')}
           </Button>
-
-          <Button
+          
+            <Button
             variant="contained"
             className="new-button"
             id='btt-new'
@@ -181,12 +181,8 @@ const heads = [
           >
             {t('Làm mới')}
           </Button>
-
-
           </div>
-          
-          
-        </div>
+          </div>
         <div className='icon-listmenu'>
           <div className='icon-list'>
          < MenuIcon/>
@@ -198,12 +194,6 @@ const heads = [
       <CustomTable
               heads={heads}
               items={data}
-              pagination={{
-                page: currentPage,
-                totalPages: Math.ceil(total / limit),
-                limit: limit,
-                total: total,
-              }}
               onChangePagination={onPageChange}
             />
 

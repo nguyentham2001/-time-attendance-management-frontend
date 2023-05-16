@@ -2,133 +2,193 @@ import React, { useEffect, useState } from 'react';
 import StyledGeneral from './index.style';
 import { useTranslation } from 'react-i18next';
 import { Button, TextField, InputAdornment } from '@mui/material';
-import ControlPointIcon from '@mui/icons-material/ControlPoint';
-import SearchIcon from '@mui/icons-material/Search';
+import dayjs from 'dayjs';
+import { DemoItem } from '@mui/x-date-pickers/internals/demo';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import AdjustIcon from '@mui/icons-material/Adjust';
+import BlockIcon from '@mui/icons-material/Block';
 import CustomTable from 'src/components/CustomTable';
-import DeleteIcon from '@mui/icons-material/Delete';
-import EditIcon from '@mui/icons-material/Edit';
-const limit = 10;
+import MenuIcon from '@mui/icons-material/Menu';
+import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
+
 const General = () => {
   const { t } = useTranslation();
+  const yesterday = dayjs().subtract(1, 'day');
+
   const [data, setData] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [total, setTotal] = useState(15);
-  const [open, setOpen] = React.useState(false);
-  useEffect(() => {
-    setData([
-      {
-        workingdepartment: 'Bộ phận hành chính',
-        jobposition: 'Trưởng phòng hành chính',
-        timesheetname: 'Bảng chấm công từ ngày 01/04/2023 đến ngày 30/04/2023',
-        timetime: 'Tháng này',
-        methodoftimekeeping: 'Theo ca',
-      },
-    ]);
-  }, []);
-  const handleOpenDialog = () => {
-    setOpen(true);
-  };
 
-  const handleClose = () => {
-    setOpen(false);
-  };
 
-  const onPageChange = (page) => {
-    console.log('page', page);
-  };
+useEffect(() => {
+  setData([
+    {
+      id: 'id',
+      name: 'Nguyễn Văn A',
+    },
+  ]);
+}, []);
 
-  const heads = [
-    {
-      label: t('Đơn vị công tác'),
-      valueName: 'workingdepartment',
-      align: 'left',
-    },
-    {
-      label: t('Vị trí công việc'),
-      valueName: 'jobposition',
-      align: 'left',
-    },
-    {
-      label: t('Tên bảng chấm công'),
-      valueName: 'timesheetname',
-      align: 'left',
-    },
-    {
-      label: t('Thời gian '),
-      valueName: 'timetime',
-      align: 'left',
-    },
-    {
-      label: t('Hình thức chấm công'),
-      valueName: 'methodoftimekeeping',
-      align: 'left',
-      minWidth: 100,
-    },
-    {
-      label: t('actions'),
-      valueName: 'actions',
-      align: 'center',
-    },
-  ];
+const onPageChange = (page) => {
+  console.log('page', page);
+};
 
-  const actions = [
-    {
-      icon: <EditIcon />,
-      onClick: (item) => {},
-    },
-    {
-      icon: <DeleteIcon className="delete-icon" />,
-      onClick: () => {},
-    },
-  ];
+const heads = [
+  {
+    label: t('STT'),
+    valueName: 'no',
+    align: 'left',
+  },
+  {
+    label: t('Tài khoản'),
+    valueName: 'account',
+    align: 'left',
+  },
+  {
+    label: t('Mã NV'),
+    valueName: 'id',
+    align: 'left',
+  },
+  {
+    label: t('Tên'),
+    valueName: 'name',
+    align: 'left',
+    minWidth: 100,
+  },
+  {
+    label: t('Phòng ban'),
+    valueName: 'department',
+    align: 'left',
+  },
+  {
+    label: t('Chức vụ'),
+    valueName: 'position',
+    align: 'left',
+  },
+  {
+    label: t('Tổng công/tháng'),
+    valueName: 'salarymonth',
+    align: 'left',
+  },
+  {
+    label: t('Vào muộn'),
+    valueName: 'inlate',
+    align: 'left',
+  },
+  {
+    label: t('Về sớm'),
+    valueName: 'outearly',
+    align: 'left',
+  },
+  {
+    label: t('Giờ tăng ca'),
+    valueName: 'overtime',
+    align: 'left',
+  },
+  {
+    label: t('Vắng KP'),
+    valueName: 'absent',
+    align: 'left',
+  },
+  {
+    label: t('Vắng phép có lương'),
+    valueName: 'absentsalary',
+    align: 'left',
+  },
+  {
+    label: t('Vắng phép không lương'),
+    valueName: 'absentnosalary',
+    align: 'left',
+  },
+  {
+    label: t('Nghỉ lễ'),
+    valueName: 'holiday',
+    align: 'left',
+  }
+ 
+ 
+];
   return (
     <StyledGeneral>
-      <div className="general-home">
-        <div className="general-header">
-          <lable className="general-title">
-            {t(' Bảng chấm công tổng hợp')}
-          </lable>
+      <div className='general-header'>
+        <label className='title-general'>{t('Tổng hợp công tháng')}</label>
+      </div>
+      <div className='general-container'>
+       <div className='calendar-general'>
+         <label>{t(' Điều kiện lọc')}</label>
+        </div>
+        <div className='general-month'>
+          <lable className='title-month'>{t('Tháng:')}</lable>
+          <span className='icon-month'>*</span>
+          <div className='calendar-month'>
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <DemoItem >
+              <DatePicker
+                defaultValue={yesterday}
+                disablePast
+                views={['year', 'month']}
+              />
+             </DemoItem>
+          </LocalizationProvider>
+
+          </div>
+          <div className='button-public'>
           <Button
             variant="contained"
-            className="general-button"
+            className="search-button"
+            id='btt-search'
             color="primary"
-            // onClick={handleOpenDialog}
-            startIcon={<ControlPointIcon />}
+            startIcon={<AdjustIcon/>}
+          
           >
-            {t('add')}
+            {t('Tìm kiếm')}
+          </Button>
+
+          <Button
+            variant="contained"
+            className="new-button"
+            id='btt-create'
+            color="primary"
+            startIcon={<BlockIcon />}
+          
+          >
+            {t('Làm mới')}
+          </Button>
+
+
+          </div>
+          
+          
+        </div>
+        
+        <div className='icon-listmenu'>
+          <div className='icon-list'>
+         < MenuIcon/>
+          </div>
+        <lable className='title-list'>{t('Bảng tổng công của từng nhân viên trong tháng')}</lable>
+        <div className='export-file'>
+        <Button
+          variant="outlined"
+            className="export-button"
+            id='btt-export'
+            color="primary"
+            startIcon={<ArrowDownwardIcon />}
+          
+          >
+            {t('Xuất dữ liệu')}
           </Button>
         </div>
-        <div className="general-container">
-          <TextField
-            id="search-general"
-            variant="outlined"
-            placeholder={t('search-nabar')}
-            type="text"
-            className="input-general"
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <SearchIcon />
-                </InputAdornment>
-              ),
-            }}
-          />
         </div>
-        <div className="general-footer">
-          <CustomTable
-            heads={heads}
-            items={data}
-            actions={actions}
-            pagination={{
-              page: currentPage,
-              totalPages: Math.ceil(total / limit),
-              limit: limit,
-              total: total,
-            }}
-            onChangePagination={onPageChange}
-          />
+        <div className='table-general'>
+        <CustomTable
+              heads={heads}
+              items={data}
+              onChangePagination={onPageChange}
+            />
+
         </div>
       </div>
+ 
     </StyledGeneral>
   );
 };

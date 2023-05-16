@@ -7,7 +7,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import CustomTable from 'src/components/CustomTable';
 // import CreateOverTime from './CreateOverTime';
 
-const limit = 10;
+
 const OverTime = () => {
     const { t } = useTranslation();
 
@@ -22,8 +22,7 @@ const OverTime = () => {
     // };
 
     const [data, setData] = useState([]);
-    const [currentPage, setCurrentPage] = useState(1);
-    const [total, setTotal] = useState(15);
+  
     
     useEffect(() => {
       setData([
@@ -105,12 +104,6 @@ const OverTime = () => {
             <CustomTable
               heads={heads}
               items={data}
-              pagination={{
-                page: currentPage,
-                totalPages: Math.ceil(total / limit),
-                limit: limit,
-                total: total,
-              }}
               onChangePagination={onPageChange}
             />
 

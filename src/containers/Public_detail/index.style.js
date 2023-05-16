@@ -22,6 +22,7 @@ padding: 16px 8px;
 .css-o9k5xi-MuiInputBase-root-MuiOutlinedInput-root{
     width: 200px;
     height: 40px;
+    float: right;
 }
 .calendar-day{
     display: flex;
@@ -46,12 +47,8 @@ padding: 16px 8px;
 .table-public{
     margin-top: 15px;
 }
-.button-public{
-margin-left: 280px;
-}
-.new-button{
-    margin-left: 10px;
-}
+
+
 .css-sghohy-MuiButtonBase-root-MuiButton-root{
     text-transform: none
 }
@@ -66,14 +63,19 @@ margin-left: 280px;
 }
 .icon-listmenu{
     display: flex;
-    margin-top: 15px;
+    margin-top: 25px;
 }
 .title-list{
     margin-left: 10px;
     font-size: 18px;
     font-weight: bold; 
 }
-
+.button-public{
+    margin-left: 250px;
+}
+.new-button{
+    margin-left: 10px;
+}
 
 
 

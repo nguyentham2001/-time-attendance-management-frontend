@@ -12,12 +12,11 @@ export default {
   DATA: '/data',
   DETAIL: '/detail',
   GENERAL: '/general',
-  TIMESHEETDATA: '/timesheetdata',
-  LATEEARLY: '/late-in-early-out',
-  REGISTEROVERTIME: '/reagister-overtime',
-  MISSIONALLOWANCE: '/mission-allowance',
-  UPDATEWORKING: '/request-update-working',
+ 
 
   PUBLICDETAIL: '/public-detail',
   OVERTIME:'/overtime',
+  SALARYOFMONTH13: '/salary-of-month-13',
+  TOTALLEAVE:'/total-leave'
+  
 };

@@ -2,23 +2,21 @@ import Login from '@src/pages/Login';
 import Home from '@src/pages/Home';
 import Leave from '@src/pages/Leave';
 import Report from '@src/pages/Report';
-import Time from '@src/pages/Time';
+
+
 import Salary from '@src/pages/Salary';
 import Shift from '@src/pages/Shift';
 import Account from '@src/pages/Account';
-import TimesheetData from '@src/pages/TimesheetData';
-import Late_in_early_out from '@src/pages/Late_in_early_out';
-import Register_overtime from '@src/pages/Register_overtime';
-import Mission_allowance from '@src/pages/Mission_allowance';
-import Update_working from '@src/pages/Update_working';
+import Salary13 from '@src/pages/Salary13';
 import Syn from '@src/pages/Syn';
 import Detail from '@src/pages/Detail';
 import General from '@src/pages/General';
 
+import TotalLeave from '@src/pages/TotalLeave';
 import Public_detail from '@src/pages/Public_detail';
-import OVERTIME from '@src/pages/OverTime';
 import routes from '@src/constants/route';
 import OverTime from 'src/containers/OverTime';
+
 
 export default [
   {
@@ -43,13 +41,7 @@ export default [
     isPrivate: true,
   },
 
-  {
-    path: routes.TIME,
-    component: Time,
-    exact: true,
-    restricted: false,
-    isPrivate: true,
-  },
+
 
   {
     path: routes.REPORT,
@@ -70,6 +62,13 @@ export default [
   {
     path: routes.SALARY,
     component: Salary,
+    exact: true,
+    restricted: false,
+    isPrivate: true,
+  },
+  {
+    path: routes.SALARYOFMONTH13,
+    component: Salary13,
     exact: true,
     restricted: false,
     isPrivate: true,
@@ -106,41 +105,11 @@ export default [
     restricted: false,
     isPrivate: true,
   },
-  {
-    path: routes.TIMESHEETDATA,
-    component: TimesheetData,
-    exact: true,
-    restricted: false,
-    isPrivate: true,
-  },
-  {
-    path: routes.LATEEARLY,
-    component: Late_in_early_out,
-    exact: true,
-    restricted: false,
-    isPrivate: true,
-  },
-  {
-    path: routes.REGISTEROVERTIME,
-    component: Register_overtime,
-    exact: true,
-    restricted: false,
-    isPrivate: true,
-  },
-  {
-    path: routes.MISSIONALLOWANCE,
-    component: Mission_allowance,
-    exact: true,
-    restricted: false,
-    isPrivate: true,
-  },
-  {
-    path: routes.UPDATEWORKING,
-    component: Update_working,
-    exact: true,
-    restricted: false,
-    isPrivate: true,
-  },
+
+  
+ 
+ 
+ 
 
   {
     path: routes.PUBLICDETAIL,
@@ -152,6 +121,13 @@ export default [
   {
     path: routes.OVERTIME,
     component: OverTime,
+    exact: true,
+    restricted: false,
+    isPrivate: true,
+  },
+  {
+    path: routes.TOTALLEAVE,
+    component: TotalLeave,
     exact: true,
     restricted: false,
     isPrivate: true,
