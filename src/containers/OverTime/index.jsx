@@ -5,21 +5,21 @@ import { Button, TextField, InputAdornment } from '@mui/material';
 import AdjustIcon from '@mui/icons-material/Adjust';
 import MenuIcon from '@mui/icons-material/Menu';
 import CustomTable from 'src/components/CustomTable';
-// import CreateOverTime from './CreateOverTime';
-
+import { DemoItem } from '@mui/x-date-pickers/internals/demo';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import Select, { selectClasses } from '@mui/joy/Select';
+import Option from '@mui/joy/Option';
+import KeyboardArrowDown from '@mui/icons-material/KeyboardArrowDown';
+import Grid from '@mui/material/Unstable_Grid2';
+import Paper from '@mui/material/Paper';
+import Box from '@mui/material/Box';
 
 const OverTime = () => {
     const { t } = useTranslation();
 
-    // const [open, setOpen] = React.useState(false);
-
-    // const handleOpenDialog = () => {
-    //   setOpen(true);
-    // };
-  
-    // const handleClose = () => {
-    //   setOpen(false);
-    // };
+   
 
     const [data, setData] = useState([]);
   
@@ -76,22 +76,71 @@ const OverTime = () => {
     <div className='overtime-home'>
         <div className='overtime-header'>
             <label className='title-overtime'>{t('Tăng ca')}</label>
-            <div className='header-right'>
-            <Button
-            variant="contained"
-            className="createnew-button"
-            id='btt-createnew'
-            color="primary"
-            startIcon={<AdjustIcon/>}
-            // onClick={handleOpenDialog}
-          
-          >
-            {t('Tạo mới')}
-          </Button>
-            </div>
             
+          </div>
+        <div className='overtime-container'>
+          <div className='titile-create'>
+            <label>{t('Tạo phiếu tăng ca')}</label>
+          </div>
+          <div className='create-container'>
+          <Box sx={{ width: '100%' }}>
+      <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+        <Grid xs={6}>
+        <div className='type-overtime'>
+           <label className='title-typeovertime'>{t('Loại tăng ca')}</label>
+           <span className='requied'>*</span>
+           <div>
+               <Select
+              className="select-detail"
+              placeholder={t('Chọn...')}
+              indicator={<KeyboardArrowDown />}
+              sx={{
+                width: 240,
+                [`& .${selectClasses.indicator}`]: {
+                  transition: '0.2s',
+                  [`&.${selectClasses.expanded}`]: {
+                    transform: 'rotate(-180deg)',
+                  },
+                },
+              }}
+            >
+              <Option value="overtime ">{t('OverTime')}</Option>
+              <Option value="overnight ">{t('OverNight')}</Option>
+              </Select>
+  </div>
+
+          </div>
+          <div className='time-overtime'>
+          <label className='title-typeovertime'>{t('Loại tăng ca')}</label>
+           <span className='requied'>*</span>
+           
+          </div>
+        </Grid>
+        <Grid xs={6}>
+          1234
+        </Grid>
+        
+      </Grid>
+    </Box>
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+          </div>
 
         </div>
+
         <div className='overtime-container'>
             <div className='listovertime'>
                 <div className='icon-listovertime'>
@@ -113,7 +162,7 @@ const OverTime = () => {
         </div>
 
     </div>
-    {/* <CreateOverTime open={open} handleClose={handleClose} /> */}
+   
   </StyledOverTime>);
 };
 

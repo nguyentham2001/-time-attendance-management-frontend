@@ -22,11 +22,11 @@ padding: 16px 8px;
 .css-o9k5xi-MuiInputBase-root-MuiOutlinedInput-root{
     width: 200px;
     height: 40px;
-    float: right;
+ 
 }
 .calendar-day{
     display: flex;
-    margin-left: 20px;
+  
 }
 .icon-calendar{
     font-size: 20px;
@@ -38,6 +38,10 @@ padding: 16px 8px;
 .public-detail{
     display: flex;
     margin-top: 15px;
+    justify-content: space-between;
+}
+.date-calendar{
+    margin-left: 20px;
 }
 .calendar-public{
     font-size: 18px;
@@ -70,9 +74,7 @@ padding: 16px 8px;
     font-size: 18px;
     font-weight: bold; 
 }
-.button-public{
-    margin-left: 250px;
-}
+
 .new-button{
     margin-left: 10px;
 }

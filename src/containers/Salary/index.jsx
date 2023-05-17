@@ -46,11 +46,43 @@ const columns = [
     align: 'right',
     format: (value) => value.toFixed(2),
   },
+  { id: 'name1', label: 'Name', minWidth: 170 },
+  { id: 'name2', label: 'Name', minWidth: 170 },
+  { id: 'name3', label: 'Name', minWidth: 170 },
+  { id: 'name4', label: 'Name', minWidth: 170 },
+  { id: 'name5', label: 'Name', minWidth: 170 },
+  { id: 'name6', label: 'Name', minWidth: 170 },
+  { id: 'name7', label: 'Name', minWidth: 170 },
+  { id: 'name8', label: 'Name', minWidth: 170 },
+  { id: 'name9', label: 'Name', minWidth: 170 },
+  { id: 'name10', label: 'Name', minWidth: 170 },
+  { id: 'name11', label: 'Name', minWidth: 170 },
+  { id: 'name12', label: 'Name', minWidth: 170 },
+  { id: 'name13', label: 'Name', minWidth: 170 },
 ];
 
 function createData(name, code, population, size) {
   const density = population / size;
-  return { name, code, population, size, density };
+  return {
+    name,
+    code,
+    population,
+    size,
+    density,
+    name1: '1',
+    name2: '1',
+    name3: '1',
+    name4: '1',
+    name5: '1',
+    name6: '1',
+    name7: '1',
+    name8: '1',
+    name9: '1',
+    name10: '1',
+    name11: '1',
+    name12: '1',
+    name13: '1',
+  };
 }
 
 const rows = [
@@ -73,9 +105,9 @@ const rows = [
 
 const Salary = () => {
   const { t } = useTranslation();
-const yesterday = dayjs().subtract(1, 'day');
+  const yesterday = dayjs().subtract(1, 'day');
 
-const [page, setPage] = React.useState(0);
+  const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
   const handleChangePage = (event, newPage) => {
@@ -88,137 +120,147 @@ const [page, setPage] = React.useState(0);
   };
 
   return (
-  <StyledSalary>
- <div className='salary-home'>
-  <div className='salary-header'>
-    <label className='title-salary'>{t('Lương tháng')}</label>
-    </div>
-    <div className='salary-container'>
-
-      <div className='condition'>
-        <label className='tittle-condition'>{t('Điều kiện lọc')}</label>
-      </div>
-      <div className='month'>
-        <label className='title-month'>{t('Tháng:')}</label>
-        <span className='requied'>*</span>
-        <div className='calendar-month'>
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <DemoItem >
-              <DatePicker
-                defaultValue={yesterday}
-                disablePast
-                views={['year', 'month']}
-              />
-             </DemoItem>
-          </LocalizationProvider>
+    <StyledSalary>
+      <div className="salary-home">
+        <div className="salary-header">
+          <label className="title-salary">{t('Lương tháng')}</label>
         </div>
-        <div className='button-month'>
-        <Button
-            variant="contained"
-            className="search-button"
-            id='btt-search'
-            color="primary"
-            startIcon={<AdjustIcon/>}
-          
-          >
-            {t('Xuất lương')}
-          </Button>
-
-          <Button
-            variant="contained"
-            className="new-button"
-            id='btt-create'
-            color="primary"
-            startIcon={<BlockIcon />}
-          
-          >
-            {t('Làm mới')}
-          </Button>
-
-        </div>
-        </div>
-        <div className='icon-salary'>
-         <div className='icon-list'>
-         < MenuIcon/>
+        <div className="salary-container">
+          <div className="condition">
+            <label className="tittle-condition">{t('Điều kiện lọc')}</label>
           </div>
-        <lable className='title-list'>{t('Bảng lương tháng')}</lable>
-        <div className='export-file'>
-        <Button
-          variant="outlined"
-            className="export-button"
-            id='btt-export'
-            color="primary"
-            startIcon={<ArrowDownwardIcon />}
-          
-          >
-            {t('Xuất dữ liệu')}
-          </Button>
+          <div className="month">
+           
+            <div className="calendar-month">
+            <span className="title-month">{t('Tháng:')}</span>
+            <span className="requied">*</span>
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <DemoItem>
+                  <DatePicker
+                    defaultValue={yesterday}
+                    disablePast
+                    views={['year', 'month']}
+                  />
+                </DemoItem>
+              </LocalizationProvider>
+            </div>
+            <div className="button-month">
+              <Button
+                variant="contained"
+                className="search-button"
+                id="btt-search"
+                color="primary"
+                startIcon={<AdjustIcon />}
+              >
+                {t('Xuất lương')}
+              </Button>
 
+              <Button
+                variant="contained"
+                className="new-button"
+                id="btt-create"
+                color="primary"
+                startIcon={<BlockIcon />}
+              >
+                {t('Làm mới')}
+              </Button>
+            </div>
+          </div>
+          <div className="icon-salary">
+            <div className="icon-list">
+              <MenuIcon />
+              <span className="title-list">{t('Bảng lương tháng')}</span>
+            </div>
+            <Button
+              variant="outlined"
+              className="export-button"
+              id="btt-export"
+              color="primary"
+              startIcon={<ArrowDownwardIcon />}
+            >
+              {t('Xuất dữ liệu')}
+            </Button>
+          </div>
+          <div className="table-salary">
+            <Paper sx={{ width: '100%' }}>
+              <TableContainer sx={{ maxHeight: 440 }}>
+                <Table stickyHeader aria-label="sticky table">
+                  <TableHead>
+                    <TableRow>
+                      <TableCell rowSpan={2}>STT</TableCell>
+                      <TableCell rowSpan={2}>Account</TableCell>
+                      <TableCell rowSpan={2}>Tên</TableCell>
+                      <TableCell rowSpan={2}>Phòng ban</TableCell>
+                      <TableCell rowSpan={2}>Lương cơ bản</TableCell>
+                      <TableCell rowSpan={2}>Tổng công/Tháng</TableCell>
+                      <TableCell rowSpan={2}>Lương tháng (1)</TableCell>
+                      <TableCell rowSpan={2}>
+                        Lương nghỉ phép + Nghỉ lễ (2)
+                      </TableCell>
+                      <TableCell rowSpan={2}>Lương thêm giờ (3)</TableCell>
+                      <TableCell colSpan={5} align="center">
+                        Phụ cấp
+                      </TableCell>
+                      <TableCell rowSpan={2}>Lương tạm ứng (5)</TableCell>
+                      <TableCell rowSpan={2}>Tổng thưởng (6)</TableCell>
+                      <TableCell rowSpan={2}>Tổng khấu trừ (7)</TableCell>
+                      <TableCell rowSpan={2}>
+                        Lương thực lĩnh 1+2+3+4-5+6-7
+                      </TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell style={{ top: 57 }}>Phụ cấp ăn</TableCell>
+                      <TableCell style={{ top: 57 }}>Điện thoại</TableCell>
+                      <TableCell style={{ top: 57 }}>Xăng xe</TableCell>
+                      <TableCell style={{ top: 57 }}>Trách nhiệm</TableCell>
+                      <TableCell style={{ top: 57 }}>
+                        Tổng Phụ cấp (4)
+                      </TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {rows
+                      .slice(
+                        page * rowsPerPage,
+                        page * rowsPerPage + rowsPerPage,
+                      )
+                      .map((row) => {
+                        return (
+                          <TableRow
+                            hover
+                            role="checkbox"
+                            tabIndex={-1}
+                            key={row.code}
+                          >
+                            {columns.map((column) => {
+                              const value = row[column.id];
+                              return (
+                                <TableCell key={column.id} align={column.align}>
+                                  {column.format && typeof value === 'number'
+                                    ? column.format(value)
+                                    : value}
+                                </TableCell>
+                              );
+                            })}
+                          </TableRow>
+                        );
+                      })}
+                  </TableBody>
+                </Table>
+              </TableContainer>
+              <TablePagination
+                rowsPerPageOptions={[10, 25, 100]}
+                component="div"
+                count={rows.length}
+                rowsPerPage={rowsPerPage}
+                page={page}
+                onPageChange={handleChangePage}
+                onRowsPerPageChange={handleChangeRowsPerPage}
+              />
+            </Paper>
+          </div>
         </div>
-
       </div>
-      <div className='table-salary'>
-      <Paper sx={{ width: '100%' }}>
-      <TableContainer sx={{ maxHeight: 440 }}>
-        <Table stickyHeader aria-label="sticky table">
-          <TableHead>
-            <TableRow>
-              <TableCell align="center" colSpan={2}>
-                Country
-              </TableCell>
-              <TableCell align="center" colSpan={3}>
-                Details
-              </TableCell>
-            </TableRow>
-            <TableRow>
-              {columns.map((column) => (
-                <TableCell
-                  key={column.id}
-                  align={column.align}
-                  style={{ top: 57, minWidth: column.minWidth }}
-                >
-                  {column.label}
-                </TableCell>
-              ))}
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {rows
-              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((row) => {
-                return (
-                  <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
-                    {columns.map((column) => {
-                      const value = row[column.id];
-                      return (
-                        <TableCell key={column.id} align={column.align}>
-                          {column.format && typeof value === 'number'
-                            ? column.format(value)
-                            : value}
-                        </TableCell>
-                      );
-                    })}
-                  </TableRow>
-                );
-              })}
-          </TableBody>
-        </Table>
-      </TableContainer>
-      <TablePagination
-        rowsPerPageOptions={[10, 25, 100]}
-        component="div"
-        count={rows.length}
-        rowsPerPage={rowsPerPage}
-        page={page}
-        onPageChange={handleChangePage}
-        onRowsPerPageChange={handleChangeRowsPerPage}
-      />
-    </Paper>
-
-      </div>
-
- </div>
- </div>
     </StyledSalary>
   );
 };

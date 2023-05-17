@@ -17,6 +17,8 @@ export default {
   PUBLICDETAIL: '/public-detail',
   OVERTIME:'/overtime',
   SALARYOFMONTH13: '/salary-of-month-13',
-  TOTALLEAVE:'/total-leave'
+  TOTALLEAVE:'/total-leave',
+  SALARYPROCESS: '/salary-process',
+  ORTHERMONEY: '/orther-money',
   
 };

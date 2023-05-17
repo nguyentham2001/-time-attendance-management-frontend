@@ -135,9 +135,10 @@ const heads = [
          <label>{t(' Điều kiện lọc')}</label>
         </div>
         <div className='public-detail'>
-          <lable className='day-public'>{t('Ngày:')}</lable>
-          <div className='calendar-day'>
-          <LocalizationProvider dateAdapter={AdapterDayjs}>
+         <div className='calendar-day'>
+         <span className='day-public'>{t('Ngày:')}</span>
+         <div className='date-calendar'>
+         <LocalizationProvider dateAdapter={AdapterDayjs}>
             <DemoItem >
               <DatePicker
                 defaultValue={yesterday}
@@ -146,6 +147,8 @@ const heads = [
               />
              </DemoItem>
           </LocalizationProvider>
+         </div>
+          
           <label className='icon-calendar'>~</label>
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <DemoItem >
@@ -185,9 +188,9 @@ const heads = [
           </div>
         <div className='icon-listmenu'>
           <div className='icon-list'>
-         < MenuIcon/>
+          < MenuIcon/>
           </div>
-        <lable className='title-list'>{t('Báo cáo thời gian làm việc')}</lable>
+        <span className='title-list'>{t('Báo cáo thời gian làm việc')}</span>
 
         </div>
         <div className='table-public'>

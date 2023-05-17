@@ -118,10 +118,11 @@ const heads = [
          <label>{t(' Điều kiện lọc')}</label>
         </div>
         <div className='general-month'>
-          <lable className='title-month'>{t('Tháng:')}</lable>
+         <div className='calendar-month'>
+          <span className='title-month'>{t('Tháng:')}</span>
           <span className='icon-month'>*</span>
-          <div className='calendar-month'>
-          <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <div className='date-calendar'>
+          <LocalizationProvider dateAdapter={AdapterDayjs} className='datecalendar'>
             <DemoItem >
               <DatePicker
                 defaultValue={yesterday}
@@ -130,7 +131,8 @@ const heads = [
               />
              </DemoItem>
           </LocalizationProvider>
-
+          </div>
+         
           </div>
           <div className='button-public'>
           <Button
@@ -164,8 +166,9 @@ const heads = [
         <div className='icon-listmenu'>
           <div className='icon-list'>
          < MenuIcon/>
+         <span className='title-list'>{t('Bảng tổng công của từng nhân viên trong tháng')}</span>
           </div>
-        <lable className='title-list'>{t('Bảng tổng công của từng nhân viên trong tháng')}</lable>
+       
         <div className='export-file'>
         <Button
           variant="outlined"

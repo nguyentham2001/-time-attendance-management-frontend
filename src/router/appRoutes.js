@@ -11,7 +11,8 @@ import Salary13 from '@src/pages/Salary13';
 import Syn from '@src/pages/Syn';
 import Detail from '@src/pages/Detail';
 import General from '@src/pages/General';
-
+import SalaryProcess from '@src/pages/SalaryProcess';
+import OrtherMoney from '@src/pages/OrtherMoney';
 import TotalLeave from '@src/pages/TotalLeave';
 import Public_detail from '@src/pages/Public_detail';
 import routes from '@src/constants/route';
@@ -128,6 +129,20 @@ export default [
   {
     path: routes.TOTALLEAVE,
     component: TotalLeave,
+    exact: true,
+    restricted: false,
+    isPrivate: true,
+  },
+  {
+    path: routes.SALARYPROCESS,
+    component: SalaryProcess,
+    exact: true,
+    restricted: false,
+    isPrivate: true,
+  },
+  {
+    path: routes.ORTHERMONEY,
+    component: OrtherMoney,
     exact: true,
     restricted: false,
     isPrivate: true,

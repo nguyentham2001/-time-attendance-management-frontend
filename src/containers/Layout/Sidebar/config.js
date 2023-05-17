@@ -87,14 +87,14 @@ export const sidebarMenu = [
       {
         key: 'rewardandpunishment',
         heading: 'Thưởng và phạt',
-        route: ROUTES.DETAIL,
+        route: ROUTES.ORTHERMONEY,
         role: ['user'],
       },
       {
         key: 'salaryprocess',
         heading: 'Quá trình lương',
         role: ['user'],
-        route: ROUTES.SHIFT,
+        route: ROUTES.SALARYPROCESS,
       },
       {
         key: 'salarymonth',

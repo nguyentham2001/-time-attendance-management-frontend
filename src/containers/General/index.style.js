@@ -30,13 +30,15 @@ export default styled.div`
 .general-month{
 display: flex;
 margin-top: 15px;
+justify-content: space-between;
+}
+.calendar-month{
+  display:flex;
 }
 .icon-month{
   color: red;
 }
-.calendar-month{
-  margin-left: 20px;
-}
+
 .new-button{
   margin-left: 10px;
   background:#f86c6b; 
@@ -44,21 +46,29 @@ margin-top: 15px;
 .new-button:hover{
   background:#f86c6b; 
 }
-.button-public{
-  margin-left: 450px;
-}
+
 .icon-listmenu{
   display: flex;
   margin-top: 25px;
+  justify-content: space-between;
+
+}
+.date-calendar{
+  margin-left: 10px;
+}
+.icon-list{
+  display: flex;
+  align-items: center;
+}
+.title-month{
+  margin-top: 7px;
 }
 .title-list{
   margin-left: 10px;
   font-size: 18px;
   font-weight: bold;
 }
-.export-file{
-  margin-left: 440px;
-}
+
 #btt-search{
   background:#1e90ff;
 }
