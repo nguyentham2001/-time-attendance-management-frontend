@@ -22,5 +22,6 @@ export default {
   ORTHERMONEY: '/orther-money',
   SALARYADVANCE:'/salary-advance',
   CREATEREQUEST: '/create-request',
+  DEPARMENT:'/deparment',
   
 };

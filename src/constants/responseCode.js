@@ -9,4 +9,12 @@ export default {
   // user
   USER_NOT_FOUND: 1001,
   WRONG_PASSWORD: 1002,
+
+  // Department
+  DEPARTMENT_NAME_EXIST: 2001,
+  DEPARTMENT_NOT_FOUND: 2002,
+
+  // Position
+  POSITION_NAME_EXIST: 3001,
+  POSITION_NOT_FOUND: 3002,
 };

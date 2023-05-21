@@ -62,6 +62,7 @@ padding: 16px 8px;
     font-size: 18px;
     font-weight: bold; 
 }
+
 #btt-search{
     background:#1e90ff;
 }

@@ -3,7 +3,6 @@ import Home from '@src/pages/Home';
 import Leave from '@src/pages/Leave';
 import Report from '@src/pages/Report';
 
-
 import Salary from '@src/pages/Salary';
 import Shift from '@src/pages/Shift';
 import Account from '@src/pages/Account';
@@ -19,7 +18,7 @@ import routes from '@src/constants/route';
 import OverTime from 'src/containers/OverTime';
 import SalaryAdvance from '@src/pages/SalaryAdvance';
 import CreateRequest from '@src/pages/CreateRequest';
-
+import Deparment from '@src/pages/Deparment';
 export default [
   {
     path: routes.LOGIN,
@@ -42,8 +41,6 @@ export default [
     restricted: false,
     isPrivate: true,
   },
-
-
 
   {
     path: routes.REPORT,
@@ -108,10 +105,13 @@ export default [
     isPrivate: true,
   },
 
-  
- 
- 
- 
+  {
+    path: routes.DEPARMENT,
+    component: Deparment,
+    exact: true,
+    restricted: false,
+    isPrivate: true,
+  },
 
   {
     path: routes.PUBLICDETAIL,

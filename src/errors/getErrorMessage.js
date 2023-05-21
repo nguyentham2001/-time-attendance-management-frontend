@@ -14,6 +14,14 @@ const getErrorMessage = (code) => {
       return 'userNotFound';
     case RESPONSE_CODE.WRONG_PASSWORD:
       return 'wrongPassword';
+    case RESPONSE_CODE.DEPARTMENT_NAME_EXIST:
+      return 'deparmentNameExists';
+    case RESPONSE_CODE.DEPARTMENT_NOT_FOUND:
+      return 'deparmentNotFound';
+    case RESPONSE_CODE.POSITION_NAME_EXIST:
+      return 'positionNameExists';
+    case RESPONSE_CODE.POSITION_NOT_FOUND:
+      return 'positionNotFound';
     default:
       return 'serverError';
   }

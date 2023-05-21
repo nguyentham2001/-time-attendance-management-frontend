@@ -33,7 +33,7 @@ export const sidebarMenu = [
       {
         key: 'Deparment',
         heading: 'Danh sách phòng ban',
-        route: ROUTES.REPORT,
+        route: ROUTES.DEPARMENT,
         role: ['user'],
       },
       {
