@@ -20,5 +20,7 @@ export default {
   TOTALLEAVE:'/total-leave',
   SALARYPROCESS: '/salary-process',
   ORTHERMONEY: '/orther-money',
+  SALARYADVANCE:'/salary-advance',
+  CREATEREQUEST: '/create-request',
   
 };

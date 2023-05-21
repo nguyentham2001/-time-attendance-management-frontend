@@ -6,7 +6,7 @@ import ControlPointIcon from '@mui/icons-material/ControlPoint';
 import SearchIcon from '@mui/icons-material/Search';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
-
+import MenuIcon from '@mui/icons-material/Menu';
 import CustomTable from 'src/components/CustomTable';
 
 import CreateEmployee from './CreateEmployee';
@@ -126,10 +126,11 @@ const Home = () => {
   return (
     <StyledHome>
       <div className="home">
-        <div className="home-employee">
-          <div>
+   
             <h3 className="employee-header">{t('manage-employee-list')}</h3>
-          </div>
+          
+        <div className="home-employee">
+        
           <div className="employee-add">
             <TextField
               id="search-employee"
@@ -157,6 +158,13 @@ const Home = () => {
               {t('add')}
             </Button>
           </div>
+          <div className='list-employee'>
+                <div className='icon-listovertime'>
+                <MenuIcon/>
+                </div>
+              
+               <label className='title-listovertime'>{t('Danh sách nhân viên')}</label>
+             </div>
           <div className="employee-container">
             <CustomTable
               heads={heads}

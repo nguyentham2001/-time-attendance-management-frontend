@@ -78,7 +78,9 @@ padding: 16px 8px;
 .new-button{
     margin-left: 10px;
 }
-
+.MuiOutlinedInput-notchedOutline {
+    border-color: #ccc !important;
+}
 
 
 

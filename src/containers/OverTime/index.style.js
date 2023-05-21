@@ -37,7 +37,89 @@ padding: 16px 8px;
 .listovertime{
     display: flex;
 }
-#btt-createnew{
-    background:#1e90ff;
+.css-o9k5xi-MuiInputBase-root-MuiOutlinedInput-root {
+width: 260px;
+height: 40px;
+}
+.css-wahqcs-JoySelect-root{
+border-radius: 4px;
+width: 260px;
+}
+.type-overtime{
+    display: flex;
+    margin-top: 20px;
+}
+.time-overtime{
+    display: flex;
+}
+
+.css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root{
+    height: 40px;
+    overflow: hidden;
+}
+.time-overtime{
+    display: flex;
+    margin-top: 15px;
+}
+.calendar-oclock{
+    display: flex;
+    margin-top: 15px;
+    margin-left: 125px;
+}
+.calendar-oclock input{
+    width: 82px;
+}
+.titile-create{
+    font-size: 18px;
+    font-weight: bold; 
+}
+.requied{
+    color: red;
+}
+.select-typeovertime{
+    margin-left: 40px;
+}
+.calendar-timeover{
+    margin-left: 60px;
+}
+.icon-oclock{
+    margin-top: 15px;
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+.css-1xhypcz-MuiStack-root{
+    padding: 0px;
+}
+.reason-overtime{
+    margin-top: 15px;
+}
+.oclock{
+    width: 90px;
+  
+}
+.reasonovertime-input{
+    width: 260px;
+    margin-left: 85px;
+}
+.css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input{
+    pading: 0px;
+}
+.MuiOutlinedInput-notchedOutline {
+    border-color: #ccc !important;
+}
+.deparment-input{
+    width: 260px;
+    margin-left: 113px;
+}
+.deparment{
+    margin-top: 15px;
+}
+.person-in-charge{
+    display: flex;
+    margin-top: 15px;
+}
+.select-deparment{
+    margin-left: 30px;
 }
 `;

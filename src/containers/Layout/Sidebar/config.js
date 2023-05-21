@@ -14,7 +14,7 @@ import AcUnitIcon from '@mui/icons-material/AcUnit';
 export const sidebarMenu = [
   {
     key: 'Employee',
-    heading: 'Quản lý danh sách nhân viên',
+    heading: 'Quản lý nhân sự',
     icon: (
       <Icon>
         {' '}
@@ -23,20 +23,26 @@ export const sidebarMenu = [
     ),
     role: ['user'],
     route: ROUTES.HOME,
-    // subMenu: [
-    //   {
-    //     key: 'Mangement',
-    //     heading: 'management',
-    //     route: ROUTES.MANAGEMENT,
-    //     role: ['user'],
-    //   },
-    //   {
-    //     key: 'Script',
-    //     heading: 'script',
-    //     route: ROUTES.HOME,
-    //     role: ['user'],
-    //   },
-    // ],
+    subMenu: [
+      {
+        key: 'Employee',
+        heading: 'Danh sách nhân viên',
+        route: ROUTES.HOME,
+        role: ['user'],
+      },
+      {
+        key: 'Deparment',
+        heading: 'Danh sách phòng ban',
+        route: ROUTES.REPORT,
+        role: ['user'],
+      },
+      {
+        key: 'Position',
+        heading: 'Danh sách chức vụ',
+        route: ROUTES.SHIFT,
+        role: ['user'],
+      },
+    ],
   },
   {
     key: 'Shift',
@@ -82,7 +88,7 @@ export const sidebarMenu = [
       {
         key: 'salaryadvance',
         heading: 'Tạm ứng lương',
-        route: ROUTES.SYN,
+        route: ROUTES.SALARYADVANCE,
       },
       {
         key: 'rewardandpunishment',
@@ -125,7 +131,7 @@ export const sidebarMenu = [
       {
         key: 'Aplication',
         heading: 'Tạo đơn nghỉ',
-        route: ROUTES.LEAVE,
+        route: ROUTES.CREATEREQUEST,
         role: ['user'],
       },
       {

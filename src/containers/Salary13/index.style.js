@@ -70,7 +70,9 @@ padding: 16px 8px;
 .table-salary13{
     margin-top: 15px;
 }
-
+.MuiOutlinedInput-notchedOutline {
+    border-color: #ccc !important;
+}
 
 
 

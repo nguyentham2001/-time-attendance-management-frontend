@@ -13,14 +13,24 @@ import {
   TextField,
   Button,
 } from '@mui/material';
+
+import JoySelect, { selectClasses } from '@mui/joy/Select';
+import JoyOption from '@mui/joy/Option';
+import KeyboardArrowDown from '@mui/icons-material/KeyboardArrowDown';
 import CancelIcon from '@mui/icons-material/Cancel';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import dayjs from 'dayjs';
+import { DemoItem } from '@mui/x-date-pickers/internals/demo';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 
 import { GENDER } from 'src/constants';
 import StyledDialog from './index.style';
 
 const CreateEmployee = ({ open, handleClose }) => {
   const { t } = useTranslation();
+  const yesterday = dayjs().subtract(1, 'day');
 
   const [gender, setGender] = React.useState('');
 
@@ -38,41 +48,26 @@ const CreateEmployee = ({ open, handleClose }) => {
       <DialogTitle id="alert-dialog-title">{t('add-employee')}</DialogTitle>
       <DialogContent>
         <DialogContentText id="alert-dialog-description">
-          <Box sx={{ flexGrow: 1 }}>
-            <Grid container spacing={2} columns={16}>
-              <Grid xs={8}>
-                <div className="information-employee">
-                  <div className="input-information">
-                    <label className="lable-infor"> {t('id')}</label>
-                    <br></br>
-                    <TextField type="text" className="infor-input" />
+          <Box sx={{ width: '100%' }}>
+            <Grid
+              container
+              rowSpacing={1}
+              columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+            >
+              <Grid xs={6}>
+                <div className="input-accountfirst">
+                  <div>
+                    <span>{t('Họ và tên')}</span>
+                    <span className="requied">*</span>
                   </div>
+                  <TextField
+                    id="outlined-basic"
+                    className=""
+                    variant="outlined"
+                  />
                 </div>
-              </Grid>
-              <Grid xs={8}>
-                <div className="information-employee">
-                  <div className="input-information">
-                    <label className="lable-infor"> {t('name')}</label>
-                    <br></br>
-                    <TextField type="text" className="infor-input" />
-                  </div>
-                </div>
-              </Grid>
-            </Grid>
-            <Grid container spacing={2} columns={16}>
-              <Grid xs={8}>
-                <div className="information-employee">
-                  <div className="input-information">
-                    <label className="lable-infor"> {t('birth')}</label>
-                    <br></br>
-                    <TextField type="text" className="infor-input" />
-                  </div>
-                </div>
-              </Grid>
-              <Grid xs={8}>
-                <div className="information-employee">
-                  <label className="lable-infor"> {t('gender')}</label>
-                  <br></br>
+                <div className="input-account">
+                  <span>{t('Giới tính')}</span>
                   <FormControl sx={{ m: 1, minWidth: 120 }}>
                     <Select
                       className="select-gender"
@@ -80,9 +75,6 @@ const CreateEmployee = ({ open, handleClose }) => {
                       onChange={handleGenderChange}
                       displayEmpty
                     >
-                      <MenuItem value="">
-                        <em>----</em>
-                      </MenuItem>
                       {Object.keys(GENDER).map((key) => (
                         <MenuItem value={GENDER[key]}>
                           {t(key.toLocaleLowerCase())}
@@ -91,104 +83,164 @@ const CreateEmployee = ({ open, handleClose }) => {
                     </Select>
                   </FormControl>
                 </div>
-              </Grid>
-            </Grid>
-            <Grid container spacing={2} columns={16}>
-              <Grid xs={8}>
-                <div className="information-employee">
-                  <div className="input-information">
-                    <label className="lable-infor"> {t('CMND')}</label>
-                    <br></br>
-                    <TextField type="text" className="infor-input" />
+                <div className="input-account">
+                  <div>
+                    <span>{t('Ngày cấp')}</span>
+                    <span className="requied">*</span>
                   </div>
+                  <LocalizationProvider dateAdapter={AdapterDayjs}>
+                    <DemoItem>
+                      <DatePicker
+                        defaultValue={yesterday}
+                        disablePast
+                        views={['year', 'month', 'day']}
+                      />
+                    </DemoItem>
+                  </LocalizationProvider>
+                </div>
+                <div className="input-account">
+                  <div>
+                    <span>{t('Địa chỉ')}</span>
+                    <span className="requied">*</span>
+                  </div>
+                  <TextField
+                    id="outlined-basic"
+                    className=""
+                    variant="outlined"
+                  />
+                </div>
+                <div className="input-account">
+                  <div>
+                    <span>{t('Số điện thoại')}</span>
+                    <span className="requied">*</span>
+                  </div>
+                  <TextField
+                    id="outlined-basic"
+                    className=""
+                    variant="outlined"
+                  />
+                </div>
+                <div className="input-account">
+                  <div>
+                    <span>{t('Phòng ban')}</span>
+                  </div>
+                  <JoySelect
+                    className="select-deparment"
+                    placeholder={t('Chọn...')}
+                    indicator={<KeyboardArrowDown />}
+                    sx={{
+                      width: 240,
+                      [`& .${selectClasses.indicator}`]: {
+                        transition: '0.2s',
+                        [`&.${selectClasses.expanded}`]: {
+                          transform: 'rotate(-180deg)',
+                        },
+                      },
+                    }}
+                  >
+                    <JoyOption value="no-data ">{t('Không có dữ liệu')}</JoyOption>
+                  </JoySelect>
+                </div>
+                <div className="input-account">
+                  <div>
+                    <span>{t('Ngày làm việc')}</span>
+                    <span className="requied">*</span>
+                  </div>
+                  <LocalizationProvider dateAdapter={AdapterDayjs}>
+                    <DemoItem>
+                      <DatePicker
+                        defaultValue={yesterday}
+                        disablePast
+                        views={['year', 'month', 'day']}
+                      />
+                    </DemoItem>
+                  </LocalizationProvider>
                 </div>
               </Grid>
-              <Grid xs={8}>
-                <div className="information-employee">
-                  <div className="input-information">
-                    <label className="lable-infor"> {t('date-range')}</label>
-                    <br></br>
-                    <TextField type="text" className="infor-input" />
+              <Grid xs={6}>
+                <div className="employee-right">
+                  <div className="input-accountfirst">
+                    <div>
+                      <span>{t('Ngày sinh')}</span>
+                      <span className="requied">*</span>
+                    </div>
+                    <LocalizationProvider dateAdapter={AdapterDayjs}>
+                      <DemoItem>
+                        <DatePicker
+                          defaultValue={yesterday}
+                          disablePast
+                          views={['year', 'month', 'day']}
+                        />
+                      </DemoItem>
+                    </LocalizationProvider>
                   </div>
-                </div>
-              </Grid>
-            </Grid>
-            <Grid container spacing={2} columns={16}>
-              <Grid xs={8}>
-                <div className="information-employee">
-                  <div className="input-information">
-                    <label className="lable-infor"> {t('issued-by')}</label>
-                    <br></br>
-                    <TextField type="text" className="infor-input" />
+                  <div className="input-account">
+                    <div>
+                      <span>{t('Số CMND')}</span>
+                      <span className="requied">*</span>
+                    </div>
+                    <TextField
+                      id="outlined-basic"
+                      className=""
+                      variant="outlined"
+                    />
                   </div>
-                </div>
-              </Grid>
-              <Grid xs={8}>
-                <div className="information-employee">
-                  <div className="input-information">
-                    <label className="lable-infor"> {t('address')}</label>
-                    <br></br>
-                    <TextField type="text" className="infor-input" />
+                  <div className="input-account">
+                    <div>
+                      <span>{t('Nơi cấp')}</span>
+                      <span className="requied">*</span>
+                    </div>
+                    <TextField
+                      id="outlined-basic"
+                      className=""
+                      variant="outlined"
+                    />
                   </div>
-                </div>
-              </Grid>
-            </Grid>
-            <Grid container spacing={2} columns={16}>
-              <Grid xs={8}>
-                <div className="information-employee">
-                  <div className="input-information">
-                    <label className="lable-infor"> {t('phoneNumber')}</label>
-                    <br></br>
-                    <TextField type="text" className="infor-input" />
+                  <div className="input-account">
+                    <div>
+                      <span>{t('Email')}</span>
+                      <span className="requied">*</span>
+                    </div>
+                    <TextField
+                      id="outlined-basic"
+                      className=""
+                      variant="outlined"
+                    />
                   </div>
-                </div>
-              </Grid>
-              <Grid xs={8}>
-                <div className="information-employee">
-                  <div className="input-information">
-                    <label className="lable-infor"> {t('email')}</label>
-                    <br></br>
-                    <TextField type="text" className="infor-input" />
+                  <div className="input-account">
+                    <div>
+                      <span>{t('Chức vụ')}</span>
+                    </div>
+                    <JoySelect
+                      className="select-deparment"
+                      placeholder={t('Chọn...')}
+                      indicator={<KeyboardArrowDown />}
+                      sx={{
+                        width: 240,
+                        [`& .${selectClasses.indicator}`]: {
+                          transition: '0.2s',
+                          [`&.${selectClasses.expanded}`]: {
+                            transform: 'rotate(-180deg)',
+                          },
+                        },
+                      }}
+                    >
+                      <JoyOption value="no-data ">{t('Không có dữ liệu')}</JoyOption>
+                    </JoySelect>
                   </div>
-                </div>
-              </Grid>
-            </Grid>
-            <Grid container spacing={2} columns={16}>
-              <Grid xs={8}>
-                <div className="information-employee">
-                  <div className="input-information">
-                    <label className="lable-infor"> {t('position')}</label>
-                    <br></br>
-                    <TextField type="text" className="infor-input" />
-                  </div>
-                </div>
-              </Grid>
-              <Grid xs={8}>
-                <div className="information-employee">
-                  <div className="input-information">
-                    <label className="lable-infor"> {t('department')}</label>
-                    <br></br>
-                    <TextField type="text" className="infor-input" />
-                  </div>
-                </div>
-              </Grid>
-            </Grid>
-            <Grid container spacing={2} columns={16}>
-              <Grid xs={8}>
-                <div className="information-employee">
-                  <div className="input-information">
-                    <label className="lable-infor"> {t('datesign')}</label>
-                    <br></br>
-                    <TextField type="text" className="infor-input" />
-                  </div>
-                </div>
-              </Grid>
-              <Grid xs={8}>
-                <div className="information-employee">
-                  <div className="input-information">
-                    <label className="lable-infor"> {t('datestart')}</label>
-                    <br></br>
-                    <TextField type="text" className="infor-input" />
+                  <div className="input-account">
+                    <div>
+                      <span>{t('Ngày ký hợp đồng')}</span>
+                    </div>
+                    <LocalizationProvider dateAdapter={AdapterDayjs}>
+                      <DemoItem>
+                        <DatePicker
+                          defaultValue={yesterday}
+                          disablePast
+                          views={['year', 'month', 'day']}
+                        />
+                      </DemoItem>
+                    </LocalizationProvider>
                   </div>
                 </div>
               </Grid>

@@ -17,7 +17,8 @@ import TotalLeave from '@src/pages/TotalLeave';
 import Public_detail from '@src/pages/Public_detail';
 import routes from '@src/constants/route';
 import OverTime from 'src/containers/OverTime';
-
+import SalaryAdvance from '@src/pages/SalaryAdvance';
+import CreateRequest from '@src/pages/CreateRequest';
 
 export default [
   {
@@ -143,6 +144,20 @@ export default [
   {
     path: routes.ORTHERMONEY,
     component: OrtherMoney,
+    exact: true,
+    restricted: false,
+    isPrivate: true,
+  },
+  {
+    path: routes.SALARYADVANCE,
+    component: SalaryAdvance,
+    exact: true,
+    restricted: false,
+    isPrivate: true,
+  },
+  {
+    path: routes.CREATEREQUEST,
+    component: CreateRequest,
     exact: true,
     restricted: false,
     isPrivate: true,

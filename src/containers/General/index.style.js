@@ -82,4 +82,7 @@ justify-content: space-between;
 .table-general{
   margin-top: 15px;
 }
+.MuiOutlinedInput-notchedOutline {
+  border-color: #ccc !important;
+}
 `;

@@ -7,6 +7,7 @@ width: 100%;
 position: fixed;
 top: 0;
 left: 0;
+overflow-y: auto;
 display: flex;
 justify-content: center;
 align-items: center;

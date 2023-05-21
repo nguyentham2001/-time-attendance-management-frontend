@@ -1,5 +1,6 @@
 export default {
-  DAY: 'DAY',
-  WEEK: 'WEEK',
-  MONTH: 'MONTH',
+ 
+  ALLDAY: 'ALLDAY',
+  MORNING:'MORNING',
+  AFTERNOON: 'AFTERNOON',
 };
