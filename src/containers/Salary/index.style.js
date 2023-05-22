@@ -82,7 +82,9 @@ padding: 16px 8px;
 .css-y8ay40-MuiTableCell-root{
     border: 1px solid #ccc;
 }
-
+.calendars{
+    margin-left: 20px;
+}
 
 
 

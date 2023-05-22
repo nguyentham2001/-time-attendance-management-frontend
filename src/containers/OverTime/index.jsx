@@ -6,6 +6,7 @@ import AdjustIcon from '@mui/icons-material/Adjust';
 import MenuIcon from '@mui/icons-material/Menu';
 import CustomTable from 'src/components/CustomTable';
 
+import BlockIcon from '@mui/icons-material/Block';
 import Select, { selectClasses } from '@mui/joy/Select';
 import Option from '@mui/joy/Option';
 import KeyboardArrowDown from '@mui/icons-material/KeyboardArrowDown';
@@ -56,16 +57,7 @@ const columns = [
   { id: 'name1', label: 'Name', minWidth: 170 },
   { id: 'name2', label: 'Name', minWidth: 170 },
   { id: 'name3', label: 'Name', minWidth: 170 },
-  { id: 'name4', label: 'Name', minWidth: 170 },
-  { id: 'name5', label: 'Name', minWidth: 170 },
-  { id: 'name6', label: 'Name', minWidth: 170 },
-  { id: 'name7', label: 'Name', minWidth: 170 },
-  { id: 'name8', label: 'Name', minWidth: 170 },
-  { id: 'name9', label: 'Name', minWidth: 170 },
-  { id: 'name10', label: 'Name', minWidth: 170 },
-  { id: 'name11', label: 'Name', minWidth: 170 },
-  { id: 'name12', label: 'Name', minWidth: 170 },
-  { id: 'name13', label: 'Name', minWidth: 170 },
+ 
 ];
 
 function createData(name, code, population, size) {
@@ -79,7 +71,6 @@ function createData(name, code, population, size) {
     name1: '1',
     name2: '1',
     name3: '1',
-    
   };
 }
 
@@ -92,19 +83,16 @@ const rows = [
   createData('Australia', 'AU', 25475400, 7692024),
   createData('Germany', 'DE', 83019200, 357578),
   createData('Ireland', 'IE', 4857000, 70273),
- 
 ];
 
-
 const OverTime = () => {
-    const { t } = useTranslation();
+  const { t } = useTranslation();
 
-    const yesterday = dayjs().subtract(1, 'day');
-    
+  const yesterday = dayjs().subtract(1, 'day');
 
-    // 
-    
-    const [page, setPage] = React.useState(0);
+  //
+
+  const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
   const handleChangePage = (event, newPage) => {
@@ -116,136 +104,166 @@ const OverTime = () => {
     setPage(0);
   };
 
-  return (<StyledOverTime>
-    <div className='overtime-home'>
-        <div className='overtime-header'>
-            <span className='title-overtime'>{t('Tăng ca')}</span>
-            
-          </div>
-        <div className='overtime-container'>
-          <div className='titile-create'>
+  return (
+    <StyledOverTime>
+      <div className="overtime-home">
+        <div className="overtime-header">
+          <span className="title-overtime">{t('Tăng ca')}</span>
+        </div>
+        <div className="overtime-container">
+          <div className="titile-create">
             <span>{t('Tạo phiếu tăng ca')}</span>
           </div>
-          <div className='create-container'>
-          <div className='type-overtime'>
-           <span className='title-typeovertime'>{t('Loại tăng ca')}</span>
-           <span className='requied'>*</span>
-           <div className='select-typeovertime'>
-               <Select
-              className="select-detail"
-              placeholder={t('Chọn...')}
-              indicator={<KeyboardArrowDown />}
-              sx={{
-                width: 240,
-                [`& .${selectClasses.indicator}`]: {
-                  transition: '0.2s',
-                  [`&.${selectClasses.expanded}`]: {
-                    transform: 'rotate(-180deg)',
-                  },
-                },
-              }}
-            >
-              <Option value="overtime ">{t('OverTime')}</Option>
-              <Option value="overnight ">{t('OverNight')}</Option>
-              </Select>
-  </div>
-
-          </div>
-          <Box sx={{ width: '100%' }}>
-      <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-        <Grid xs={6}>
-      
-          <div className='time-overtime'>
-          <span className='title-typeovertime'>{t('Thời gian')}</span>
-           <span className='requied'>*</span>
-           <div className='calendar-timeover'>
-              <LocalizationProvider dateAdapter={AdapterDayjs} >
-                <DemoItem >
-                  <DatePicker
-                  defaultValue={yesterday}
-                  disablePast
-                  views={['year', 'month', 'day']}
-                  />
-                </DemoItem>
-              </LocalizationProvider>
+          <div className="create-container">
+            <div className="type-overtime">
+              <span className="title-typeovertime">{t('Loại tăng ca')}</span>
+              <span className="requied">*</span>
+              <div className="select-typeovertime">
+                <Select
+                  className="select-detail"
+                  placeholder={t('Chọn...')}
+                  indicator={<KeyboardArrowDown />}
+                  sx={{
+                    width: 240,
+                    [`& .${selectClasses.indicator}`]: {
+                      transition: '0.2s',
+                      [`&.${selectClasses.expanded}`]: {
+                        transform: 'rotate(-180deg)',
+                      },
+                    },
+                  }}
+                >
+                  <Option value="overtime ">{t('OverTime')}</Option>
+                  <Option value="overnight ">{t('OverNight')}</Option>
+                </Select>
+              </div>
             </div>
-          </div>
-          <div className='calendar-oclock'>
-            <LocalizationProvider dateAdapter={AdapterDayjs} className='oclock'>
-              <DemoContainer
-              components={[
-              'TimePicker',
-              ]}
+            <Box sx={{ width: '100%' }}>
+              <Grid
+                container
+                rowSpacing={1}
+                columnSpacing={{ xs: 1, sm: 2, md: 3 }}
               >
-              <DemoItem >
-              <DesktopTimePicker defaultValue={dayjs('2022-04-17T15:30')} />
-              </DemoItem>
-              </DemoContainer>
-            </LocalizationProvider>
-            <span className='icon-oclock'>~</span>
-            <LocalizationProvider dateAdapter={AdapterDayjs} className='oclock'>
-              <DemoContainer
-              components={[
-              'TimePicker',
-              ]}
-              >
-              <DemoItem >
-                <DesktopTimePicker defaultValue={dayjs('2022-04-17T15:30')} />
-              </DemoItem>
-              </DemoContainer>
-            </LocalizationProvider>
-          </div>
-          <div className='reason-overtime'>
-          <span className='title-reasonovertime'>{t('Lý do')}</span>
-           <span className='requied'>*</span>
+                <Grid xs={6}>
+                  <div className="time-overtime">
+                    <span className="title-typeovertime">{t('Thời gian')}</span>
+                    <span className="requied">*</span>
+                    <div className="calendar-timeover">
+                      <LocalizationProvider dateAdapter={AdapterDayjs}>
+                        <DemoItem>
+                          <DatePicker
+                            defaultValue={yesterday}
+                            disablePast
+                            views={['year', 'month', 'day']}
+                          />
+                        </DemoItem>
+                      </LocalizationProvider>
+                    </div>
+                  </div>
+                  <div className="calendar-oclock">
+                    <LocalizationProvider
+                      dateAdapter={AdapterDayjs}
+                      className="oclock"
+                    >
+                      <DemoContainer components={['TimePicker']}>
+                        <DemoItem>
+                          <DesktopTimePicker
+                            defaultValue={dayjs('2022-04-17T15:30')}
+                          />
+                        </DemoItem>
+                      </DemoContainer>
+                    </LocalizationProvider>
+                    <span className="icon-oclock">~</span>
+                    <LocalizationProvider
+                      dateAdapter={AdapterDayjs}
+                      className="oclock"
+                    >
+                      <DemoContainer components={['TimePicker']}>
+                        <DemoItem>
+                          <DesktopTimePicker
+                            defaultValue={dayjs('2022-04-17T15:30')}
+                          />
+                        </DemoItem>
+                      </DemoContainer>
+                    </LocalizationProvider>
+                  </div>
+                  <div className="reason-overtime">
+                    <span className="title-reasonovertime">{t('Lý do')}</span>
+                    <span className="requied">*</span>
 
-           <TextField id="outlined-basic" className='reasonovertime-input' variant="outlined" />
-
-          </div>
-        </Grid>
-        <Grid xs={6}>
-          <div className='deparment'>
-            <span>{t('Phòng ban')}</span>
-            <TextField id="outlined-basic" className='deparment-input' variant="outlined" />
-          </div>
-          <div className='person-in-charge'>
-          <span>{t('Người phụ trách phòng')}</span>
-          <Select
-              className="select-deparment"
-              placeholder={t('Chọn...')}
-              indicator={<KeyboardArrowDown />}
-              sx={{
-                width: 240,
-                [`& .${selectClasses.indicator}`]: {
-                  transition: '0.2s',
-                  [`&.${selectClasses.expanded}`]: {
-                    transform: 'rotate(-180deg)',
-                  },
-                },
-              }}
+                    <TextField
+                      id="outlined-basic"
+                      className="reasonovertime-input"
+                      variant="outlined"
+                    />
+                  </div>
+                </Grid>
+                <Grid xs={6}>
+                  <div className="deparment">
+                    <span>{t('Phòng ban')}</span>
+                    <TextField
+                      id="outlined-basic"
+                      className="deparment-input"
+                      variant="outlined"
+                    />
+                  </div>
+                  <div className="person-in-charge">
+                    <span>{t('Người phụ trách phòng')}</span>
+                    <Select
+                      className="select-deparment"
+                      placeholder={t('Chọn...')}
+                      indicator={<KeyboardArrowDown />}
+                      sx={{
+                        width: 240,
+                        [`& .${selectClasses.indicator}`]: {
+                          transition: '0.2s',
+                          [`&.${selectClasses.expanded}`]: {
+                            transform: 'rotate(-180deg)',
+                          },
+                        },
+                      }}
+                    >
+                      <Option value="no-data ">{t('Không có dữ liệu')}</Option>
+                    </Select>
+                  </div>
+                </Grid>
+              </Grid>
+            </Box>
+            <div className="button-salaryadvance">
+            <Button
+              variant="contained"
+              className="search-button"
+              id="btt-search"
+              color="primary"
+              startIcon={<AdjustIcon />}
             >
-              <Option value="no-data ">{t('Không có dữ liệu')}</Option>
-             
-              </Select>
+              {t('Tạo phiếu')}
+            </Button>
 
+            <Button
+              variant="contained"
+              className="new-button"
+              id="btt-new"
+              color="primary"
+              startIcon={<BlockIcon />}
+            >
+              {t('Làm mới')}
+            </Button>
           </div>
-        </Grid>
-        
-      </Grid>
-    </Box>
-     </div>
-
+          </div>
         </div>
 
-        <div className='overtime-container'>
-            <div className='listovertime'>
-                <div className='icon-listovertime'>
-                <MenuIcon/>
-                </div>
-              
-               <label className='title-listovertime'>{t('Danh sách phiếu tăng ca')}</label>
-             </div>
-            <div className='table-overtime'>
+        <div className="overtime-container">
+          <div className="listovertime">
+            <div className="icon-listovertime">
+              <MenuIcon />
+            </div>
+
+            <label className="title-listovertime">
+              {t('Danh sách phiếu tăng ca')}
+            </label>
+          </div>
+          <div className="table-overtime">
             <Paper sx={{ width: '100%' }}>
               <TableContainer sx={{ maxHeight: 440 }}>
                 <Table stickyHeader aria-label="sticky table">
@@ -253,7 +271,7 @@ const OverTime = () => {
                     <TableRow>
                       <TableCell rowSpan={2}>STT</TableCell>
                       <TableCell rowSpan={2}>Loại tăng ca</TableCell>
-                      <TableCell colSpan={5} align="center">
+                      <TableCell colSpan={3} align="center">
                         Thời gian tăng ca
                       </TableCell>
                       <TableCell rowSpan={2}>Lý do </TableCell>
@@ -306,15 +324,11 @@ const OverTime = () => {
                 onRowsPerPageChange={handleChangeRowsPerPage}
               />
             </Paper>
-
-
-            </div>
-             
+          </div>
         </div>
-
-    </div>
-   
-  </StyledOverTime>);
+      </div>
+    </StyledOverTime>
+  );
 };
 
 export default OverTime;

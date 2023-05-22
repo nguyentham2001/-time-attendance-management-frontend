@@ -8,68 +8,88 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import AdjustIcon from '@mui/icons-material/Adjust';
-import CustomTable from 'src/components/CustomTable';
 import MenuIcon from '@mui/icons-material/Menu';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import Select, { selectClasses } from '@mui/joy/Select';
 import Option from '@mui/joy/Option';
 import KeyboardArrowDown from '@mui/icons-material/KeyboardArrowDown';
+import Paper from '@mui/material/Paper';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TablePagination from '@mui/material/TablePagination';
+import TableRow from '@mui/material/TableRow';
+const columns = [
+  { id: 'name', label: 'Name', minWidth: 170 },
+  { id: 'code', label: 'ISO\u00a0Code', minWidth: 100 },
+  {
+    id: 'population',
+    label: 'Population',
+    minWidth: 170,
+    align: 'right',
+    format: (value) => value.toLocaleString('en-US'),
+  },
+  {
+    id: 'size',
+    label: 'Size\u00a0(km\u00b2)',
+    minWidth: 170,
+    align: 'right',
+    format: (value) => value.toLocaleString('en-US'),
+  },
+  {
+    id: 'density',
+    label: 'Density',
+    minWidth: 170,
+    align: 'right',
+    format: (value) => value.toFixed(2),
+  },
+  { id: 'name1', label: 'Name', minWidth: 170 },
+];
+
+function createData(name, code, population, size) {
+  const density = population / size;
+  return {
+    name,
+    code,
+    population,
+    size,
+    density,
+    name1: '1',
+  };
+}
+const rows = [
+  createData('India', 'IN', 1324171354,),
+  createData('China', 'CN', 1403500365),
+  createData('Italy', 'IT', 60483973),
+  createData('United States', 'US', 327167434),
+  createData('Canada', 'CA', 37602103),
+  createData('Australia', 'AU', 2547540),
+  createData('Germany', 'DE', 83019200),
+  createData('Ireland', 'IE', 4857000),
+  createData('Ireland', 'IE', 4857000),
+];
+
 
 const OrtherMoney = () => {
     const { t } = useTranslation();
     const yesterday = dayjs().subtract(1, 'day');
 
-    const [data, setData] = useState([]);
+    const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(+event.target.value);
+    setPage(0);
+  };
+
 
   
-    useEffect(() => {
-      setData([
-        {
-        
-          no: '1',
-        },
-      ]);
-    }, []);
     
-    const onPageChange = (page) => {
-      console.log('page', page);
-    };
-    
-    const heads = [
-      {
-        label: t('STT'),
-        valueName: 'no',
-        align: 'left',
-      },
-      {
-        label: t('Tài khoản'),
-        valueName: 'account',
-        align: 'left',
-      },
-      {
-        label: t('Ngày áp dụng'),
-        valueName: 'dateapplication',
-        align: 'left',
-        minWidth: 100,
-      },
-      {
-        label: t('Số tiền'),
-        valueName: 'numbermoney',
-        align: 'left',
-      },
-      {
-        label: t('Loại tiền'),
-        valueName: 'typemoney',
-        align: 'left',
-      },
-      {
-        label: t('Ghi chú'),
-        valueName: 'note',
-        align: 'left',
-      }
-     
-     
-    ];
   return <StyledOrtherMoney>
     <div className='orthermoney-home'>
         <lable className='title-orthermoney'>{t('Tiền thưởng/phạt')}</lable>
@@ -168,11 +188,57 @@ const OrtherMoney = () => {
 
         </div>
         <div className='table-salary13'>
-        <CustomTable
-              heads={heads}
-              items={data}
-              onChangePagination={onPageChange}
+        <Paper sx={{ width: '100%' }}>
+            <TableContainer sx={{ maxHeight: 440 }}>
+              <Table stickyHeader aria-label="sticky table">
+                <TableHead>
+                  <TableRow>
+                    <TableCell>STT</TableCell>
+                    <TableCell>Tài khoản</TableCell>
+                    <TableCell>Ngày áp dụng</TableCell>
+                    <TableCell>Số tiền</TableCell>
+                    <TableCell>Loại tiền</TableCell>
+                    <TableCell>Ghi chú</TableCell>
+                    
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {rows
+                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                    .map((row) => {
+                      return (
+                        <TableRow
+                          hover
+                          role="checkbox"
+                          tabIndex={-1}
+                          key={row.code}
+                        >
+                          {columns.map((column) => {
+                            const value = row[column.id];
+                            return (
+                              <TableCell key={column.id} align={column.align}>
+                                {column.format && typeof value === 'number'
+                                  ? column.format(value)
+                                  : value}
+                              </TableCell>
+                            );
+                          })}
+                        </TableRow>
+                      );
+                    })}
+                </TableBody>
+              </Table>
+            </TableContainer>
+            <TablePagination
+              rowsPerPageOptions={[10, 25, 100]}
+              component="div"
+              count={rows.length}
+              rowsPerPage={rowsPerPage}
+              page={page}
+              onPageChange={handleChangePage}
+              onRowsPerPageChange={handleChangeRowsPerPage}
             />
+          </Paper>
 
         </div>
 

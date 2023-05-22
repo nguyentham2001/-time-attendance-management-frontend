@@ -33,11 +33,16 @@ padding: 16px 8px;
 .calendars-years{
     display: flex;
     margin-top: 15px;
+    justify-content: space-between;
 }
 .css-sghohy-MuiButtonBase-root-MuiButton-root{
     text-transform: none
   }
   .calendar-month{
+
+    display: flex;
+  }
+  .calendar{
     margin-left: 20px;
   }
   #btt-search{
@@ -55,6 +60,7 @@ padding: 16px 8px;
 .icon-listmenu{
     margin-top: 25px;
     display: flex;
+    justify-content: space-between;
 }
 .css-1rwt2y5-MuiButtonBase-root-MuiButton-root{
     text-transform: none
@@ -72,6 +78,10 @@ padding: 16px 8px;
 }
 .MuiOutlinedInput-notchedOutline {
     border-color: #ccc !important;
+}
+.icon-list{
+    display: flex;
+    align-items: center;
 }
 
 `;

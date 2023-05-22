@@ -1,7 +1,7 @@
 import { Dialog } from '@mui/material';
 import styled from 'styled-components';
 const StyledDialog = styled(Dialog)`
-  .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input {
+.css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input {
     width: 300px;
   }
   .css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root {
@@ -25,5 +25,15 @@ const StyledDialog = styled(Dialog)`
   #alert-dialog-title {
     color: #0000ff;
   }
+
+
+
+
+
+
+
+
+
+
 `;
 export default StyledDialog;

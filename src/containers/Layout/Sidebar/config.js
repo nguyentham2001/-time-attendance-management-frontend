@@ -39,7 +39,7 @@ export const sidebarMenu = [
       {
         key: 'Position',
         heading: 'Danh sách chức vụ',
-        route: ROUTES.SHIFT,
+        route: ROUTES.POSITION,
         role: ['user'],
       },
     ],

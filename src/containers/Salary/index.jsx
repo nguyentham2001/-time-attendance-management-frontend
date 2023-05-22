@@ -134,7 +134,8 @@ const Salary = () => {
             <div className="calendar-month">
             <span className="title-month">{t('Tháng:')}</span>
             <span className="requied">*</span>
-              <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <div className='calendars'>
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DemoItem>
                   <DatePicker
                     defaultValue={yesterday}
@@ -143,6 +144,8 @@ const Salary = () => {
                   />
                 </DemoItem>
               </LocalizationProvider>
+            </div>
+              
             </div>
             <div className="button-month">
               <Button

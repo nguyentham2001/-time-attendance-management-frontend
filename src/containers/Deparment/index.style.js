@@ -19,29 +19,14 @@ export default styled.div`
     padding: 20px 20px 20px 20px;
     border-radius: 4px;
   }
-  .title-create {
-    font-size: 18px;
-    font-weight: bold;
-  }
-  .create-deparment {
-    margin-top: 25px;
-    display: flex;
-    justify-content: space-between;
-  }
+ 
+
   .css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root {
     width: 240px;
     height: 40px;
   }
-  .input-deparment {
-    margin-left: 40px;
-  }
 
-  #btt-search {
-    background: #1e90ff;
-  }
-  #btt-new {
-    background: #f86c6b;
-  }
+
 
   .css-sghohy-MuiButtonBase-root-MuiButton-root {
     text-transform: none;
@@ -81,5 +66,13 @@ export default styled.div`
   .css-sghohy-MuiButtonBase-root-MuiButton-root:hover {
     background: #1e90ff;
   }
-
+  .css-y8ay40-MuiTableCell-root{
+    border: 1px solid #C0C0C0;
+    border-collapse: collapse;
+    font-weight:solid;
+  }
+ 
+  .table-deparment{
+    margin-top: 20px;
+  }
 `;

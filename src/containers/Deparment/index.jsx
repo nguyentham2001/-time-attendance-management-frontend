@@ -16,11 +16,15 @@ import TableRow from '@mui/material/TableRow';
 import { usePaginationWithState } from 'src/hooks';
 import apis from 'src/apis';
 import CreateDepartment from './CreateDeparment';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 const columns = [
   { id: 'no', label: 'STT' },
   { id: 'name', label: 'Name', minWidth: 170 },
+  { id: 'actions', label: 'Actions', minWidth: 170 },
 ];
+
 
 const Deparment = () => {
   const { t } = useTranslation();
@@ -59,6 +63,17 @@ const Deparment = () => {
     onParamsChange({ limit: newLimit, pageNum: 1 });
   };
 
+
+  const actions = [
+    {
+      icon: <EditIcon />,
+      onClick: (item) => {},
+    },
+    {
+      icon: <DeleteIcon className="delete-icon" />,
+      onClick: () => {},
+    },
+  ];
   return (
     <StyledDeparment>
       <div className="deparment-home">
@@ -106,6 +121,7 @@ const Deparment = () => {
                     <TableRow>
                       <TableCell>STT</TableCell>
                       <TableCell>Tên phòng ban</TableCell>
+                      <TableCell>Thao tác</TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
@@ -141,6 +157,7 @@ const Deparment = () => {
                 rowsPerPageOptions={[10, 25, 100]}
                 component="div"
                 count={total}
+                actions={actions}
                 rowsPerPage={limit}
                 page={currentPage - 1}
                 onPageChange={handleChangePage}

@@ -122,4 +122,20 @@ width: 260px;
 .select-deparment{
     margin-left: 30px;
 }
+.button-salaryadvance{
+    margin-top: 20px;
+}
+.css-sghohy-MuiButtonBase-root-MuiButton-root{
+    text-transform: none
+}
+
+.new-button{
+    margin-left: 10px;
+}
+#btt-search{
+    background:#1e90ff;
+}
+#btt-new{
+    background:#f86c6b;
+}
 `;

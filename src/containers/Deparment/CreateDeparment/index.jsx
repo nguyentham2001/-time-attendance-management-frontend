@@ -69,7 +69,7 @@ const CreateDepartment = ({ open, handleClose, handleReloadData }) => {
       <DialogContent>
         <DialogContentText id="alert-dialog-description">
           <span>{t('Tên phòng ban')}</span>
-          <div>
+          <div className='input-createdeparment'>
             <TextField
               id="outlined-basic"
               className="input-create"

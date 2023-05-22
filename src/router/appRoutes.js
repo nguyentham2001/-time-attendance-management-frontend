@@ -1,14 +1,7 @@
 import Login from '@src/pages/Login';
 import Home from '@src/pages/Home';
-import Leave from '@src/pages/Leave';
-import Report from '@src/pages/Report';
-
 import Salary from '@src/pages/Salary';
-import Shift from '@src/pages/Shift';
-import Account from '@src/pages/Account';
 import Salary13 from '@src/pages/Salary13';
-import Syn from '@src/pages/Syn';
-import Detail from '@src/pages/Detail';
 import General from '@src/pages/General';
 import SalaryProcess from '@src/pages/SalaryProcess';
 import OrtherMoney from '@src/pages/OrtherMoney';
@@ -19,6 +12,7 @@ import OverTime from 'src/containers/OverTime';
 import SalaryAdvance from '@src/pages/SalaryAdvance';
 import CreateRequest from '@src/pages/CreateRequest';
 import Deparment from '@src/pages/Deparment';
+import Position from '@src/pages/Position';
 export default [
   {
     path: routes.LOGIN,
@@ -34,29 +28,6 @@ export default [
     restricted: false,
     isPrivate: true,
   },
-  {
-    path: routes.LEAVE,
-    component: Leave,
-    exact: true,
-    restricted: false,
-    isPrivate: true,
-  },
-
-  {
-    path: routes.REPORT,
-    component: Report,
-    exact: true,
-    restricted: false,
-    isPrivate: true,
-  },
-
-  {
-    path: routes.SHIFT,
-    component: Shift,
-    exact: true,
-    restricted: false,
-    isPrivate: true,
-  },
 
   {
     path: routes.SALARY,
@@ -68,30 +39,6 @@ export default [
   {
     path: routes.SALARYOFMONTH13,
     component: Salary13,
-    exact: true,
-    restricted: false,
-    isPrivate: true,
-  },
-
-  {
-    path: routes.ACCOUNT,
-    component: Account,
-    exact: true,
-    restricted: false,
-    isPrivate: true,
-  },
-
-  {
-    path: routes.SYN,
-    component: Syn,
-    exact: true,
-    restricted: false,
-    isPrivate: true,
-  },
-
-  {
-    path: routes.DETAIL,
-    component: Detail,
     exact: true,
     restricted: false,
     isPrivate: true,
@@ -158,6 +105,13 @@ export default [
   {
     path: routes.CREATEREQUEST,
     component: CreateRequest,
+    exact: true,
+    restricted: false,
+    isPrivate: true,
+  },
+  {
+    path: routes.POSITION,
+    component: Position,
     exact: true,
     restricted: false,
     isPrivate: true,
