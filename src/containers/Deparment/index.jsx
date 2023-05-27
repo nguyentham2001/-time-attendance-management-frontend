@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import StyledDeparment from './index.style';
 import { useTranslation } from 'react-i18next';
-import { Button, TextField, InputAdornment } from '@mui/material';
+import { Button, TextField, InputAdornment, IconButton } from '@mui/material';
 import ControlPointIcon from '@mui/icons-material/ControlPoint';
 import SearchIcon from '@mui/icons-material/Search';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -18,6 +18,9 @@ import apis from 'src/apis';
 import CreateDepartment from './CreateDeparment';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
+import Popup from 'src/components/Popup';
+import { useSnackbar } from 'notistack';
+import debounce from '@src/utils/debounce';
 
 const columns = [
   { id: 'no', label: 'STT' },
@@ -25,17 +28,22 @@ const columns = [
   { id: 'actions', label: 'Actions', minWidth: 170 },
 ];
 
-
 const Deparment = () => {
   const { t } = useTranslation();
+  const { enqueueSnackbar } = useSnackbar();
 
   const [open, setOpen] = React.useState(false);
+  const [departmentSelected, setDepartmentSelected] = useState(null);
+  const [showConfirmDeleteDepartment, setShowConfirmDeleteDepartment] =
+    useState(false);
 
-  const handleOpenDialog = () => {
+  const handleOpenDialog = (item) => {
+    setDepartmentSelected(item);
     setOpen(true);
   };
 
   const handleClose = () => {
+    setDepartmentSelected();
     setOpen(false);
   };
 
@@ -63,17 +71,56 @@ const Deparment = () => {
     onParamsChange({ limit: newLimit, pageNum: 1 });
   };
 
+  const handleSearchChange = (event) => {
+    const { value } = event.target;
+    debounce(onParamsChange)({ search: value.trim() });
+  };
+
+  const handleOpenDelete = (department) => {
+    setDepartmentSelected(department);
+    setShowConfirmDeleteDepartment(true);
+  };
+
+  const handleCloseConfirmDelete = () => {
+    setDepartmentSelected();
+    setShowConfirmDeleteDepartment(false);
+  };
+
+  const handleConfirmDeleteDepartment = async () => {
+    try {
+      const res = await apis.deparment.deleteDepartment(departmentSelected.id);
+
+      if (!res) throw new Error('serverError');
+
+      enqueueSnackbar({
+        variant: 'success',
+        message: t('Xoa bo phan thanh cong'),
+      });
+
+      if (data.length <= 1 && currentPage !== 1) {
+        onPageChange(currentPage - 1);
+      } else {
+        handleReloadData();
+      }
+    } catch (error) {
+      enqueueSnackbar({
+        variant: 'error',
+        message: t(message),
+      });
+    }
+  };
 
   const actions = [
     {
       icon: <EditIcon />,
-      onClick: (item) => {},
+      onClick: (item) => handleOpenDialog(item),
     },
     {
       icon: <DeleteIcon className="delete-icon" />,
-      onClick: () => {},
+      onClick: handleOpenDelete,
     },
   ];
+
   return (
     <StyledDeparment>
       <div className="deparment-home">
@@ -88,6 +135,7 @@ const Deparment = () => {
               placeholder={t('Tìm kiếm phòng ban')}
               type="text"
               className="input-employee"
+              onChange={handleSearchChange}
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
@@ -102,7 +150,7 @@ const Deparment = () => {
               className="employee-button"
               color="primary"
               startIcon={<ControlPointIcon />}
-              onClick={handleOpenDialog}
+              onClick={() => handleOpenDialog()}
             >
               {t('add')}
             </Button>
@@ -126,6 +174,8 @@ const Deparment = () => {
                   </TableHead>
                   <TableBody>
                     {data.map((row, index) => {
+                      const item = data[index];
+
                       return (
                         <TableRow
                           hover
@@ -137,6 +187,28 @@ const Deparment = () => {
                             let value = row[column.id];
                             if (column.id === 'no') {
                               value = (currentPage - 1) * limit + index + 1;
+                            }
+
+                            if (column.id === 'actions') {
+                              return (
+                                <TableCell>
+                                  {actions.map((action) => (
+                                    <IconButton
+                                      className="icon-button"
+                                      onClick={() => action.onClick(item)}
+                                      disabled={
+                                        typeof action.disable === 'function'
+                                          ? action.disable(item)
+                                          : action.disable
+                                      }
+                                    >
+                                      {typeof action.icon === 'function'
+                                        ? action.icon(item)
+                                        : action.icon}
+                                    </IconButton>
+                                  ))}
+                                </TableCell>
+                              );
                             }
 
                             return (
@@ -157,7 +229,6 @@ const Deparment = () => {
                 rowsPerPageOptions={[10, 25, 100]}
                 component="div"
                 count={total}
-                actions={actions}
                 rowsPerPage={limit}
                 page={currentPage - 1}
                 onPageChange={handleChangePage}
@@ -169,8 +240,18 @@ const Deparment = () => {
       </div>
       <CreateDepartment
         open={open}
+        deparment={departmentSelected}
         handleClose={handleClose}
         handleReloadData={handleReloadData}
+      />
+
+      <Popup
+        open={showConfirmDeleteDepartment}
+        onOk={handleConfirmDeleteDepartment}
+        onClose={handleCloseConfirmDelete}
+        title={'Delete department'}
+        okMessage={'Delete'}
+        content={'Are you sure you want to delete this department'}
       />
     </StyledDeparment>
   );

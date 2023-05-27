@@ -53,6 +53,10 @@ padding: 0px;
 .css-o9k5xi-MuiInputBase-root-MuiOutlinedInput-root {
   height: 40px;
 }
+.css-wahqcs-JoySelect-root{
+  width: 260px;
+  border-radius: 4px;
+}
 
 
 

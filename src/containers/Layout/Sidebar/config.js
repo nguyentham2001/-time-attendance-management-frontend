@@ -23,6 +23,7 @@ export const sidebarMenu = [
     ),
     role: ['user'],
     route: ROUTES.HOME,
+    isShow: (isAdmin) => isAdmin,
     subMenu: [
       {
         key: 'Employee',
@@ -54,6 +55,7 @@ export const sidebarMenu = [
     ),
     role: ['user'],
     route: ROUTES.SHIFT,
+    isShow: (isAdmin) => !isAdmin,
     subMenu: [
       {
         key: 'Syn',
@@ -74,7 +76,7 @@ export const sidebarMenu = [
       },
     ],
   },
-   {
+  {
     key: 'Salary',
     heading: 'Quản lý lương',
     icon: (
@@ -84,6 +86,7 @@ export const sidebarMenu = [
     ),
     role: ['user'],
     route: ROUTES.SALARY,
+    isShow: (isAdmin) => !isAdmin,
     subMenu: [
       {
         key: 'salaryadvance',
@@ -127,6 +130,7 @@ export const sidebarMenu = [
     ),
     role: ['user'],
     route: ROUTES.LEAVE,
+    isShow: (isAdmin) => !isAdmin,
     subMenu: [
       {
         key: 'Aplication',
@@ -137,12 +141,9 @@ export const sidebarMenu = [
       {
         key: 'lateearly',
         heading: 'Tổng hợp nghỉ phép',
-        route: ROUTES. TOTALLEAVE,
+        route: ROUTES.TOTALLEAVE,
         role: ['user'],
       },
     ],
   },
-
-  
-
 ];

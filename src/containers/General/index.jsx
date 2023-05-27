@@ -217,11 +217,12 @@ const General = () => {
                       <TableCell rowSpan={2}>Nghỉ lễ</TableCell>
                     </TableRow>
                     <TableRow>
-                      <TableCell style={{ top: 57 }}>Lần </TableCell>
+                    <TableCell style={{ top: 57 }}>Lần</TableCell>
                       <TableCell style={{ top: 57 }}>Phút</TableCell>
                       <TableCell style={{ top: 57 }}>Lần</TableCell>
                       <TableCell style={{ top: 57 }}>Phút</TableCell>
                     </TableRow>
+                   
                   </TableHead>
                   <TableBody>
                     {rows

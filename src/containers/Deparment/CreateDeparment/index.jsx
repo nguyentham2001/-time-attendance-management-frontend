@@ -6,8 +6,6 @@ import {
   DialogContent,
   DialogContentText,
   DialogActions,
-  Box,
-  Grid,
   TextField,
   Button,
 } from '@mui/material';
@@ -16,7 +14,12 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import { useSnackbar } from 'notistack';
 import apis from 'src/apis';
 
-const CreateDepartment = ({ open, handleClose, handleReloadData }) => {
+const CreateDepartment = ({
+  open,
+  deparment,
+  handleClose,
+  handleReloadData,
+}) => {
   const { t } = useTranslation();
   const { enqueueSnackbar } = useSnackbar();
 
@@ -25,8 +28,12 @@ const CreateDepartment = ({ open, handleClose, handleReloadData }) => {
   useEffect(() => {
     if (!open) {
       setName('');
+      return;
     }
-  }, [open]);
+
+    const { name: initName = '' } = deparment || {};
+    setName(initName);
+  }, [open, deparment]);
 
   const handleNameChange = (event) => {
     const { value } = event.target;
@@ -37,12 +44,22 @@ const CreateDepartment = ({ open, handleClose, handleReloadData }) => {
     if (name.trim().length == 0) return;
 
     try {
-      await apis.deparment.createDepartment({
-        name: name,
-      });
+      let res;
+      const data = { name };
+
+      if (!deparment) {
+        res = await apis.deparment.createDepartment(data);
+      } else {
+        res = await apis.deparment.updateDepartment(deparment.id, data);
+      }
+
+      if (!res) throw new Error('serverError');
+
       enqueueSnackbar({
         variant: 'success',
-        message: t('Them bo phan thanh cong'),
+        message: deparment
+          ? t('Cap nhat bo phan thanh cong')
+          : t('Them bo phan thanh cong'),
       });
 
       handleReloadData();
@@ -69,7 +86,7 @@ const CreateDepartment = ({ open, handleClose, handleReloadData }) => {
       <DialogContent>
         <DialogContentText id="alert-dialog-description">
           <span>{t('Tên phòng ban')}</span>
-          <div className='input-createdeparment'>
+          <div className="input-createdeparment">
             <TextField
               id="outlined-basic"
               className="input-create"

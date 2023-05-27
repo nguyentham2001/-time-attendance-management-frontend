@@ -33,12 +33,16 @@ padding: 16px 8px;
 .calendars-years{
     display: flex;
     margin-top: 15px;
+    justify-content: space-between;
+}
+.calendar-month{
+    display: flex;
+}
+.month{
+    margin-left: 20px;
 }
 .css-sghohy-MuiButtonBase-root-MuiButton-root{
     text-transform: none
-  }
-  .calendar-month{
-    margin-left: 20px;
   }
   #btt-search{
     background:#1e90ff;
@@ -46,15 +50,18 @@ padding: 16px 8px;
 #btt-create{
     background: #f86c6b;
 }
-.button-salary13{
-    margin-left: 470px;
-}
+
 .new-button{
     margin-left: 10px;
 }
 .icon-listmenu{
     margin-top: 25px;
     display: flex;
+    justify-content: space-between;
+}
+.icon-list{
+    display: flex;
+    align-items: center;
 }
 .css-1rwt2y5-MuiButtonBase-root-MuiButton-root{
     text-transform: none
@@ -64,9 +71,7 @@ padding: 16px 8px;
     font-size: 18px;
     font-weight: bold; 
 }
-.export-file{
-    margin-left: 600px;
-}
+
 .table-salary13{
     margin-top: 15px;
 }

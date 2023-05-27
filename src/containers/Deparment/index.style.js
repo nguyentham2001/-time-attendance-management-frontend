@@ -66,11 +66,7 @@ export default styled.div`
   .css-sghohy-MuiButtonBase-root-MuiButton-root:hover {
     background: #1e90ff;
   }
-  .css-y8ay40-MuiTableCell-root{
-    border: 1px solid #C0C0C0;
-    border-collapse: collapse;
-    font-weight:solid;
-  }
+
  
   .table-deparment{
     margin-top: 20px;

@@ -75,13 +75,8 @@ padding: 16px 8px;
 .MuiOutlinedInput-notchedOutline {
     border-color: #ccc !important;
 }
-.css-u06erh-MuiPaper-root{
-    border: 1.5px solid #ccc;
-    
-}
-.css-y8ay40-MuiTableCell-root{
-    border: 1px solid #ccc;
-}
+
+
 .calendars{
     margin-left: 20px;
 }

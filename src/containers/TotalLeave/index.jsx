@@ -51,12 +51,8 @@ const columns = [
   { id: 'name5', label: 'Name', minWidth: 170 },
   { id: 'name6', label: 'Name', minWidth: 170 },
   { id: 'name7', label: 'Name', minWidth: 170 },
-  { id: 'name8', label: 'Name', minWidth: 170 },
-  { id: 'name9', label: 'Name', minWidth: 170 },
-  { id: 'name10', label: 'Name', minWidth: 170 },
-  { id: 'name11', label: 'Name', minWidth: 170 },
-  { id: 'name12', label: 'Name', minWidth: 170 },
-  { id: 'name13', label: 'Name', minWidth: 170 },
+ 
+ 
 ];
 
 function createData(name, code, population, size) {
@@ -74,12 +70,8 @@ function createData(name, code, population, size) {
     name5: '1',
     name6: '1',
     name7: '1',
-    name8: '1',
-    name9: '1',
-    name10: '1',
-    name11: '1',
-    name12: '1',
-    name13: '1',
+   
+   
   };
 }
 
@@ -127,18 +119,17 @@ const TotalLeave = () => {
             <div className="calendar-month">
               <span className="title-month">{t('Tháng:')}</span>
               <span className="icon-month">*</span>
-              <div className='calendar'>
-              <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <DemoItem>
-                  <DatePicker
-                    defaultValue={yesterday}
-                    disablePast
-                    views={['year']}
-                  />
-                </DemoItem>
-              </LocalizationProvider>
+              <div className="calendar">
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                  <DemoItem>
+                    <DatePicker
+                      defaultValue={yesterday}
+                      disablePast
+                      views={['year']}
+                    />
+                  </DemoItem>
+                </LocalizationProvider>
               </div>
-              
             </div>
             <div className="button-salary13">
               <Button
@@ -166,10 +157,10 @@ const TotalLeave = () => {
             <div className="icon-list">
               <MenuIcon />
               <span className="title-list">
-              {t('Danh sách tổng hợp nghỉ phép năm ')}
+                {t('Danh sách tổng hợp nghỉ phép năm ')}
               </span>
             </div>
-            
+
             <div className="export-file">
               <Button
                 variant="outlined"
@@ -183,37 +174,23 @@ const TotalLeave = () => {
             </div>
           </div>
           <div className="table-salary13">
-          <Paper sx={{ width: '100%' }}>
+            <Paper sx={{ width: '100%' }}>
               <TableContainer sx={{ maxHeight: 440 }}>
                 <Table stickyHeader aria-label="sticky table">
                   <TableHead>
                     <TableRow>
-                      <TableCell rowSpan={2}>STT</TableCell>
-                      <TableCell rowSpan={2}>Account</TableCell>
-                      <TableCell rowSpan={2}>Mã NV</TableCell>
-                      <TableCell rowSpan={2}>Tên</TableCell>
-                      <TableCell rowSpan={2}>Phòng ban</TableCell>
-                      <TableCell rowSpan={2}>Chức vụ</TableCell>
-                      <TableCell rowSpan={2}>Tổng công/tháng</TableCell>
-                      <TableCell colSpan={2} align="center">Vào muộn</TableCell>
-                      <TableCell colSpan={2} align="center">Về sớm</TableCell>
-                      
-                      <TableCell rowSpan={2}>Giờ tăng ca</TableCell>
-                      <TableCell rowSpan={2}>Vắng không phép</TableCell>
-                      <TableCell rowSpan={2}>Vắng phép có lương</TableCell>
-                      <TableCell rowSpan={2}>
-                        Vắng phép không lương
-                      </TableCell>
-                      <TableCell rowSpan={2}>Nghỉ lễ</TableCell>
-                    </TableRow>
-                    <TableRow>
-                      <TableCell style={{ top: 57 }}>Lần </TableCell>
-                      <TableCell style={{ top: 57 }}>Ph</TableCell>
-                      <TableCell style={{ top: 57 }}>Xăng xe</TableCell>
-                      <TableCell style={{ top: 57 }}>Trách nhiệm</TableCell>
-                      <TableCell style={{ top: 57 }}>
-                        Tổng Phụ cấp (4)
-                      </TableCell>
+                      <TableCell >STT</TableCell>
+                      <TableCell >Account</TableCell>
+                      <TableCell >Mã NV</TableCell>
+                      <TableCell >Tên</TableCell>
+                      <TableCell >Phòng ban</TableCell>
+                      <TableCell >Chức vụ</TableCell>
+                      <TableCell >Ngày bắt đầu làm việc</TableCell>
+                      <TableCell >Ngày dừng làm việc</TableCell>
+                      <TableCell >Số ngày phép tối đa </TableCell>
+                      <TableCell >Đã phê duyệt nghỉ</TableCell>
+                      <TableCell >Còn lại</TableCell>
+                      <TableCell >Tổng lương nghỉ phép</TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>

@@ -51,6 +51,8 @@ padding: 16px 8px;
     font-size: 18px;
     font-weight: bold;
   }
-
+.table-position{
+  margin-top: 20px;
+}
 
 `;

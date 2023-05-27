@@ -18,4 +18,26 @@ const createDepartment = async (data) => {
   return response;
 };
 
-export { getListDeparments, createDepartment };
+const updateDepartment = async (id, data) => {
+  const response = await api({
+    method: 'PUT',
+    url: `/departments/${id}`,
+    data,
+  });
+  return response;
+};
+
+const deleteDepartment = async (id) => {
+  const response = await api({
+    method: 'DELETE',
+    url: `/departments/${id}`,
+  });
+  return response;
+};
+
+export {
+  getListDeparments,
+  createDepartment,
+  updateDepartment,
+  deleteDepartment,
+};

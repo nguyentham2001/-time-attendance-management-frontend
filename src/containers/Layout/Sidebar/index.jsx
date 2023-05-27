@@ -17,6 +17,7 @@ import {
 import { ChevronRight, ExpandMore, ExpandLess } from '@mui/icons-material';
 import { sidebarMenu } from './config';
 import { StyledSidebar } from './index.style';
+import { useSelector } from 'react-redux';
 
 const hasChildren = (item) => {
   const { subMenu } = item;
@@ -230,6 +231,9 @@ export default function Sidebar(props) {
   const { pathname } = useLocation();
   const history = useHistory();
 
+  const { user } = useSelector((state) => state.auth);
+  const { isAdmin } = user || {};
+
   const isActiveRoute = (route) =>
     matchPath(pathname, { path: route, exact: true });
 
@@ -294,15 +298,21 @@ export default function Sidebar(props) {
         </Toolbar>
         <div className="content">
           <List>
-            {sidebarMenu.map((item, index) => (
-              <MenuItem
-                key={index.toString()}
-                item={item}
-                collapsed={collapsed}
-                onItemClick={handleClickMenu}
-                selectedKeys={selectedKeys}
-              />
-            ))}
+            {sidebarMenu.map((item, index) => {
+              const { isShow } = item;
+              const showMenu = !isShow || isShow(isAdmin);
+              if (!showMenu) return null;
+
+              return (
+                <MenuItem
+                  key={index.toString()}
+                  item={item}
+                  collapsed={collapsed}
+                  onItemClick={handleClickMenu}
+                  selectedKeys={selectedKeys}
+                />
+              );
+            })}
           </List>
         </div>
       </Drawer>
