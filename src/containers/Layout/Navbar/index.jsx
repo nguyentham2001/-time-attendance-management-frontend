@@ -96,7 +96,7 @@ const Account = () => {
   const [anchorEl, setAnchorEl] = useState(null);
 
   const { user } = useSelector((state) => state.auth);
-  const { name } = user || {};
+  const { name, avatar } = user || {};
 
   const dispath = useDispatch();
   const history = useHistory();
@@ -119,9 +119,13 @@ const Account = () => {
   };
 
   const renderAvatar = () => {
+    if (avatar) {
+      return <Avatar className="avatar" color="primary" src={avatar} />;
+    }
+
     return (
       <Avatar className="avatar" color="primary">
-        {'Abc'.slice(0, 1).toUpperCase()}
+        {name.slice(0, 1).toUpperCase()}
       </Avatar>
     );
   };

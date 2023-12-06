@@ -16,9 +16,39 @@ import AdjustIcon from '@mui/icons-material/Adjust';
 import BlockIcon from '@mui/icons-material/Block';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { Button, TextField } from '@mui/material';
+import { useDispatch, useSelector } from 'react-redux';
+import apis from 'src/apis';
+import actions from '@src/redux/actions';
 
 const Profile = () => {
   const { t } = useTranslation();
+  const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.auth);
+  const { avatar } = user || {};
+
+  const handleUploadAvatar = async (e) => {
+    const formData = new FormData();
+    const file = e.target.files[0];
+    formData.append('file', file);
+
+    const resp = await apis.upload.uploadFile({ formData });
+    const { status, result } = resp;
+
+    if (status !== 1) {
+      return;
+    }
+
+    const { link: avatar } = result;
+    const resp1 = await apis.user.updateProfile({ avatar });
+    const { status: status1, result: user } = resp1;
+
+    if (status1 !== 1) {
+      return;
+    }
+
+    dispatch(actions.auth.updateUser(user));
+  };
+
   return (
     <StyledProfile>
       <div className="profile-home">
@@ -175,15 +205,17 @@ const Profile = () => {
                 <div className="icon-avatar">
                   <img
                     id="logo-img"
-                    src="/img/avatar-default.png"
+                    src={avatar || '/img/avatar-default.png'}
                     alt="avatar"
                   />
                 </div>
                 <div className="avatar-file">
-                  <Button variant="contained">{t('Choose file')}</Button>
-                  <Button className="no-file" variant="text">
-                    {t('No file chosen')}
-                  </Button>
+                  <input
+                    id="send-attachment"
+                    type="file"
+                    accept="image/*"
+                    onChange={handleUploadAvatar}
+                  />
                 </div>
               </Grid>
               <Grid item xs={6}>

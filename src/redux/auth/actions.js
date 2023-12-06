@@ -6,6 +6,7 @@ export const actionTypes = {
   VERIFY_TOKEN: 'VERIFY_TOKEN',
   VERIFY_TOKEN_SUCCESS: 'VERIFY_TOKEN_SUCCESS',
   VERIFY_TOKEN_FAILURE: 'VERIFY_TOKEN_FAILURE',
+  UPDATE_USER: 'UPDATE_USER',
 };
 
 const login = (email, password) => ({
@@ -44,6 +45,11 @@ const verifyTokenFailure = () => ({
   type: actionTypes.VERIFY_TOKEN_FAILURE,
 });
 
+const updateUser = (user) => ({
+  type: actionTypes.UPDATE_USER,
+  user,
+});
+
 export {
   login,
   loginSuccess,
@@ -52,4 +58,5 @@ export {
   verifyToken,
   verifyTokenSucess,
   verifyTokenFailure,
+  updateUser,
 };

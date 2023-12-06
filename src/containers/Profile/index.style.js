@@ -160,6 +160,10 @@ export default styled.div`
   .icon-avatar {
     text-align: center;
   }
+  img {
+    max-width: 400px;
+    max-height: 400px;
+  }
   .css-1e6y48t-MuiButtonBase-root-MuiButton-root {
     text-transform: none;
     color: #696969;
@@ -171,7 +175,11 @@ export default styled.div`
     text-align: center;
     margin-top: 15px;
   }
-  .no-file {
-    margin-left: 10px;
+  #send-attachment {
+    text-align: center;
+  }
+
+  .send-attachment {
+    display: none;
   }
 `;
