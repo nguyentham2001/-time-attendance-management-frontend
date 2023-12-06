@@ -117,7 +117,7 @@ const TotalLeave = () => {
           <span className="tittle-calendar">{t('Điều kiện lọc')}</span>
           <div className="calendars-years">
             <div className="calendar-month">
-              <span className="title-month">{t('Tháng:')}</span>
+              <span className="title-month">{t('Năm:')}</span>
               <span className="icon-month">*</span>
               <div className="calendar">
                 <LocalizationProvider dateAdapter={AdapterDayjs}>

@@ -1,13 +1,11 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import StyledSalaryAdvances from './index.style';
 import { useTranslation } from 'react-i18next';
-import { Button, TextField, InputAdornment } from '@mui/material';
-import Grid from '@mui/material/Unstable_Grid2';
-import Box from '@mui/material/Box';
+import { Button, TextField, InputAdornment, Box, Grid } from '@mui/material';
+import MenuIcon from '@mui/icons-material/Menu';
 import AdjustIcon from '@mui/icons-material/Adjust';
 import BlockIcon from '@mui/icons-material/Block';
-import MenuIcon from '@mui/icons-material/Menu';
-
+import ControlPointIcon from '@mui/icons-material/ControlPoint';
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -17,36 +15,19 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 
+// import { usePaginationWithState } from 'src/hooks';
+// import apis from 'src/apis';
 const columns = [
-  { id: 'name', label: 'Name', minWidth: 170 },
-  { id: 'code', label: 'ISO\u00a0Code', minWidth: 100 },
-  {
-    id: 'population',
-    label: 'Population',
-    minWidth: 170,
-    align: 'right',
-    format: (value) => value.toLocaleString('en-US'),
-  },
-  {
-    id: 'size',
-    label: 'Size\u00a0(km\u00b2)',
-    minWidth: 170,
-    align: 'right',
-    format: (value) => value.toLocaleString('en-US'),
-  },
-  {
-    id: 'density',
-    label: 'Density',
-    minWidth: 170,
-    align: 'right',
-    format: (value) => value.toFixed(2),
-  },
-  { id: 'name1', label: 'Name', minWidth: 170 },
-  { id: 'name2', label: 'Name', minWidth: 170 },
-  { id: 'name3', label: 'Name', minWidth: 170 },
-  { id: 'name4', label: 'Name', minWidth: 170 },
+  { id: 'no', label: 'STT', minWidth: 170 },
+  { id: 'datecreate', label: 'Ngày tạo đơn', minWidth: 100 },
+  { id: 'salary', label: 'Lương chính thức', minWidth: 170 },
+  { id: 'salary_present', label: 'Lương thời điểm tạm ứng', minWidth: 170 },
+  { id: 'salary_advance', label: 'Lương tạm ứng', minWidth: 170 },
+  { id: 'reason', label: 'Lý do', minWidth: 170 },
+  { id: 'status', label: 'Trạng thái', minWidth: 170 },
+  { id: 'verifier', label: 'Người xác nhận', minWidth: 170 },
+  { id: 'confirmation_date', label: 'Ngày xác nhận', minWidth: 170 },
 ];
-
 function createData(name, code, population, size) {
   const density = population / size;
   return {
@@ -59,6 +40,7 @@ function createData(name, code, population, size) {
     name2: '1',
     name3: '1',
     name4: '1',
+    name5: '1',
   };
 }
 const rows = [
@@ -70,11 +52,18 @@ const rows = [
   createData('Australia', 'AU', 25475400, 7692024),
   createData('Germany', 'DE', 83019200, 357578),
   createData('Ireland', 'IE', 4857000, 70273),
-  createData('Ireland', 'IE', 4857000, 70273),
+  createData('Mexico', 'MX', 126577691, 1972550),
+  createData('Japan', 'JP', 126317000, 377973),
+  createData('France', 'FR', 67022000, 640679),
+  createData('United Kingdom', 'GB', 67545757, 242495),
+  createData('Russia', 'RU', 146793744, 17098246),
+  createData('Nigeria', 'NG', 200962417, 923768),
+  createData('Brazil', 'BR', 210147125, 8515767),
 ];
 
 const SalaryAdvances = () => {
   const { t } = useTranslation();
+
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
@@ -87,15 +76,43 @@ const SalaryAdvances = () => {
     setPage(0);
   };
 
+  // const {
+  //   data,
+  //   onPageChange,
+  //    onParamsChange,
+  //    currentPage,
+  //   limit,
+  //   total,
+  //   handleCallApi: fetchListSalaryAdvances,
+
+  // } = usePaginationWithState([], apis.salary_advance.getListSalaryAdvances);
+
+  // const handleReloadData = () => {
+  //   fetchListSalaryAdvances();
+  // };
+
+  // const handleChangePage = (event, newPage) => {
+  //   onPageChange(newPage + 1);
+  // };
+
+  // const handleChangeRowsPerPage = (event) => {
+  //   const newLimit = +event.target.value;
+  //   onParamsChange({limit: newLimit, pageNum: 1});
+
+  // };
+
   return (
     <StyledSalaryAdvances>
       <div className="salaryadvance-home">
-        <span className="title-salaryadvance">{t('Tạm ứng lương')}</span>
         <div className="salaryadvance-header">
+          <span className="title-salaryadvance">{t('Tạm ứng lương')}</span>
+        </div>
+
+        <div className="salaryadvance-container">
           <span className="titlecreatesalary">
             {t('Tạo mới tạm ứng lương')}
           </span>
-          <Box sx={{ width: '100%' }}>
+          <Box sx={{ width: '100%' }} className="box-advance">
             <Grid
               container
               rowSpacing={1}
@@ -211,11 +228,11 @@ const SalaryAdvances = () => {
                     <TableCell>Ngày tạo đơn</TableCell>
                     <TableCell>Lương chính thức</TableCell>
                     <TableCell>Lương thời điểm tạm ứng </TableCell>
+                    <TableCell>Lương tạm ứng </TableCell>
                     <TableCell>Lý do</TableCell>
-                    <TableCell>Trạng thái </TableCell>
                     <TableCell>Thao tác</TableCell>
                     <TableCell>Người xác nhận</TableCell>
-                    <TableCell>Ngày tạo đơn</TableCell>
+                    <TableCell>Ngày xác nhận</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>

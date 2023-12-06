@@ -14,7 +14,12 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import { useSnackbar } from 'notistack';
 import apis from 'src/apis';
 
-const CreatePosition = ({ open, handleClose, handleReloadData }) => {
+const CreatePosition = ({ 
+  open,
+  position ,
+  handleClose, 
+  handleReloadData
+ }) => {
   const { t } = useTranslation();
 
   const { enqueueSnackbar } = useSnackbar();
@@ -24,8 +29,15 @@ const CreatePosition = ({ open, handleClose, handleReloadData }) => {
   useEffect(() => {
     if (!open) {
       setName('');
+      return;
     }
-  }, [open]);
+    
+    const { name: initName = '' } = position || {};
+  setName(initName);
+  }, [open, position]);
+
+  
+ 
 
   const handleNameChange = (event) => {
     const { value } = event.target;
@@ -35,13 +47,21 @@ const CreatePosition = ({ open, handleClose, handleReloadData }) => {
   const handleCreatePosition = async () => {
     if (name.trim().length == 0) return;
     try {
-      await apis.position.createPosition({
-        name: name,
-      });
+     let res;
+     const data = {name};
+     
+     if(!position) {
+      res = await apis.position.createPosition(data);
+     }else{
+      res = await apis.position.updatePosition(position.id, data);
+     }
+     if (!res) throw new Error('serverError');
 
       enqueueSnackbar({
         variant: 'success',
-        message: t('Thêm chức vụ thành công'),
+        message: position 
+        ? t('Cap nhat bo phan thanh cong')
+        : t('Them bo phan thanh cong'),
       });
       handleReloadData();
       handleClose();

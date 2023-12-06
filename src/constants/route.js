@@ -13,4 +13,6 @@ export default {
   CREATEREQUEST: '/create-request',
   DEPARMENT: '/deparment',
   POSITION: '/position',
+  PROFILE: '/profile',
+  TYPELEAVE: '/type_leave',
 };

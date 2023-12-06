@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
   DialogTitle,
@@ -19,23 +19,204 @@ import JoyOption from '@mui/joy/Option';
 import KeyboardArrowDown from '@mui/icons-material/KeyboardArrowDown';
 import CancelIcon from '@mui/icons-material/Cancel';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import dayjs from 'dayjs';
+
 import { DemoItem } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 
-import { GENDER } from 'src/constants';
+import { DEFAULT_PASSWORD, GENDER } from 'src/constants';
 import StyledDialog from './index.style';
+import { useSnackbar } from 'notistack';
+import apis from 'src/apis';
 
-const CreateEmployee = ({ open, handleClose }) => {
+const CreateEmployee = ({
+  open,
+  handleClose,
+  handleReloadData,
+  departments,
+  positions,
+  user,
+}) => {
   const { t } = useTranslation();
-  const yesterday = dayjs().subtract(1, 'day');
 
-  const [gender, setGender] = React.useState('');
+  const { enqueueSnackbar } = useSnackbar();
+
+  const [data, setData] = useState({});
+
+  useEffect(() => {
+    if (!open) {
+      setData({});
+      return;
+    }
+
+    if (!user) return;
+
+    console.log('user: ', user);
+
+    const {
+      name,
+      phoneNumber,
+      email,
+      address,
+      positionId,
+      departmentId,
+      dateOfBirth,
+      identityNumber,
+      issuedOn,
+      issuedBy,
+      signingDate,
+      workingDate,
+    } = user;
+
+    setData({
+      name,
+      phoneNumber,
+      email,
+      address,
+      positionId,
+      departmentId,
+      dateOfBirth,
+      identityNumber,
+      issuedOn,
+      issuedBy,
+      signingDate,
+      workingDate,
+    });
+  }, [open, user]);
 
   const handleGenderChange = (event) => {
-    setGender(event.target.value);
+    const { value } = event.target;
+    setData((prevData) => ({
+      ...prevData,
+      // gender: value,
+    }));
+  };
+
+  const handleNameChange = (event) => {
+    const { value } = event.target;
+    setData((prevData) => ({
+      ...prevData,
+      name: value,
+    }));
+  };
+
+  const handleDateBirthChange = (event) => {
+    const { value } = event.target;
+    setData((prevData) => ({
+      ...prevData,
+      dateOfBirth: value,
+    }));
+  };
+
+  const handleAddressChange = (event) => {
+    const { value } = event.target;
+    setData((prevData) => ({
+      ...prevData,
+      address: value,
+    }));
+  };
+
+  const handleNumberChange = (event) => {
+    const { value } = event.target;
+    setData((prevData) => ({
+      ...prevData,
+      identityNumber: value,
+    }));
+  };
+
+  const handleDateChange = (event) => {
+    const { value } = event.target;
+    setData((prevData) => ({
+      ...prevData,
+      signingDate: value,
+    }));
+  };
+
+  const handlePhoneChange = (event) => {
+    const { value } = event.target;
+    setData((prevData) => ({
+      ...prevData,
+      phoneNumber: value,
+    }));
+  };
+
+  const handleDateWorkChange = (event) => {
+    const { value } = event.target;
+    setData((prevData) => ({
+      ...prevData,
+      workingDate: value,
+    }));
+  };
+
+  const handleIssueOnChange = (event) => {
+    const { value } = event.target;
+    setData((prevData) => ({
+      ...prevData,
+      issuedOn: value,
+    }));
+  };
+
+  const handleIssueByChange = (event) => {
+    const { value } = event.target;
+    setData((prevData) => ({
+      ...prevData,
+      issuedBy: value,
+    }));
+  };
+
+  const handleEmailChange = (event) => {
+    const { value } = event.target;
+    setData((prevData) => ({
+      ...prevData,
+      email: value,
+    }));
+  };
+
+  const handleDepartmentChange = (value) => {
+    setData((prevData) => ({
+      ...prevData,
+      departmentId: value,
+    }));
+  };
+
+  const handlePositionChange = (value) => {
+    setData((prevData) => ({
+      ...prevData,
+      positionId: value,
+    }));
+  };
+
+  const handleCreateUser = async () => {
+    try {
+      let res;
+      if (!user) {
+        res = await apis.user.createUser({
+          ...data,
+          password: DEFAULT_PASSWORD,
+        });
+      } else {
+        res = await apis.user.updateUser(user.id, data);
+      }
+
+      if (!res) throw new Error('serverError');
+
+      enqueueSnackbar({
+        variant: 'success',
+        message: user
+          ? t('Cap nhat nhan vien thanh cong')
+          : t('Them nhan vien thanh cong'),
+      });
+
+      handleReloadData();
+      handleClose();
+    } catch (error) {
+      const { message } = error;
+      enqueueSnackbar({
+        variant: 'error',
+        message: t(message),
+      });
+    }
   };
 
   return (
@@ -64,6 +245,8 @@ const CreateEmployee = ({ open, handleClose }) => {
                     id="outlined-basic"
                     className=""
                     variant="outlined"
+                    value={data.name}
+                    onChange={handleNameChange}
                   />
                 </div>
                 <div className="input-account">
@@ -71,7 +254,7 @@ const CreateEmployee = ({ open, handleClose }) => {
                   <FormControl sx={{ m: 1, minWidth: 120 }}>
                     <Select
                       className="select-gender"
-                      value={gender}
+                      value={data.gender}
                       onChange={handleGenderChange}
                       displayEmpty
                     >
@@ -88,13 +271,13 @@ const CreateEmployee = ({ open, handleClose }) => {
                     <span>{t('Ngày cấp')}</span>
                     <span className="requied">*</span>
                   </div>
-                  <LocalizationProvider dateAdapter={AdapterDayjs}>
+                  <LocalizationProvider
+                    dateAdapter={AdapterDayjs}
+                    value={data.issuedBy}
+                    onChange={handleIssueByChange}
+                  >
                     <DemoItem>
-                      <DatePicker
-                        defaultValue={yesterday}
-                        disablePast
-                        views={['year', 'month', 'day']}
-                      />
+                      <DatePicker views={['year', 'month', 'day']} />
                     </DemoItem>
                   </LocalizationProvider>
                 </div>
@@ -107,6 +290,8 @@ const CreateEmployee = ({ open, handleClose }) => {
                     id="outlined-basic"
                     className=""
                     variant="outlined"
+                    value={data.address}
+                    onChange={handleAddressChange}
                   />
                 </div>
                 <div className="input-account">
@@ -118,6 +303,9 @@ const CreateEmployee = ({ open, handleClose }) => {
                     id="outlined-basic"
                     className=""
                     variant="outlined"
+                    value={data.phoneNumber}
+                    onChange={handlePhoneChange}
+                    type="tel"
                   />
                 </div>
                 <div className="input-account">
@@ -137,8 +325,12 @@ const CreateEmployee = ({ open, handleClose }) => {
                         },
                       },
                     }}
+                    value={data.departmentId}
+                    onChange={(e, newValue) => handleDepartmentChange(newValue)}
                   >
-                    <JoyOption value="no-data ">{t('Không có dữ liệu')}</JoyOption>
+                    {departments.map(({ id, name }) => (
+                      <JoyOption value={id}>{name}</JoyOption>
+                    ))}
                   </JoySelect>
                 </div>
                 <div className="input-account">
@@ -146,13 +338,13 @@ const CreateEmployee = ({ open, handleClose }) => {
                     <span>{t('Ngày làm việc')}</span>
                     <span className="requied">*</span>
                   </div>
-                  <LocalizationProvider dateAdapter={AdapterDayjs}>
+                  <LocalizationProvider
+                    dateAdapter={AdapterDayjs}
+                    value={data.workingDate}
+                    onChange={handleDateWorkChange}
+                  >
                     <DemoItem>
-                      <DatePicker
-                        defaultValue={yesterday}
-                        disablePast
-                        views={['year', 'month', 'day']}
-                      />
+                      <DatePicker views={['year', 'month', 'day']} />
                     </DemoItem>
                   </LocalizationProvider>
                 </div>
@@ -164,13 +356,13 @@ const CreateEmployee = ({ open, handleClose }) => {
                       <span>{t('Ngày sinh')}</span>
                       <span className="requied">*</span>
                     </div>
-                    <LocalizationProvider dateAdapter={AdapterDayjs}>
+                    <LocalizationProvider
+                      dateAdapter={AdapterDayjs}
+                      value={data.dateOfBirth}
+                      onChange={handleDateBirthChange}
+                    >
                       <DemoItem>
-                        <DatePicker
-                          defaultValue={yesterday}
-                          disablePast
-                          views={['year', 'month', 'day']}
-                        />
+                        <DatePicker views={['year', 'month', 'day']} />
                       </DemoItem>
                     </LocalizationProvider>
                   </div>
@@ -183,6 +375,9 @@ const CreateEmployee = ({ open, handleClose }) => {
                       id="outlined-basic"
                       className=""
                       variant="outlined"
+                      value={data.identityNumber}
+                      onChange={handleNumberChange}
+                      type="tel"
                     />
                   </div>
                   <div className="input-account">
@@ -194,6 +389,8 @@ const CreateEmployee = ({ open, handleClose }) => {
                       id="outlined-basic"
                       className=""
                       variant="outlined"
+                      value={data.issuedOn}
+                      onChange={handleIssueOnChange}
                     />
                   </div>
                   <div className="input-account">
@@ -205,6 +402,9 @@ const CreateEmployee = ({ open, handleClose }) => {
                       id="outlined-basic"
                       className=""
                       variant="outlined"
+                      type="email"
+                      value={data.email}
+                      onChange={handleEmailChange}
                     />
                   </div>
                   <div className="input-account">
@@ -224,21 +424,25 @@ const CreateEmployee = ({ open, handleClose }) => {
                           },
                         },
                       }}
+                      value={data.positionId}
+                      onChange={(e, newValue) => handlePositionChange(newValue)}
                     >
-                      <JoyOption value="no-data ">{t('Không có dữ liệu')}</JoyOption>
+                      {positions.map(({ id, name }) => (
+                        <JoyOption value={id}>{name}</JoyOption>
+                      ))}
                     </JoySelect>
                   </div>
                   <div className="input-account">
                     <div>
                       <span>{t('Ngày ký hợp đồng')}</span>
                     </div>
-                    <LocalizationProvider dateAdapter={AdapterDayjs}>
+                    <LocalizationProvider
+                      dateAdapter={AdapterDayjs}
+                      value={data.signingDate}
+                      onChange={handleDateChange}
+                    >
                       <DemoItem>
-                        <DatePicker
-                          defaultValue={yesterday}
-                          disablePast
-                          views={['year', 'month', 'day']}
-                        />
+                        <DatePicker views={['year', 'month', 'day']} />
                       </DemoItem>
                     </LocalizationProvider>
                   </div>
@@ -260,7 +464,7 @@ const CreateEmployee = ({ open, handleClose }) => {
         </Button>
         <Button
           id="save"
-          onClick={handleClose}
+          onClick={handleCreateUser}
           color="primary"
           variant="contained"
           startIcon={<CheckCircleIcon />}

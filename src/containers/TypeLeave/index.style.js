@@ -1,4 +1,3 @@
-import { Dialog } from '@mui/material';
 import styled from 'styled-components';
 
 export default styled.div`
@@ -8,48 +7,42 @@ export default styled.div`
   left: 0;
   box-shadow: 2px 2px 4px #2222;
   padding: 16px 8px;
-
-  .employee-header {
+  .title-type {
+    font-size: 20px;
+    font-weight: bold;
     color: #0000ff;
   }
-  #search-employee {
-    height: 5px;
+  .type-container {
+    margin-top: 30px;
+    border: 1px groove;
+    background-color: #ffffff;
+    padding: 20px 20px 20px 20px;
+    border-radius: 4px;
   }
-  .input-employee {
+  .css-1q6at85-MuiInputBase-root-MuiOutlinedInput-root {
     width: 400px;
+    height: 40px;
   }
-  .employee-add {
+  .search-type {
     display: flex;
     justify-content: space-between;
   }
-
   .css-sghohy-MuiButtonBase-root-MuiButton-root {
     background: #1e90ff;
   }
   .css-sghohy-MuiButtonBase-root-MuiButton-root:hover {
     background: #1e90ff;
   }
-
-  .imformation-employee {
-    font-size: 16px;
+  .css-sghohy-MuiButtonBase-root-MuiButton-root {
+    text-transform: none;
   }
-  .css-bdhsul-MuiTypography-root-MuiDialogTitle-root {
-    color: #0000ff;
-  }
-  .home-employee {
-    border: 1px groove;
-    background-color: #ffffff;
-    padding: 20px 20px 20px 20px;
-    border-radius: 4px;
-  }
-  .list-employee {
+  .icon-listmenu {
     display: flex;
-    align-items: center;
     margin-top: 25px;
   }
-  .title-listovertime {
+  .title-list {
+    margin-left: 10px;
     font-size: 18px;
     font-weight: bold;
-    margin-left: 10px;
   }
 `;

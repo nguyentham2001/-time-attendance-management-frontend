@@ -43,6 +43,12 @@ export const sidebarMenu = [
         route: ROUTES.POSITION,
         role: ['user'],
       },
+      {
+        key: 'typeleave',
+        heading: 'Loại đơn xin nghỉ',
+        route: ROUTES.TYPELEAVE,
+        role: ['user'],
+      },
     ],
   },
   {

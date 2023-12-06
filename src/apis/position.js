@@ -17,4 +17,24 @@ const createPosition = async (data) => {
   });
   return response;
 };
-export { getListPositions, createPosition };
+
+const updatePosition = async (id, data) => {
+  const response = await api({
+    method: 'PUT',
+    url: `/positions/${id}`,
+    data,
+  });
+  return response;
+};
+
+const deletePosition = async (id) => {
+  const response = await api({
+    method: 'DELETE',
+    url: `/positions/${id}`,
+  });
+  return response;
+};
+export { getListPositions,
+   createPosition,
+    updatePosition, 
+    deletePosition };

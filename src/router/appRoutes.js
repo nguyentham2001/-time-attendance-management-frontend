@@ -13,6 +13,9 @@ import SalaryAdvance from '@src/pages/SalaryAdvance';
 import CreateRequest from '@src/pages/CreateRequest';
 import Deparment from '@src/pages/Deparment';
 import Position from '@src/pages/Position';
+import Profile from '@src/pages/Profile';
+import TYPELEAVE from '@src/pages/TypeLeave';
+import TypeLeave from '@src/pages/TypeLeave';
 export default [
   {
     path: routes.LOGIN,
@@ -112,6 +115,20 @@ export default [
   {
     path: routes.POSITION,
     component: Position,
+    exact: true,
+    restricted: false,
+    isPrivate: true,
+  },
+  {
+    path: routes.PROFILE,
+    component: Profile,
+    exact: true,
+    restricted: false,
+    isPrivate: true,
+  },
+  {
+    path: routes.TYPELEAVE,
+    component: TypeLeave,
     exact: true,
     restricted: false,
     isPrivate: true,

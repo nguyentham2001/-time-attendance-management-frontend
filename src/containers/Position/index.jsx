@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import StyledPosition from './index.style';
 import { useTranslation } from 'react-i18next';
-import { Button, TextField, InputAdornment } from '@mui/material';
+import { Button, TextField, InputAdornment, IconButton } from '@mui/material';
 import ControlPointIcon from '@mui/icons-material/ControlPoint';
 import SearchIcon from '@mui/icons-material/Search';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -15,25 +15,41 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
+import Popup from 'src/components/Popup';
+import { enqueueSnackbar, useSnackbar } from 'notistack';
+import debounce from '@src/utils/debounce';
+
 import { usePaginationWithState } from 'src/hooks';
 import apis from 'src/apis';
 const columns = [
   { id: 'no', label: 'STT', minWidth: 170 },
   { id: 'name', label: 'Name', minWidth: 170 },
-  {
-    id: 'actions',
-    label: 'Actions',
-    minWidth: 170,
-  },
+  {id: 'actions', label: 'Actions', minWidth: 170,},
 ];
 
 const Position = () => {
   const { t } = useTranslation();
 
-  // const handleChangeRowsPerPage = (event) => {
-  //   const newLimit = +event.target.value;
-  //   onParamsChange({ limit: newLimit, pageNum: 1 });
-  // };
+  const { enqueueSnackbar } = useSnackbar();
+
+  const [open, setOpen] = React.useState(false);
+  const [ positionSelected, setPositionSelected ] = useState(null);
+  const[ showConfirmDeletePosition, setShowConfirmDeletePosition ] = useState(false);
+
+ 
+
+  const handleOpenDialog = (item) => {
+    setPositionSelected(item);
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setPositionSelected();
+    setOpen(false);
+  };
+
   const {
     data,
     onParamsChange,
@@ -58,21 +74,62 @@ const Position = () => {
     onParamsChange({ limit: newLimit, pageNum: 1 });
   };
 
+ 
 
-  const [open, setOpen] = React.useState(false);
-
-  const handleOpenDialog = () => {
-    setOpen(true);
+  const handleSearchChange = (event) => {
+    const { value } = event.target;
+    debounce(onParamsChange)({search: value.trim()});
+  };
+  
+  const handleOpenDelete = (position) =>{
+    setPositionSelected(position);
+    setShowConfirmDeletePosition(true);
   };
 
-  const handleClose = () => {
-    setOpen(false);
+  const handleCloseConfirmDelete= () => {
+    setPositionSelected();
+    setShowConfirmDeletePosition(false);
   };
 
+  const handleConfirmDeletePosition = async () => {
+    try{
+      const res = await apis.position.deletePosition(positionSelected.id);
+      if(!res) throw new Error('serverError');
+      enqueueSnackbar({
+        variant : 'success',
+        message : 'Xoa bo phan thanh cong',
+      });
+
+      if(data.length <= 1 && currentPage !==1){
+        onPageChange(currentPage - 1);
+
+      }else{
+        handleReloadData();
+      }
+    } catch (error) {
+      enqueueSnackbar({
+        variant : 'error',
+        message : t('messaga'),
+      });
+    };
+  };
+
+  const actions = [
+    {
+      icon: <EditIcon />,
+      onClick: (item) => handleOpenDialog(item),
+    },
+    {
+      icon: <DeleteIcon className="delete-icon" />,
+      onClick: handleOpenDelete,
+    },
+  ];
   return (
     <StyledPosition>
       <div className="position-home">
-        <span className="title-position">{t('Quản lý danh sách chức vụ')}</span>
+        <span className="title-position">
+          {t('Quản lý danh sách chức vụ')}
+          </span>
         <div className="position-container">
           <div className="search-position">
             <TextField
@@ -81,6 +138,7 @@ const Position = () => {
               placeholder={t('Tìm kiếm chức vụ')}
               type="text"
               className="input-employee"
+              onChange={handleSearchChange}
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
@@ -95,7 +153,7 @@ const Position = () => {
               className="employee-button"
               color="primary"
               startIcon={<ControlPointIcon />}
-              onClick={handleOpenDialog}
+              onClick={() => handleOpenDialog()}
             >
               {t('add')}
             </Button>
@@ -119,6 +177,7 @@ const Position = () => {
                   </TableHead>
                   <TableBody>
                     {data.map((row,index) => {
+                      const item = data[index];
                         return (
                           <TableRow
                             hover
@@ -131,6 +190,27 @@ const Position = () => {
                               if (column.id == 'no'){
                                 value = (currentPage - 1) * limit + index + 1;
                               }
+                              if (column.id === 'actions'){
+                                return (
+                                  <TableCell>
+                                    {actions.map((action) => (
+                                      <IconButton
+                                        className="icon-button"
+                                        onClick={() => action.onClick(item)}
+                                        disabled={
+                                          typeof action.disable === 'function'
+                                            ? action.disable(item)
+                                            : action.disable
+                                        }
+                                      >
+                                        {typeof action.icon === 'function'
+                                          ? action.icon(item)
+                                          : action.icon}
+                                      </IconButton>
+                                    ))}
+                                  </TableCell>
+                                );
+                              }
                               return (
                                 <TableCell key={column.id} align={column.align}>
                                   {column.format && typeof value === 'number'
@@ -138,6 +218,7 @@ const Position = () => {
                                     : value}
                                 </TableCell>
                               );
+                             
                             })}
                           </TableRow>
                         );
@@ -160,8 +241,17 @@ const Position = () => {
       </div>
       <CreatePosition
         open={open}
+        position={positionSelected}
         handleClose={handleClose}
         handleReloadData={handleReloadData}
+      />
+      <Popup
+      open = {showConfirmDeletePosition}
+      onOk = {handleConfirmDeletePosition}
+      onClose = {handleCloseConfirmDelete}
+      title = {'Delete Position'}
+      okMessage = {'Delete'}
+      content = {'Are you sure you want to delete this position'}
       />
     </StyledPosition>
   );

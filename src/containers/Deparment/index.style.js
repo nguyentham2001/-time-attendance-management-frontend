@@ -19,14 +19,11 @@ export default styled.div`
     padding: 20px 20px 20px 20px;
     border-radius: 4px;
   }
- 
 
   .css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root {
     width: 240px;
     height: 40px;
   }
-
-
 
   .css-sghohy-MuiButtonBase-root-MuiButton-root {
     text-transform: none;
@@ -49,14 +46,14 @@ export default styled.div`
     border: 1px groove;
     background-color: #ffffff;
     padding: 20px 20px 20px 20px;
-    border-radius: 4px;F
+    border-radius: 4px;
   }
-  .css-1q6at85-MuiInputBase-root-MuiOutlinedInput-root{
+  .css-1q6at85-MuiInputBase-root-MuiOutlinedInput-root {
     width: 400px;
     height: 40px;
   }
-  
-  .search-deparment{
+
+  .search-deparment {
     display: flex;
     justify-content: space-between;
   }
@@ -67,8 +64,7 @@ export default styled.div`
     background: #1e90ff;
   }
 
- 
-  .table-deparment{
+  .table-deparment {
     margin-top: 20px;
   }
 `;

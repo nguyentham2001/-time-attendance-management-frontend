@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import StyledHome from './index.style';
-import { Button, TextField, InputAdornment } from '@mui/material';
+import { Button, TextField, InputAdornment, IconButton } from '@mui/material';
 import ControlPointIcon from '@mui/icons-material/ControlPoint';
 import SearchIcon from '@mui/icons-material/Search';
-import EditIcon from '@mui/icons-material/Edit';
-import DeleteIcon from '@mui/icons-material/Delete';
 import MenuIcon from '@mui/icons-material/Menu';
 import CreateEmployee from './CreateEmployee';
 import Paper from '@mui/material/Paper';
@@ -16,29 +14,21 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
+import { usePaginationWithState } from 'src/hooks';
+import apis from 'src/apis';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
+import Popup from 'src/components/Popup';
+import { useSnackbar } from 'notistack';
+import debounce from '@src/utils/debounce';
 
 const columns = [
   { id: 'no', label: 'STT' },
   { id: 'employeeId', label: 'employeeId', minWidth: 170 },
   { id: 'name', label: 'name', minWidth: 100 },
-  {
-    id: 'phoneNumber',
-    label: 'phoneNumber',
-    minWidth: 170,
-    align: 'right',
-  },
-  {
-    id: 'email',
-    label: 'email',
-    minWidth: 170,
-    align: 'right',
-  },
-  {
-    id: 'address',
-    label: 'address',
-    minWidth: 170,
-    align: 'right',
-  },
+  { id: 'phoneNumber', label: 'phoneNumber', minWidth: 170, align: 'right' },
+  { id: 'email', label: 'email', minWidth: 170, align: 'right' },
+  { id: 'address', label: 'address', minWidth: 170, align: 'right' },
   { id: 'positionId', label: 'positionId', minWidth: 170 },
   { id: 'departmentId', label: 'departmentId', minWidth: 170 },
   { id: 'dateOfBirth', label: 'dateOfBirth', minWidth: 170 },
@@ -47,66 +37,124 @@ const columns = [
   { id: 'issuedBy', label: 'issuedBy', minWidth: 170 },
   { id: 'signingDate', label: 'signingDate', minWidth: 170 },
   { id: 'workingDate', label: 'workingDate', minWidth: 170 },
-];
-
-function createData(name, code, population, size) {
-  const density = population / size;
-  return {
-    name,
-    code,
-    population,
-    size,
-    density,
-    name1: '1',
-    name2: '1',
-    name3: '1',
-    name4: '1',
-    name5: '1',
-  };
-}
-
-const rows = [
-  createData('India', 'IN', 1324171354, 3287263),
-  createData('China', 'CN', 1403500365, 9596961),
-  createData('Italy', 'IT', 60483973, 301340),
-  createData('United States', 'US', 327167434, 9833520),
-  createData('Canada', 'CA', 37602103, 9984670),
-  createData('Australia', 'AU', 25475400, 7692024),
-  createData('Germany', 'DE', 83019200, 357578),
-  createData('Ireland', 'IE', 4857000, 70273),
-  createData('Mexico', 'MX', 126577691, 1972550),
-  createData('Japan', 'JP', 126317000, 377973),
-  createData('France', 'FR', 67022000, 640679),
-  createData('United Kingdom', 'GB', 67545757, 242495),
-  createData('Russia', 'RU', 146793744, 17098246),
-  createData('Nigeria', 'NG', 200962417, 923768),
-  createData('Brazil', 'BR', 210147125, 8515767),
+  { id: 'actions', label: 'Actions', minWidth: 170 },
 ];
 
 const Home = () => {
   const { t } = useTranslation();
 
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
-
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
-
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(+event.target.value);
-    setPage(0);
-  };
+  const { enqueueSnackbar } = useSnackbar();
 
   const [open, setOpen] = React.useState(false);
+  const [userSelected, setUserSelected] = useState(null);
+  const [showConfirmDeleteUser, setShowConfirmDeleteUser] = useState(false);
 
-  const handleOpenDialog = () => {
+  const [departments, setDepartments] = useState([]);
+  const [positions, setPositions] = useState([]);
+
+  useEffect(() => {
+    fetchListDepartments();
+    fetchListPositions();
+  }, []);
+
+  const fetchListDepartments = async () => {
+    const res = await apis.deparment.getListDeparments();
+    const { status } = res || {};
+    if (status == 1) {
+      setDepartments(res.result.data);
+    }
+  };
+
+  const fetchListPositions = async () => {
+    const res = await apis.position.getListPositions();
+    const { status } = res || {};
+    if (status == 1) {
+      setPositions(res.result.data);
+    }
+  };
+
+  const handleOpenDialog = (item) => {
+    setUserSelected(item);
     setOpen(true);
   };
 
   const handleClose = () => {
+    setUserSelected();
     setOpen(false);
   };
+
+  const {
+    data,
+    onParamsChange,
+    onPageChange,
+    currentPage,
+    limit,
+    total,
+    handleCallApi: fetchListUsers,
+    searchParams,
+  } = usePaginationWithState([], apis.user.getListUsers);
+
+  const handleReloadData = () => {
+    fetchListUsers(searchParams);
+  };
+
+  const handleChangePage = (event, newPage) => {
+    onParamsChange(newPage + 1);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    const newLimit = +event.target.value;
+    onParamsChange({ limit: newLimit, pageNum: 1 });
+  };
+
+  const handleSearchChange = (event) => {
+    const { value } = event.target;
+    debounce(onParamsChange)({ search: value.trim() });
+  };
+
+  const handleOpenDelete = (user) => {
+    setUserSelected(user);
+    setShowConfirmDeleteUser(true);
+  };
+
+  const handleCloseConfirmDelete = () => {
+    setUserSelected();
+    setShowConfirmDeleteUser(false);
+  };
+
+  const handleConfirmDeleteUser = async () => {
+    try {
+      const res = await apis.user.deleteUser(userSelected.id);
+      if (!res) throw new Error('serverError');
+
+      enqueueSnackbar({
+        variant: 'success',
+        message: t('Xoa nhan vien thanh cong'),
+      });
+
+      if (data.length <= 1 && currentPage !== 1) {
+        onPageChange(currentPage - 1);
+      } else {
+        handleReloadData();
+      }
+    } catch (error) {
+      enqueueSnackbar({
+        variant: 'error',
+        message: t(message),
+      });
+    }
+  };
+
+  const actions = [
+    {
+      icon: <EditIcon />,
+      onClick: (item) => handleOpenDialog(item),
+    },
+    {
+      icon: <DeleteIcon className="delete-icon" />,
+      onClick: handleOpenDelete,
+    },
+  ];
 
   return (
     <StyledHome>
@@ -121,6 +169,7 @@ const Home = () => {
               placeholder={t('search')}
               type="text"
               className="input-employee"
+              onChange={handleSearchChange}
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
@@ -135,8 +184,7 @@ const Home = () => {
               className="employee-button"
               color="primary"
               startIcon={<ControlPointIcon />}
-              onClick={handleOpenDialog}
-              // onClick={() => setView(VIEWS.ADD)}
+              onClick={() => handleOpenDialog()}
             >
               {t('add')}
             </Button>
@@ -162,41 +210,81 @@ const Home = () => {
                     </TableRow>
                   </TableHead>
                   <TableBody>
-                    {rows
-                      .slice(
-                        page * rowsPerPage,
-                        page * rowsPerPage + rowsPerPage,
-                      )
-                      .map((row) => {
-                        return (
-                          <TableRow
-                            hover
-                            role="checkbox"
-                            tabIndex={-1}
-                            key={row.code}
-                          >
-                            {columns.map((column) => {
-                              const value = row[column.id];
+                    {data.map((row, index) => {
+                      const item = data[index];
+
+                      return (
+                        <TableRow
+                          hover
+                          role="checkbox"
+                          tabIndex={-1}
+                          key={row.code}
+                        >
+                          {columns.map((column) => {
+                            let value = row[column.id];
+
+                            if (column.id === 'no') {
+                              value = (currentPage - 1) * limit + index + 1;
+                            }
+
+                            if (column.id == 'departmentId') {
+                              const department = departments.find(
+                                (e) => e.id == value,
+                              );
+                              const { name } = department || {};
+                              value = name;
+                            }
+
+                            if (column.id == 'positionId') {
+                              const position = positions.find(
+                                (e) => e.id == value,
+                              );
+                              const { name } = position || {};
+                              value = name;
+                            }
+
+                            if (column.id === 'actions') {
                               return (
-                                <TableCell key={column.id} align={column.align}>
-                                  {column.format && typeof value === 'number'
-                                    ? column.format(value)
-                                    : value}
+                                <TableCell>
+                                  {actions.map((action) => (
+                                    <IconButton
+                                      className="icon-button"
+                                      onClick={() => action.onClick(item)}
+                                      disabled={
+                                        typeof action.disable === 'function'
+                                          ? action.disable(item)
+                                          : action.disable
+                                      }
+                                    >
+                                      {typeof action.icon === 'function'
+                                        ? action.icon(item)
+                                        : action.icon}
+                                    </IconButton>
+                                  ))}
                                 </TableCell>
                               );
-                            })}
-                          </TableRow>
-                        );
-                      })}
+                            }
+
+                            return (
+                              <TableCell key={column.id} align={column.align}>
+                                {column.format && typeof value === 'number'
+                                  ? column.format(value)
+                                  : value}
+                              </TableCell>
+                            );
+                          })}
+                        </TableRow>
+                      );
+                    })}
                   </TableBody>
                 </Table>
               </TableContainer>
               <TablePagination
                 rowsPerPageOptions={[10, 25, 100]}
                 component="div"
-                count={rows.length}
-                rowsPerPage={rowsPerPage}
-                page={page}
+                count={total}
+                rowsPerPage={limit}
+                page={currentPage - 1}
                 onPageChange={handleChangePage}
                 onRowsPerPageChange={handleChangeRowsPerPage}
               />
@@ -205,7 +293,23 @@ const Home = () => {
         </div>
       </div>
 
-      <CreateEmployee open={open} handleClose={handleClose} />
+      <CreateEmployee
+        open={open}
+        user={userSelected}
+        handleClose={handleClose}
+        handleReloadData={handleReloadData}
+        departments={departments}
+        positions={positions}
+      />
+
+      <Popup
+        open={showConfirmDeleteUser}
+        onOk={handleConfirmDeleteUser}
+        onClose={handleCloseConfirmDelete}
+        title={'Delete employee'}
+        okMessage={'Delete'}
+        content={'Are you sure you want to delete this employee'}
+      />
     </StyledHome>
   );
 };

@@ -24,6 +24,7 @@ import { StyledMenuItem, StyledNavbar } from './index.style';
 import SearchIcon from '@mui/icons-material/Search';
 import actions from '@src/redux/actions';
 import { useDispatch, useSelector } from 'react-redux';
+
 const languages = [
   { value: 'en-US', label: 'English' },
   { value: 'vi', label: 'Vietnamese' },
@@ -98,6 +99,7 @@ const Account = () => {
   const { name } = user || {};
 
   const dispath = useDispatch();
+  const history = useHistory();
 
   const handleClickOpenPopover = (event) => {
     setAnchorEl(event.currentTarget);
@@ -108,7 +110,8 @@ const Account = () => {
   };
 
   const handleViewInfo = () => {
-    window.open(`${IAM_URL}/auth/realms/${IAM_REALM}/account`, '_blank');
+    handleClosePopover();
+    history.push(ROUTES.PROFILE);
   };
 
   const handleLogout = () => {
