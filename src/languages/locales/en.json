@@ -64,5 +64,25 @@
   "notFound": "Not found",
   "serverError": "Server error, please try again.",
   "userNotFound": "User not found",
-  "wrongPassword": "Wrong password"
+  "wrongPassword": "Wrong password",
+  "absenceRequest":"Absence Request",
+  "requestType":"Request Type",
+  "absenceName":"Absence Name",
+  "fromDate":"From Date",
+  "toDate":"To Date",
+  "reason":"Reason",
+  "handoverWork":"Handover Work",
+  "deparment":"Deparment",
+  "manager":"Manager",
+  "select":"Select...",
+  "create":"Create",
+  "refresh":"Refresh",
+  "absenceTime":"Absence Time",
+  "status":"Trạng thái",
+  "menu":"Menu",
+  "allday":"Day",
+  "morning":"Morning",
+  "afternoon":"Afternoon"
+  
+
 }

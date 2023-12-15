@@ -10,11 +10,11 @@ import Public_detail from '@src/pages/Public_detail';
 import routes from '@src/constants/route';
 import OverTime from 'src/containers/OverTime';
 import SalaryAdvance from '@src/pages/SalaryAdvance';
-import CreateRequest from '@src/pages/CreateRequest';
+import AbsenceRequest from '@src/pages/AbsenceRequest';
 import Deparment from '@src/pages/Deparment';
 import Position from '@src/pages/Position';
 import Profile from '@src/pages/Profile';
-import TYPELEAVE from '@src/pages/TypeLeave';
+
 import TypeLeave from '@src/pages/TypeLeave';
 export default [
   {
@@ -107,7 +107,7 @@ export default [
   },
   {
     path: routes.CREATEREQUEST,
-    component: CreateRequest,
+    component: AbsenceRequest,
     exact: true,
     restricted: false,
     isPrivate: true,

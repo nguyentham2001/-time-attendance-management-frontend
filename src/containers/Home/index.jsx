@@ -21,6 +21,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import Popup from 'src/components/Popup';
 import { useSnackbar } from 'notistack';
 import debounce from '@src/utils/debounce';
+import { getByPath } from '@src/utils/object';
 
 const columns = [
   { id: 'no', label: 'STT' },
@@ -221,7 +222,7 @@ const Home = () => {
                           key={row.code}
                         >
                           {columns.map((column) => {
-                            let value = row[column.id];
+                            let value = getByPath(row, column.id);
 
                             if (column.id === 'no') {
                               value = (currentPage - 1) * limit + index + 1;

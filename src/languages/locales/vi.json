@@ -64,6 +64,26 @@
   "notFound": "Không tìm thấy",
   "serverError": "Máy chủ lỗi, vui lòng thử lại sau.",
   "userNotFound": "Người dùng không tồn tại",
-  "wrongPassword": "Mật khẩu không chính xác"
+  "wrongPassword": "Mật khẩu không chính xác",
+  "absenceRequest":"Tạo đơn xin nghỉ",
+  "requestType":"Loại nghỉ",
+  "absenceName":"Loại đơn nghỉ",
+  "fromDate": "Thời gian bắt đầu",
+  "toDate":"Thời gian kết thúc",
+  "reason":"Lý do",
+  "handoverWork":"Công việc bàn giao",
+  "deparment":"Phòng ban",
+  "manager":"Quản lý phòng ban",
+  "select":"Chọn...",
+  "create":"Tạo đơn",
+  "refresh":"Làm mới",
+  "absenceTime":"Thời gian nghỉ",
+  "status":"Trạng thái",
+  "menu":"Danh sách đơn",
+  "allday":"Cả ngày",
+  "morning":"Buổi sáng",
+  "afternoon":"Buổi chiều"
+
+
 }
 
