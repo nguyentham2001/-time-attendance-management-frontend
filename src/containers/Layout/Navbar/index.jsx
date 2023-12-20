@@ -192,7 +192,7 @@ const Navbar = () => {
         >
           {t('timekeeping')}
         </Button>
-        <div className="balance-box">
+        {/* <div className="balance-box">
           <TextField
             id="Search"
             variant="outlined"
@@ -207,7 +207,7 @@ const Navbar = () => {
               ),
             }}
           />
-        </div>
+        </div> */}
       </div>
       <div className="content righ-container">
         <LanguageSelect />

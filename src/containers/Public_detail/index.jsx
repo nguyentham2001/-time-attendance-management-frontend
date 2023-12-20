@@ -19,25 +19,19 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
+import Dialog from './Dialog';
 
 const columns = [
-  { id: 'name', label: 'Name', minWidth: 170 },
-  { id: 'code', label: 'ISO\u00a0Code', minWidth: 100 },
+  { id: 'no', label: 'no' },
+  { id: 'account', label: 'account' },
   {
-    id: 'population',
-    label: 'Population',
-    minWidth: 170,
+    id: 'id',
+    label: 'id',
     align: 'right',
-    format: (value) => value.toLocaleString('en-US'),
   },
   {
-    id: 'size',
-    label: 'Size\u00a0(km\u00b2)',
+    id: 'name',
+    label: 'name-employee',
     minWidth: 170,
     align: 'right',
     format: (value) => value.toLocaleString('en-US'),
@@ -61,47 +55,6 @@ const columns = [
   { id: 'name10', label: 'Name', minWidth: 170 },
   { id: 'name11', label: 'Name', minWidth: 170 },
   { id: 'name12', label: 'Name', minWidth: 170 },
-];
-
-function createData(name, code, population, size) {
-  const density = population / size;
-  return {
-    name,
-    code,
-    population,
-    size,
-    density,
-    name1: '1',
-    name2: '1',
-    name3: '1',
-    name4: '1',
-    name5: '1',
-    name6: '1',
-    name7: '1',
-    name8: '1',
-    name9: '1',
-    name10: '1',
-    name11: '1',
-    name12: '1',
-  };
-}
-
-const rows = [
-  createData('India', 'IN', 1324171354, 3287263),
-  createData('China', 'CN', 1403500365, 9596961),
-  createData('Italy', 'IT', 60483973, 301340),
-  createData('United States', 'US', 327167434, 9833520),
-  createData('Canada', 'CA', 37602103, 9984670),
-  createData('Australia', 'AU', 25475400, 7692024),
-  createData('Germany', 'DE', 83019200, 357578),
-  createData('Ireland', 'IE', 4857000, 70273),
-  createData('Mexico', 'MX', 126577691, 1972550),
-  createData('Japan', 'JP', 126317000, 377973),
-  createData('France', 'FR', 67022000, 640679),
-  createData('United Kingdom', 'GB', 67545757, 242495),
-  createData('Russia', 'RU', 146793744, 17098246),
-  createData('Nigeria', 'NG', 200962417, 923768),
-  createData('Brazil', 'BR', 210147125, 8515767),
 ];
 
 const PublicDeatail = () => {
@@ -198,34 +151,10 @@ const PublicDeatail = () => {
                 {t('Báo cáo thời gian làm việc')}
               </span>
             </div>
-            <div className="note-rules">
-              <Button className="late-early" onClick={handleClickOpen}>
-                {t('Chú thích và nội quy đi muộn/ về sớm')}
-              </Button>
-              <Dialog
-                open={open}
-                onClose={handleClose}
-                aria-labelledby="alert-dialog-title"
-                aria-describedby="alert-dialog-description"
-              >
-                <DialogTitle id="alert-dialog-title">
-                  {"Use Google's location service?"}
-                </DialogTitle>
-                <DialogContent>
-                  <DialogContentText id="alert-dialog-description">
-                    Let Google help apps determine location. This means sending
-                    anonymous location data to Google, even when no apps are
-                    running.
-                  </DialogContentText>
-                </DialogContent>
-                <DialogActions>
-                  <Button onClick={handleClose}>Disagree</Button>
-                  <Button onClick={handleClose} autoFocus>
-                    Agree
-                  </Button>
-                </DialogActions>
-              </Dialog>
-            </div>
+
+            <Button className="late-early" onClick={handleClickOpen}>
+              {t('Chú thích và nội quy đi muộn/ về sớm')}
+            </Button>
           </div>
 
           <div className="table-public">
@@ -254,7 +183,7 @@ const PublicDeatail = () => {
                     </TableRow>
                   </TableHead>
                   <TableBody>
-                    {rows
+                    {/* {rows
                       .slice(
                         page * rowsPerPage,
                         page * rowsPerPage + rowsPerPage,
@@ -279,14 +208,15 @@ const PublicDeatail = () => {
                             })}
                           </TableRow>
                         );
-                      })}
+                      })} */}
                   </TableBody>
                 </Table>
               </TableContainer>
               <TablePagination
                 rowsPerPageOptions={[10, 25, 100]}
                 component="div"
-                count={rows.length}
+                // count={rows.length}
+                count={0}
                 rowsPerPage={rowsPerPage}
                 page={page}
                 onPageChange={handleChangePage}
@@ -296,6 +226,7 @@ const PublicDeatail = () => {
           </div>
         </div>
       </div>
+      <Dialog open={open} handleClose={handleClose} />
     </StyledPublicDetail>
   );
 };

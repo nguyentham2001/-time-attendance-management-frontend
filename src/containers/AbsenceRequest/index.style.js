@@ -128,4 +128,8 @@ export default styled.div`
     padding: 20px 20px 20px 20px;
     border-radius: 4px;
   }
+
+  css-y8ay40-MuiTableCell-roott {
+    text-transform: none;
+  }
 `;

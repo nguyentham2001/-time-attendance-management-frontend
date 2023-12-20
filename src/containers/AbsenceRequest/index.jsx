@@ -12,7 +12,8 @@ import { DemoItem } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import { REPEAT_TIME } from 'src/constants';
+import moment from 'moment';
+import { REPEAT_TIME, ABSENCE_REQUEST_STATUS } from 'src/constants';
 import AdjustIcon from '@mui/icons-material/Adjust';
 import BlockIcon from '@mui/icons-material/Block';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -85,13 +86,7 @@ const AbsenceRequest = () => {
       name: value,
     }));
   };
-  const handleNameChange = (event) => {
-    const { value } = event.target;
-    setData((prevData) => ({
-      ...prevData,
-      name: value,
-    }));
-  };
+
   const handleRequestTypeChange = (event) => {
     const { value } = event.target;
     setData((prevData) => ({
@@ -99,13 +94,7 @@ const AbsenceRequest = () => {
       name: value,
     }));
   };
-  const handleCreatedAtChange = (event) => {
-    const { value } = event.target;
-    setData((prevData) => ({
-      ...prevData,
-      name: value,
-    }));
-  };
+
   const handleFromDateChange = (event) => {
     const { value } = event.target;
     setData((prevData) => ({
@@ -147,6 +136,27 @@ const AbsenceRequest = () => {
 
   //   }
   //   };
+
+  function renderStatus(statusLogChat) {
+    if (statusLogChat === ABSENCE_REQUEST_STATUS.PENDING) {
+      return <span className="pending">{t('pending')}</span>;
+    }
+    if (statusLogChat === ABSENCE_REQUEST_STATUS.CONFIRMED) {
+      return <span className="confimed">{t('confirmed')}</span>;
+    }
+    if (statusLogChat === ABSENCE_REQUEST_STATUS.APPROVED) {
+      return <span className="aprroved">{t('approved')}</span>;
+    }
+    return <span className="cancel">{t('cancel')}</span>;
+  }
+
+  function formatDate(date) {
+    if (date) {
+      return moment(date).format('DD/MM/YYYY');
+    }
+    return '';
+  }
+
   return (
     <StyledAbsenceRequest>
       <div className="createrequest-home">
@@ -171,7 +181,7 @@ const AbsenceRequest = () => {
                     <Select
                       onChange={handleRequestTypeChange}
                       className="select-detail"
-                      placeholder={t('Chọn...')}
+                      placeholder={t('select')}
                       indicator={<KeyboardArrowDown />}
                       sx={{
                         width: 240,
@@ -468,6 +478,20 @@ const AbsenceRequest = () => {
                                 </TableCell>
                               );
                             }
+
+                            if (column.id == 'status') {
+                              return (
+                                <TableCell>{renderStatus(value)}</TableCell>
+                              );
+                            }
+
+                            if (
+                              column.id == 'fromDate' ||
+                              column.id == 'toDate'
+                            ) {
+                              return <TableCell>{formatDate(value)}</TableCell>;
+                            }
+
                             return (
                               <TableCell key={column.id} align={column.align}>
                                 {column.format && typeof value === 'number'

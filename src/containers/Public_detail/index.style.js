@@ -91,4 +91,32 @@ export default styled.div`
   .note-rules {
     margin-top: 15px;
   }
+  #alert-dialog-description {
+    max-height: 400px;
+    max-width: 400px;
+  }
+  .rules-header {
+    border: 1px groove;
+    background-color: #ffffff;
+    padding: 20px 20px 20px 20px;
+    border-radius: 4px;
+  }
+  .blue {
+    width: 40px;
+    height: 40px;
+    background-color: #00ffff;
+  }
+  .offending-color {
+    text-align: center;
+    color: #303030;
+    font-weight: bold;
+    font-size: 30px;
+  }
+
+ 
+  .blue {
+    width: 30px;
+    height: 30px;
+    background-color: cyan;
+  }
 `;

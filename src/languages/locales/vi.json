@@ -82,7 +82,9 @@
   "menu":"Danh sách đơn",
   "allday":"Cả ngày",
   "morning":"Buổi sáng",
-  "afternoon":"Buổi chiều"
+  "afternoon":"Buổi chiều",
+  "account":"Tên tài khoản",
+  "name-employee":"Tên nhân viên"
 
 
 }

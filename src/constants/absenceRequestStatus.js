@@ -1,0 +1,6 @@
+export default {
+  PENDING: 'PENDING',
+  CONFIRMED: 'CONFIRMED',
+  APPROVED: 'APPROVED',
+  CANCEL: 'CANCEL',
+};

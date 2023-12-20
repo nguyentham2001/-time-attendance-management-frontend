@@ -49,6 +49,8 @@ const Profile = () => {
     dispatch(actions.auth.updateUser(user));
   };
 
+  
+
   return (
     <StyledProfile>
       <div className="profile-home">

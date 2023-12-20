@@ -25,6 +25,7 @@
     "express": "^4.17.1",
     "i18next": "^19.6.3",
     "i18next-browser-languagedetector": "^5.0.0",
+    "moment": "^2.29.4",
     "notistack": "^3.0.1",
     "nprogress": "^0.2.0",
     "react": "^16.13.1",
