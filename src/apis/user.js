@@ -44,4 +44,20 @@ const deleteUser = async (id) => {
   return response;
 };
 
-export { getListUsers, createUser, updateUser, deleteUser, updateProfile };
+const getProfile = async (data) => {
+  const response = await api({
+    method: 'GET',
+    url: `/me`,
+    data,
+  });
+  return response;
+};
+
+export {
+  getListUsers,
+  createUser,
+  updateUser,
+  deleteUser,
+  updateProfile,
+  getProfile,
+};

@@ -161,8 +161,8 @@ export default styled.div`
     text-align: center;
   }
   img {
-    max-width: 400px;
-    max-height: 400px;
+    max-width: 300px;
+    max-height: 300px;
   }
   .css-1e6y48t-MuiButtonBase-root-MuiButton-root {
     text-transform: none;

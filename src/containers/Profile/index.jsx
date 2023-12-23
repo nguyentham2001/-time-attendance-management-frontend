@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import StyledProfile from './index.style';
 import { useTranslation } from 'react-i18next';
 import Grid from '@mui/material/Grid';
@@ -49,7 +49,19 @@ const Profile = () => {
     dispatch(actions.auth.updateUser(user));
   };
 
-  
+  const [profile, setProfile] = useState([]);
+
+  useEffect(() => {
+    getProfile();
+  }, []);
+
+  const getProfile = async () => {
+    const res = await apis.user.getProfile();
+    const { status } = res || {};
+    if (status == 1) {
+      setProfile(res.result);
+    }
+  };
 
   return (
     <StyledProfile>

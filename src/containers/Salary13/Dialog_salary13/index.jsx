@@ -2,7 +2,6 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import StyleDialog from './index.style';
 import {
-  DialogTitle,
   DialogContent,
   DialogContentText,
   DialogActions,
@@ -10,9 +9,9 @@ import {
   Button,
 } from '@mui/material';
 import CancelIcon from '@mui/icons-material/Cancel';
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+// import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
-const CreateTyepLeave = ({ open, handleClose }) => {
+const Dialog_salary13 = ({ open, handleClose }) => {
   const { t } = useTranslation();
   return (
     <StyleDialog
@@ -21,18 +20,13 @@ const CreateTyepLeave = ({ open, handleClose }) => {
       aria-labelledby="alert-dialog-title"
       aria-describedby="alert-dialog-description"
     >
-      <DialogTitle id="alert-dialog-title" className="titile-typeleave">
-        {t('Thêm loại đơn xin nghỉ')}
-      </DialogTitle>
       <DialogContent>
         <DialogContentText id="alert-dialog-description">
-          <span>{t('Tên loại đơn xin nghỉ')}</span>
-          <div className="input-createdeparment">
-            <TextField
-              id="outlined-basic"
-              className="input-create"
-              variant="outlined"
-            />
+          <div className="note-salary13">
+            <div className="title-salary13">
+              {t('Công thức tính lương tháng 13')}
+            </div>
+            <img id="img-salary13" src={'/img/rule_salary13.png'} alt="" />
           </div>
         </DialogContentText>
       </DialogContent>
@@ -44,21 +38,11 @@ const CreateTyepLeave = ({ open, handleClose }) => {
           variant="contained"
           startIcon={<CancelIcon />}
         >
-          {t('cancel')}
-        </Button>
-        <Button
-          onClick={handleClose}
-          autoFocus
-          id="save"
-          color="primary"
-          variant="contained"
-          startIcon={<CheckCircleIcon />}
-        >
-          {t('save')}
+          {t('Đóng')}
         </Button>
       </DialogActions>
     </StyleDialog>
   );
 };
 
-export default CreateTyepLeave;
+export default Dialog_salary13;

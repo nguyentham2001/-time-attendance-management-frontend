@@ -22,6 +22,9 @@ export default styled.div`
     display: flex;
     justify-content: space-between;
   }
+  .css-sghohy-MuiButtonBase-root-MuiButton-root {
+    text-transform: none;
+  }
 
   .css-sghohy-MuiButtonBase-root-MuiButton-root {
     background: #1e90ff;

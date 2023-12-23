@@ -1,6 +1,7 @@
 import styled from 'styled-components';
+import { Dialog } from '@mui/material';
 
-export default styled.div`
+export default styled(Dialog)`
   .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input {
     width: 300px;
   }
