@@ -157,7 +157,7 @@ const CreateEmployee = ({
     }));
   };
 
-  const handleIssueByChange = (event) => {
+  const handleIssueByChang = (event) => {
     const { value } = event.target;
     setData((prevData) => ({
       ...prevData,
@@ -274,7 +274,6 @@ const CreateEmployee = ({
                   <LocalizationProvider
                     dateAdapter={AdapterDayjs}
                     value={data.issuedBy}
-                    onChange={handleIssueByChange}
                   >
                     <DemoItem>
                       <DatePicker views={['year', 'month', 'day']} />

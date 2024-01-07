@@ -5,6 +5,7 @@ import * as user from './user';
 import * as salary_advance from './salary_advance';
 import * as upload from './upload';
 import * as absence_request from './absence_request';
+import * as overtimes from './overtimes';
 
 export default {
   auth,
@@ -14,4 +15,5 @@ export default {
   salary_advance,
   upload,
   absence_request,
+  overtimes,
 };

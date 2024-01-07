@@ -11,7 +11,7 @@ import Select, { selectClasses } from '@mui/joy/Select';
 import Option from '@mui/joy/Option';
 import KeyboardArrowDown from '@mui/icons-material/KeyboardArrowDown';
 import Grid from '@mui/material/Unstable_Grid2';
-
+import { usePaginationWithState } from 'src/hooks';
 import Box from '@mui/material/Box';
 import dayjs from 'dayjs';
 import { DemoItem } from '@mui/x-date-pickers/internals/demo';
@@ -20,7 +20,9 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { DesktopTimePicker } from '@mui/x-date-pickers/DesktopTimePicker';
-
+import Popup from 'src/components/Popup';
+import { useSnackbar } from 'notistack';
+import debounce from '@src/utils/debounce';
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -29,60 +31,32 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
-
+import apis from 'src/apis';
 const columns = [
-  { id: 'name', label: 'Name', minWidth: 170 },
-  { id: 'code', label: 'ISO\u00a0Code', minWidth: 100 },
+  { id: 'no', label: 'STT', minWidth: 170 },
+  { id: 'type', label: 'Type overtime', minWidth: 100 },
   {
-    id: 'population',
-    label: 'Population',
+    id: 'date',
+    label: 'date',
     minWidth: 170,
     align: 'right',
-    format: (value) => value.toLocaleString('en-US'),
   },
   {
-    id: 'size',
-    label: 'Size\u00a0(km\u00b2)',
+    id: 'startTime',
+    label: 'startTime',
     minWidth: 170,
     align: 'right',
-    format: (value) => value.toLocaleString('en-US'),
   },
   {
-    id: 'density',
-    label: 'Density',
+    id: 'endTime',
+    label: 'endTime',
     minWidth: 170,
     align: 'right',
     format: (value) => value.toFixed(2),
   },
-  { id: 'name1', label: 'Name', minWidth: 170 },
-  { id: 'name2', label: 'Name', minWidth: 170 },
-  { id: 'name3', label: 'Name', minWidth: 170 },
- 
-];
-
-function createData(name, code, population, size) {
-  const density = population / size;
-  return {
-    name,
-    code,
-    population,
-    size,
-    density,
-    name1: '1',
-    name2: '1',
-    name3: '1',
-  };
-}
-
-const rows = [
-  createData('India', 'IN', 1324171354, 3287263),
-  createData('China', 'CN', 1403500365, 9596961),
-  createData('Italy', 'IT', 60483973, 301340),
-  createData('United States', 'US', 327167434, 9833520),
-  createData('Canada', 'CA', 37602103, 9984670),
-  createData('Australia', 'AU', 25475400, 7692024),
-  createData('Germany', 'DE', 83019200, 357578),
-  createData('Ireland', 'IE', 4857000, 70273),
+  { id: 'reason', label: 'reason', minWidth: 170 },
+  { id: 'status', label: 'status', minWidth: 170 },
+  { id: 'actions', label: 'actions', minWidth: 170 },
 ];
 
 const OverTime = () => {
@@ -90,19 +64,68 @@ const OverTime = () => {
 
   const yesterday = dayjs().subtract(1, 'day');
 
-  //
-
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
   const handleChangePage = (event, newPage) => {
-    setPage(newPage);
+    onParamsChange(newPage + 1);
   };
 
   const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(+event.target.value);
-    setPage(0);
+    const newLimit = +event.target.value;
+    onParamsChange({ limit: newLimit, pageNum: 1 });
   };
+  const {
+    data,
+    onParamsChange,
+
+    currentPage,
+    limit,
+    total,
+  } = usePaginationWithState([], apis.overtimes.getListOverTime);
+
+  const handleTypeChange = (event) => {
+    const { value } = event.target;
+    setData((prevData) => ({
+      ...prevData,
+      name: value,
+    }));
+  };
+  const handleDateChange = (event) => {
+    const { value } = event.target;
+    setData((prevData) => ({
+      ...prevData,
+      name: value,
+    }));
+  };
+  const handlefromDateChange = (event) => {
+    const { value } = event.target;
+    setData((prevData) => ({
+      ...prevData,
+      name: value,
+    }));
+  };
+  const handletoDateChange = (event) => {
+    const { value } = event.target;
+    setData((prevData) => ({
+      ...prevData,
+      name: value,
+    }));
+  };
+  const handleReasonChange = (event) => {
+    const { value } = event.target;
+    setData((prevData) => ({
+      ...prevData,
+      name: value,
+    }));
+  };
+
+  function formatDate(date) {
+    if (date) {
+      return moment(date).format('DD/MM/YYYY');
+    }
+    return '';
+  }
 
   return (
     <StyledOverTime>
@@ -120,6 +143,7 @@ const OverTime = () => {
               <span className="requied">*</span>
               <div className="select-typeovertime">
                 <Select
+                  onChange={handleTypeChange}
                   className="select-detail"
                   placeholder={t('Chọn...')}
                   indicator={<KeyboardArrowDown />}
@@ -230,26 +254,26 @@ const OverTime = () => {
               </Grid>
             </Box>
             <div className="button-salaryadvance">
-            <Button
-              variant="contained"
-              className="search-button"
-              id="btt-search"
-              color="primary"
-              startIcon={<AdjustIcon />}
-            >
-              {t('Tạo phiếu')}
-            </Button>
+              <Button
+                variant="contained"
+                className="search-button"
+                id="btt-search"
+                color="primary"
+                startIcon={<AdjustIcon />}
+              >
+                {t('Tạo phiếu')}
+              </Button>
 
-            <Button
-              variant="contained"
-              className="new-button"
-              id="btt-new"
-              color="primary"
-              startIcon={<BlockIcon />}
-            >
-              {t('Làm mới')}
-            </Button>
-          </div>
+              <Button
+                variant="contained"
+                className="new-button"
+                id="btt-new"
+                color="primary"
+                startIcon={<BlockIcon />}
+              >
+                {t('Làm mới')}
+              </Button>
+            </div>
           </div>
         </div>
 
@@ -285,41 +309,49 @@ const OverTime = () => {
                     </TableRow>
                   </TableHead>
                   <TableBody>
-                    {rows
-                      .slice(
-                        page * rowsPerPage,
-                        page * rowsPerPage + rowsPerPage,
-                      )
-                      .map((row) => {
-                        return (
-                          <TableRow
-                            hover
-                            role="checkbox"
-                            tabIndex={-1}
-                            key={row.code}
-                          >
-                            {columns.map((column) => {
-                              const value = row[column.id];
-                              return (
-                                <TableCell key={column.id} align={column.align}>
-                                  {column.format && typeof value === 'number'
-                                    ? column.format(value)
-                                    : value}
-                                </TableCell>
-                              );
-                            })}
-                          </TableRow>
-                        );
-                      })}
+                    {data.map((row, index) => {
+                      const item = data[index];
+
+                      return (
+                        <TableRow
+                          hover
+                          role="checkbox"
+                          tabIndex={-1}
+                          key={row.code}
+                        >
+                          {columns.map((column) => {
+                            let value = row[column.id];
+                            if (column.id == ' no') {
+                              value = (currentPage - 1) * limit + index + 1;
+                            }
+
+                            if (
+                              column.id == 'fromDate' ||
+                              column.id == 'toDate'
+                            ) {
+                              return <TableCell>{formatDate(value)}</TableCell>;
+                            }
+
+                            return (
+                              <TableCell key={column.id} align={column.align}>
+                                {column.format && typeof value === 'number'
+                                  ? column.format(value)
+                                  : value}
+                              </TableCell>
+                            );
+                          })}
+                        </TableRow>
+                      );
+                    })}
                   </TableBody>
                 </Table>
               </TableContainer>
               <TablePagination
                 rowsPerPageOptions={[10, 25, 100]}
                 component="div"
-                count={rows.length}
-                rowsPerPage={rowsPerPage}
-                page={page}
+                count={total}
+                rowsPerPage={limit}
+                page={currentPage - 1}
                 onPageChange={handleChangePage}
                 onRowsPerPageChange={handleChangeRowsPerPage}
               />

@@ -8,8 +8,14 @@
   "name":"Họ và tên",
   "phoneNumber":"Số điện thoại",
   "email":"Email",
+  "educations" :"Học vấn",
+  "marriage":"Hôn nhân",
+  "dateofBirth": "Ngày sinh",
   "address":"Địa chỉ",
+  "edit":"Chỉnh sửa",
+
   "position":"Chức vụ",
+  "workplace":"Nơi làm việc",
   "datesign":"Ngày ký HĐ",
   "datestart":"Ngày làm việc",
   "actions":"Thao tác",
@@ -20,6 +26,8 @@
   "issuedOn":"Ngày cấp",
   "issuedBy":"Nơi cấp",
   "department":"Phòng ban",
+  "idBank":"Số tài khoản",
+  "bank":"Ngân hàng",
   "add-employee":"Thêm thông tin nhân viên",
   "manage-employee-list":"Quản lý danh sách nhân viên",
   "save":"Lưu",
@@ -31,35 +39,13 @@
   "role":"Vai trò",
   "male": "Nam",
   "female": "Nữ",
-  "tablename":"Tên bảng phân ca",
-  "shiftwork":"Ca làm việc",
-  "time":"Thời gian áp dụng",
-  "applicableunit":"Đơn vị áp dụng",
-  "applicableobject":"Đối tượng áp dụng",
-  "detailed-shift":"Phân ca chi tiết",
-  "names-of-units":" Tên các đơn vị",
-  "administrative":"Bộ phận hành chính",
-  "personnel":"Bộ phận nhân sự",
-  "accounting-department":"Bộ phận tài chính-kế toán",
-  "business-department":"Bộ phận kinh doanh",
-  "marketing-room":"Bộ phận marketing",
-  "engineering-department":"Bộ phận kỹ thuật-sản xuất",
-  "quality-controldepartment":"Bộ phận kiểm soát chất lượng",
-  "idwork":"Mã ca",
-  "namework":"Tên ca",
-  "timestart":"Giờ bắt đầu ca",
-  "beginwork":"Chấm vào đầu ra từ",
-  "finalwork":"Chấm vào đầu ca đến",
-  "timeend":"Giờ kết thúc ca",
-  "finalstart":"Giờ kết thúc ca từ",
-  "finalbegin":"Giờ kết thúc ca đến",
-  "moneyday":"Ngày công",
-  "timeday":"Giờ công",
-  "everyday":"Hệ số ngày thường",
-  "restday":"Hệ số ngày nghỉ",
-  "holiday":"Hệ số ngày lễ",
-  "badRequest": "Yêu cầu không hợp lệ",
-  "unauthorized": "Không xác thực",
+
+ 
+
+
+
+
+
   "forbidden": "Không được phép truy cập",
   "notFound": "Không tìm thấy",
   "serverError": "Máy chủ lỗi, vui lòng thử lại sau.",
@@ -84,7 +70,8 @@
   "morning":"Buổi sáng",
   "afternoon":"Buổi chiều",
   "account":"Tên tài khoản",
-  "name-employee":"Tên nhân viên"
+  "name-employee":"Tên nhân viên",
+  "update-successful":"Cập nhật thành công"
 
 
 }

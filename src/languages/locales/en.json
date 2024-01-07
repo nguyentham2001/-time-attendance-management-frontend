@@ -83,7 +83,16 @@
   "allday":"Day",
   "morning":"Morning",
   "afternoon":"Afternoon",
-  "account":"Account"
+  "account":"Account",
+  "dateofBirth": "Date of birth",
+  "workplace":"Workplace",
+  "idBank":"ID bank",
+  "bank":"Bank",
+  "educations" :"Education",
+  "marriage":"Marriage",
+  "edit":"edit",
+  "update-successful":"Update successful"
+
   
 
 }

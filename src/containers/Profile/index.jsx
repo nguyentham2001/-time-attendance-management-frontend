@@ -9,22 +9,116 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 import Box from '@mui/material/Box';
-import Select, { selectClasses } from '@mui/joy/Select';
-import Option from '@mui/joy/Option';
-import KeyboardArrowDown from '@mui/icons-material/KeyboardArrowDown';
+
 import AdjustIcon from '@mui/icons-material/Adjust';
 import BlockIcon from '@mui/icons-material/Block';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import { Button, TextField } from '@mui/material';
+import {
+  Select,
+  Button,
+  TextField,
+  InputAdornment,
+  FormControl,
+  MenuItem,
+} from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import apis from 'src/apis';
 import actions from '@src/redux/actions';
-
+import { getByPath } from '@src/utils/object';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { GENDER } from 'src/constants';
+import { omitIsNil } from '@src/utils/omit';
+import { enqueueSnackbar } from 'notistack';
+import { useSnackbar } from 'notistack';
 const Profile = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
   const { avatar } = user || {};
+
+  const [profile, setProfile] = useState({});
+  const [data, setData] = useState({});
+
+  const { name } = profile || {};
+  const { email } = profile || {};
+
+  useEffect(() => {
+    getProfile();
+  }, []);
+
+  const getProfile = async () => {
+    const res = await apis.user.getProfile();
+    const { status } = res || {};
+    if (status == 1) {
+      const { result } = res;
+      setProfile(result);
+
+      let dateOfBirth = getByPath(result, 'dateOfBirth') || null;
+      if (dateOfBirth) {
+        dateOfBirth = dayjs(dateOfBirth);
+      }
+
+      let issuedOn = getByPath(result, 'issuedOn') || null;
+      if (issuedOn) {
+        issuedOn = dayjs(issuedOn);
+      }
+
+      setData({
+        identityNumber: getByPath(result, 'identityNumber'),
+        dateOfBirth: dateOfBirth,
+        issuedOn: issuedOn,
+        bankAccount: getByPath(result, 'bankAccount'),
+        bank: getByPath(result, 'bank'),
+        education: getByPath(result, 'education'),
+        phoneNumber: getByPath(result, 'phoneNumber'),
+        gender: getByPath(result, 'gender'),
+        address: getByPath(result, 'address'),
+        issuedBy: getByPath(result, 'issuedBy'),
+      });
+    }
+  };
+
+  const parseDataUpdate = () => {
+    let { dateOfBirth, issuedOn } = data;
+    if (dateOfBirth) {
+      dateOfBirth = dateOfBirth.toDate();
+    }
+
+    if (issuedOn) {
+      issuedOn = issuedOn.toDate();
+    }
+
+    const newData = {
+      ...data,
+      dateOfBirth,
+      issuedOn,
+    };
+    omitIsNil(newData, { deep: false });
+
+    return newData;
+  };
+
+  const handleUpadateProfile = async () => {
+    try {
+      const updateData = parseDataUpdate();
+      const res = await apis.user.updateProfile(updateData);
+      const { status } = res || {};
+      if (status == 1) {
+        const { result } = res;
+        setProfile(result);
+        enqueueSnackbar({
+          variant: 'success',
+          message: t('update-successful'),
+        });
+      }
+    } catch (error) {
+      const { message } = error;
+      enqueueSnackbar({
+        variant: 'error',
+        message: t(message),
+      });
+    }
+  };
 
   const handleUploadAvatar = async (e) => {
     const formData = new FormData();
@@ -49,19 +143,46 @@ const Profile = () => {
     dispatch(actions.auth.updateUser(user));
   };
 
-  const [profile, setProfile] = useState([]);
-
-  useEffect(() => {
-    getProfile();
-  }, []);
-
-  const getProfile = async () => {
-    const res = await apis.user.getProfile();
-    const { status } = res || {};
-    if (status == 1) {
-      setProfile(res.result);
-    }
+  const handleValueChange = (event, key) => {
+    const { value } = event.target;
+    setData((prevData) => ({
+      ...prevData,
+      [key]: value,
+    }));
   };
+
+  const handleDateChange = (value, key) => {
+    setData((prevData) => ({
+      ...prevData,
+      [key]: value,
+    }));
+  };
+
+  // const handleUpadateEditProfile = async () => {
+  //   if (name.trim().leghth == 0) return;
+  //   try {
+  //     let res;
+  //     const data ={name};
+  //     if(!profile){
+  //       res = await apis.user.updateProfile(profile.id, data);
+
+  //     }
+  //     if (!res) throw new Error("serverError");
+  //     enqueueSnackbar({
+  //       variant: "success",
+  //       message: profile
+  //       ? t('Cap nhat thanh cong')
+  //     });
+  //     handleReloadData();
+  //       handleClose();
+  //   }catch(error){
+  //     const{message} = error;
+  //     enqueueSnackbar({
+  //       variant: 'error',
+  //       message: t(message),
+  //     });
+  //   }
+  // };
 
   return (
     <StyledProfile>
@@ -80,7 +201,7 @@ const Profile = () => {
                 <div className="profile-left">
                   <div className="profile-id">
                     <div>
-                      <span>{t('Mã nhân viên')}</span>
+                      <span>{t('id')}</span>
                       <span className="requied">*</span>
                     </div>
 
@@ -89,21 +210,21 @@ const Profile = () => {
                         disabled
                         id="outlined-disabled"
                         label=""
-                        defaultValue=""
+                        value={getByPath(profile, 'employeeId')}
                       />
                     </div>
                   </div>
                   <div className="profile-name">
                     <div>
-                      <span>{t('Tên nhân viên')}</span>
+                      <span>{t('name')}</span>
                       <span className="requied">*</span>
                     </div>
 
-                    <TextField id="filled-helperText" />
+                    <TextField id="filled-helperText" value={name || ''} />
                   </div>
                   <div className="profile-birth">
                     <div>
-                      <span>{t('Ngày sinh')}</span>
+                      <span>{t('dateofBirth')}</span>
                       <span className="requied">*</span>
                     </div>
 
@@ -111,108 +232,100 @@ const Profile = () => {
                       <LocalizationProvider dateAdapter={AdapterDayjs}>
                         <DemoItem label="">
                           <DesktopDatePicker
-                            defaultValue={dayjs('2022-04-17')}
+                            value={data.dateOfBirth}
+                            onChange={(value) =>
+                              handleDateChange(value, 'dateOfBirth')
+                            }
                           />
                         </DemoItem>
                       </LocalizationProvider>
                     </div>
                   </div>
                   <div className="profile-all">
-                    <span>{t('Giới tính')}</span>
+                    <span>{t('gender')}</span>
                     <div className="gender-select">
-                      <Select
-                        className="select-detail"
-                        placeholder={t('')}
-                        indicator={<KeyboardArrowDown />}
-                        sx={{
-                          width: 240,
-                          [`& .${selectClasses.indicator}`]: {
-                            transition: '0.2s',
-                            [`&.${selectClasses.expanded}`]: {
-                              transform: 'rotate(-180deg)',
-                            },
-                          },
-                        }}
-                      >
-                        <Option value="boy ">{t('Nam')}</Option>
-                        <Option value="girl ">{t('Nữ')}</Option>
-                        <Option value="diffirent ">{t('Khác')}</Option>
-                      </Select>
+                      <FormControl sx={{ m: 1, minWidth: 120 }}>
+                        <Select
+                          className="select-gender"
+                          value={data.gender || ''}
+                          onChange={(event) =>
+                            handleValueChange(event, 'gender')
+                          }
+                        >
+                          {Object.keys(GENDER).map((key) => (
+                            <MenuItem value={GENDER[key]}>
+                              {t(key.toLocaleLowerCase())}
+                            </MenuItem>
+                          ))}
+                        </Select>
+                      </FormControl>
                     </div>
                   </div>
                   <div className="profile-all">
-                    <span>{t('Phòng ban')}</span>
-                    <div className="deparment-select">
-                      <Select
-                        disabled
-                        className="select-detail"
-                        placeholder={t('')}
-                        indicator={<KeyboardArrowDown />}
-                        sx={{
-                          width: 240,
-                          [`& .${selectClasses.indicator}`]: {
-                            transition: '0.2s',
-                            [`&.${selectClasses.expanded}`]: {
-                              transform: 'rotate(-180deg)',
-                            },
-                          },
-                        }}
-                      ></Select>
-                    </div>
-                  </div>
-                  <div className="profile-all">
-                    <span>{t('Chức vụ')}</span>
-                    <div className="profile-select">
-                      <Select
-                        disabled
-                        className="select-detail"
-                        placeholder={t('')}
-                        indicator={<KeyboardArrowDown />}
-                        sx={{
-                          width: 240,
-                          [`& .${selectClasses.indicator}`]: {
-                            transition: '0.2s',
-                            [`&.${selectClasses.expanded}`]: {
-                              transform: 'rotate(-180deg)',
-                            },
-                          },
-                        }}
-                      ></Select>
-                    </div>
-                  </div>
-                  <div className="profile-all">
-                    <span>{t('Nơi làm việc')}</span>
-                    <div className="workplace-select">
-                      <Select
-                        disabled
-                        className="select-detail"
-                        placeholder={t('')}
-                        indicator={<KeyboardArrowDown />}
-                        sx={{
-                          width: 240,
-                          [`& .${selectClasses.indicator}`]: {
-                            transition: '0.2s',
-                            [`&.${selectClasses.expanded}`]: {
-                              transform: 'rotate(-180deg)',
-                            },
-                          },
-                        }}
-                      ></Select>
-                    </div>
-                  </div>
-                  <div className="profile-account">
+                    <span>{t('department')}</span>
                     <div>
-                      <span>{t('Tên tài khoản')}</span>
-                      <span className="requied">*</span>
+                      <TextField
+                        disabled
+                        id="outlined-disabled"
+                        label=""
+                        value={getByPath(profile, 'department.name')}
+                        InputProps={{
+                          endAdornment: (
+                            <InputAdornment position="end">
+                              {' '}
+                              <ExpandMoreIcon edge="end" />
+                            </InputAdornment>
+                          ),
+                        }}
+                      />
                     </div>
-
+                  </div>
+                  <div className="profile-all">
+                    <span>{t('position')}</span>
                     <TextField
                       disabled
                       id="outlined-disabled"
                       label=""
-                      defaultValue=""
+                      value={getByPath(profile, 'position.name')}
+                      InputProps={{
+                        endAdornment: (
+                          <InputAdornment position="end">
+                            {' '}
+                            <ExpandMoreIcon edge="end" />
+                          </InputAdornment>
+                        ),
+                      }}
                     />
                   </div>
+                </div>
+                <div className="profile-all">
+                  <span>{t('workplace')}</span>
+                  <TextField
+                    disabled
+                    id="outlined-disabled"
+                    label=""
+                    InputProps={{
+                      endAdornment: (
+                        <InputAdornment position="end">
+                          {' '}
+                          <ExpandMoreIcon edge="end" />
+                        </InputAdornment>
+                      ),
+                    }}
+                  />
+                </div>
+                <div className="profile-account">
+                  <div>
+                    <span>{t('account')}</span>
+                    <span className="requied">*</span>
+                  </div>
+                  <TextField
+                    disabled
+                    id="outlined-disabled"
+                    label=""
+                    defaultValue=""
+                    value={getByPath(profile, 'account')}
+                  />
                 </div>
               </Grid>
               <Grid item xs={6}>
@@ -235,136 +348,157 @@ const Profile = () => {
               <Grid item xs={6}>
                 <div className="profile-idcart">
                   <div>
-                    <span>{t('Số CCCD')}</span>
+                    <span>{t('identityNumber')}</span>
                     <span className="requied">*</span>
                   </div>
 
-                  <TextField id="outlined-disabled" label="" defaultValue="" />
+                  <TextField
+                    id="outlined-disabled"
+                    label=""
+                    value={data.identityNumber || ''}
+                    onChange={(event) =>
+                      handleValueChange(event, 'identityNumber')
+                    }
+                  />
                 </div>
+
                 <div className="profile-date">
                   <div className="date-range">
                     <div>
-                      <span>{t('Ngày cấp')}</span>
+                      <span>{t('issuedOn')}</span>
                       <span className="requied">*</span>
                     </div>
 
                     <div id="calendar-issued" className="calendar-date">
                       <LocalizationProvider dateAdapter={AdapterDayjs}>
                         <DemoItem label="">
-                          <DatePicker defaultValue={dayjs('2022-04-17')} />
+                          <DatePicker
+                            Value={data.issuedOn}
+                            onChange={(value) =>
+                              handleDateChange(value, 'issuedOn')
+                            }
+                          />
                         </DemoItem>
                       </LocalizationProvider>
                     </div>
                   </div>
                   <div className="issued-by">
                     <div className="title-issued">
-                      <span>{t('Nơi cấp')}</span>
+                      <span>{t('issuedBy')}</span>
                       <span className="requied">*</span>
                     </div>
 
-                    <TextField id="text-isued" />
+                    <TextField
+                      className="input-issueBy"
+                      value={data.issuedBy || ''}
+                      onChange={(value) => handleValueChange(value, 'issuedBy')}
+                    />
                   </div>
                 </div>
                 <div className="profile-bank">
                   <div className="id-bank">
                     <div>
-                      <span>{t('Số tài khoản')}</span>
+                      <span>{t('idBank')}</span>
                       <span className="requied">*</span>
                     </div>
-                    <TextField id="text-bank" />
+                    <TextField
+                      id="textbank"
+                      className="text-bank"
+                      value={data.bankAccount || ''}
+                      onChange={(event) =>
+                        handleValueChange(event, 'bankAccount')
+                      }
+                    />
                   </div>
-                  <div className="name-bank">
+                  <div className="name-bank" id="nameBank">
                     <div>
-                      <span>{t('Ngân hàng')}</span>
+                      <span>{t('bank')}</span>
                       <span className="requied">*</span>
                     </div>
                     <div id="select-bank">
-                      <Select
-                        className="select-detail"
-                        placeholder={t('')}
-                        indicator={<KeyboardArrowDown />}
-                        sx={{
-                          width: 240,
-                          [`& .${selectClasses.indicator}`]: {
-                            transition: '0.2s',
-                            [`&.${selectClasses.expanded}`]: {
-                              transform: 'rotate(-180deg)',
-                            },
-                          },
-                        }}
-                      >
-                        <Option value="MB ">{t('Ngân hàng Quân đội')}</Option>
-
-                        <Option value="VCB ">
-                          {t('Ngân hàng Ngoại thương Việt Nam')}
-                        </Option>
-
-                        <Option value="Agribank ">
-                          {t(
-                            'Ngân hàng Nông nghiệp và Phát triển Nông thôn VN',
-                          )}
-                        </Option>
-
-                        <Option value="BIDV ">
-                          {t('Đầu tư và Phát triển Việt Nam')}
-                        </Option>
-                      </Select>
+                      <FormControl>
+                        <Select
+                          value={data.bank || ''}
+                          onChange={(event) => handleValueChange(event, 'bank')}
+                        >
+                          <MenuItem value="MB ">
+                            {t('Ngân hàng Quân đội')}
+                          </MenuItem>
+                          <MenuItem value="VCB ">
+                            {t('Ngân hàng Ngoại thương Việt Nam')}
+                          </MenuItem>
+                          <MenuItem value="Agribank ">
+                            {t(
+                              'Ngân hàng Nông nghiệp và Phát triển Nông thôn VN',
+                            )}
+                          </MenuItem>
+                        </Select>
+                      </FormControl>
                     </div>
                   </div>
                 </div>
                 <div className="profile-address">
                   <div>
-                    <span>{t('Địa chỉ')}</span>
+                    <span>{t('address')}</span>
                     <span className="requied">*</span>
                   </div>
-                  <TextField id="filled-helperText" />
+                  <TextField
+                    id="filled-helperText"
+                    value={data.address}
+                    onChange={(value) => handleValueChange(value, 'address')}
+                  />
                 </div>
                 <div className="profile-country">
                   <div>
                     <span>{t('Quê quán')}</span>
                   </div>
-                  <TextField id="filled-helperText" />
+                  <TextField
+                    id="filled-helperText"
+                    value={data.address}
+                    onChange={(value) => handleValueChange(value, 'address')}
+                  />
                 </div>
               </Grid>
               <Grid item xs={6}>
                 <div className="profile-email">
                   <div>
-                    <span>{t('Email')}</span>
+                    <span>{t('email')}</span>
                     <span className="requied">*</span>
                   </div>
-                  <TextField id="filled-helperText" />
+                  <TextField id="filled-helperText" value={email || ''} />
                 </div>
                 <div className="profile-phone">
                   <div>
-                    <span>{t('Số điện thoại')}</span>
+                    <span>{t('phoneNumber')}</span>
                     <span className="requied">*</span>
                   </div>
-                  <TextField id="filled-helperText" />
+                  <TextField
+                    id="filled-helperText"
+                    value={data.phoneNumber || ''}
+                    onChange={(event) =>
+                      handleValueChange(event, 'phoneNumber')
+                    }
+                  />
                 </div>
                 <div className="profile-learn">
-                  <span>{t('Học vấn')}</span>
+                  <span>{t('educations')}</span>
 
-                  <TextField id="filled-helperText" />
+                  <TextField
+                    id="filled-helperText"
+                    value={data.education || ''}
+                    onChange={(event) => handleValueChange(event, 'education')}
+                  />
                 </div>
                 <div className="profile-merriage">
-                  <span>{t('Hôn nhân')}</span>
-                  <Select
-                    className="select-detail"
-                    placeholder={t('')}
-                    indicator={<KeyboardArrowDown />}
-                    sx={{
-                      width: 240,
-                      [`& .${selectClasses.indicator}`]: {
-                        transition: '0.2s',
-                        [`&.${selectClasses.expanded}`]: {
-                          transform: 'rotate(-180deg)',
-                        },
-                      },
-                    }}
-                  >
-                    <Option value="yes ">{t('Có')}</Option>
-                    <Option value="no ">{t('Không')}</Option>
-                  </Select>
+                  <span>{t('marriage')}</span>
+                  <div id="select-merriage">
+                    <FormControl>
+                      <Select>
+                        <MenuItem value="yes ">{t('có')}</MenuItem>
+                        <MenuItem value="no ">{t('không')}</MenuItem>
+                      </Select>
+                    </FormControl>
+                  </div>
                 </div>
               </Grid>
             </Grid>
@@ -377,8 +511,9 @@ const Profile = () => {
             id="btt-search"
             color="primary"
             startIcon={<AdjustIcon />}
+            onClick={() => handleUpadateProfile()}
           >
-            {t('Chỉnh sửa')}
+            {t('edit')}
           </Button>
 
           <Button
@@ -388,7 +523,7 @@ const Profile = () => {
             color="primary"
             startIcon={<BlockIcon />}
           >
-            {t('Làm mới')}
+            {t('refresh')}
           </Button>
         </div>
       </div>

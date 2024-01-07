@@ -65,7 +65,13 @@ export default styled.div`
     justify-content: space-between;
     display: flex;
   }
-  #text-isued {
+  .text-isued .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input {
+    width: 100px;
+  }
+  #outlined-basic .css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root {
+    width: 150px;
+  }
+  #outlined-basic .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input {
     width: 100px;
   }
   #calendar-issued {
@@ -79,19 +85,21 @@ export default styled.div`
     margin-top: 25px;
     justify-content: space-between;
   }
+
   .date-range {
     display: flex;
   }
   .issued-by {
     display: flex;
+    margin-left: 10px;
   }
   .calendar-date {
     margin-left: 20px;
   }
   .title-issued {
-    margin-right: 20px;
+    margin-left: 20px;
   }
-  #text-bank {
+  .text-bank .css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root {
     width: 150px;
   }
   #select-bank .css-wahqcs-JoySelect-root {
@@ -102,7 +110,26 @@ export default styled.div`
   }
   .name-bank {
     display: flex;
-    margin-left: 10px;
+    margin-left: 20px;
+  }
+  .css-om8c7-JoySelect-root {
+    width: 300px;
+  }
+  #select-merriage .css-1nrlq1o-MuiFormControl-root {
+    width: 300px;
+  }
+  #select-bank .css-1nrlq1o-MuiFormControl-root {
+    max-width: 200px;
+  }
+  .input-issueBy .css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root {
+    width: 160px;
+  }
+  .css-1869usk-MuiFormControl-root {
+    width: 300px;
+    margin: 0px;
+  }
+  .css-1yk1gt9-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root {
+    height: 40px;
   }
   .profile-bank {
     display: flex;
@@ -181,5 +208,16 @@ export default styled.div`
 
   .send-attachment {
     display: none;
+  }
+
+  .css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root {
+    width: 300px;
+  }
+
+  .css-1q6at85-MuiInputBase-root-MuiOutlinedInput-root.Mui-disabled {
+    height: 40px;
+  }
+  .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input {
+    padding-left: 5px;
   }
 `;
