@@ -116,26 +116,6 @@ const AbsenceRequest = () => {
       name: value,
     }));
   };
-  // const handleStatusChange = (event) => {
-  //   const { value } = event.target;
-  //   setData((prevData) => ({
-  //     ...prevData,
-  //     name: value,
-  //   }));
-  // };
-
-  //       const handleCreateAbsence_Request = async ()=>{
-  // if(requestType.trim().leghth == 0) return;
-  // try{
-  //   let res;
-  //   const data = {requestType};
-  //   if (!absence_request){
-  // res = await apis.absence_request.createAbsence_Request(data);
-  //   }else{
-  //     res = await apis.absence_request.updateAbsence_Request(data.id, data);
-
-  //   }
-  //   };
 
   function renderStatus(statusLogChat) {
     if (statusLogChat === ABSENCE_REQUEST_STATUS.PENDING) {
@@ -457,6 +437,7 @@ const AbsenceRequest = () => {
                             if (column.id === 'no') {
                               value = (currentPage - 1) * limit + index + 1;
                             }
+
                             if (column.id === 'actions') {
                               return (
                                 <TableCell>

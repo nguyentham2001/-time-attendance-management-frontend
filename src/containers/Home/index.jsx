@@ -24,20 +24,22 @@ import debounce from '@src/utils/debounce';
 import { getByPath } from '@src/utils/object';
 
 const columns = [
-  { id: 'no', label: 'STT' },
-  { id: 'employeeId', label: 'employeeId', minWidth: 170 },
+  { id: 'no', label: 'no' },
+  { id: 'employeeId', label: 'id', minWidth: 170 },
   { id: 'name', label: 'name', minWidth: 100 },
   { id: 'phoneNumber', label: 'phoneNumber', minWidth: 170, align: 'right' },
   { id: 'email', label: 'email', minWidth: 170, align: 'right' },
   { id: 'address', label: 'address', minWidth: 170, align: 'right' },
-  { id: 'positionId', label: 'positionId', minWidth: 170 },
-  { id: 'departmentId', label: 'departmentId', minWidth: 170 },
+  { id: 'position.name', label: 'positionId', minWidth: 170 },
+  { id: 'department.name', label: 'departmentId', minWidth: 170 },
   { id: 'dateOfBirth', label: 'dateOfBirth', minWidth: 170 },
   { id: 'identityNumber', label: 'identityNumber', minWidth: 170 },
   { id: 'issuedOn', label: 'issuedOn', minWidth: 170 },
   { id: 'issuedBy', label: 'issuedBy', minWidth: 170 },
   { id: 'signingDate', label: 'signingDate', minWidth: 170 },
   { id: 'workingDate', label: 'workingDate', minWidth: 170 },
+  { id: 'bankAccount', label: 'bankAccount', minWidth: 170 },
+  { id: 'bank', label: 'bank', minWidth: 170 },
   { id: 'actions', label: 'Actions', minWidth: 170 },
 ];
 
@@ -195,9 +197,7 @@ const Home = () => {
               <MenuIcon />
             </div>
 
-            <label className="title-listovertime">
-              {t('Danh sách nhân viên')}
-            </label>
+            <label className="title-listovertime">{t('employee list')}</label>
           </div>
           <div className="employee-container">
             <Paper sx={{ width: '100%' }}>
@@ -226,22 +226,6 @@ const Home = () => {
 
                             if (column.id === 'no') {
                               value = (currentPage - 1) * limit + index + 1;
-                            }
-
-                            if (column.id == 'departmentId') {
-                              const department = departments.find(
-                                (e) => e.id == value,
-                              );
-                              const { name } = department || {};
-                              value = name;
-                            }
-
-                            if (column.id == 'positionId') {
-                              const position = positions.find(
-                                (e) => e.id == value,
-                              );
-                              const { name } = position || {};
-                              value = name;
                             }
 
                             if (column.id === 'actions') {

@@ -9,23 +9,23 @@ const getListOverTime = async (params) => {
   return response;
 };
 
-// const createDepartment = async (data) => {
-//   const response = await api({
-//     method: 'POST',
-//     url: '/departments',
-//     data,
-//   });
-//   return response;
-// };
+const createOvertime = async (data) => {
+  const response = await api({
+    method: 'POST',
+    url: '/overtimes',
+    data,
+  });
+  return response;
+};
 
-// const updateDepartment = async (id, data) => {
-//   const response = await api({
-//     method: 'PUT',
-//     url: `/departments/${id}`,
-//     data,
-//   });
-//   return response;
-// };
+const updateOvertime = async (id, data) => {
+  const response = await api({
+    method: 'PUT',
+    url: '/overtimes',
+    data,
+  });
+  return response;
+};
 
 // const deleteDepartment = async (id) => {
 //   const response = await api({
@@ -35,4 +35,4 @@ const getListOverTime = async (params) => {
 //   return response;
 // };
 
-export { getListOverTime };
+export { getListOverTime, createOvertime, updateOvertime };

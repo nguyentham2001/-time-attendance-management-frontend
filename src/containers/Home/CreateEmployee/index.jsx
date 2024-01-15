@@ -30,6 +30,8 @@ import StyledDialog from './index.style';
 import { useSnackbar } from 'notistack';
 import apis from 'src/apis';
 
+import { useForm, FormProvider } from 'react-hook-form';
+
 const CreateEmployee = ({
   open,
   handleClose,
@@ -47,6 +49,7 @@ const CreateEmployee = ({
   useEffect(() => {
     if (!open) {
       setData({});
+      // methods.reset();
       return;
     }
 
@@ -67,6 +70,8 @@ const CreateEmployee = ({
       issuedBy,
       signingDate,
       workingDate,
+      bank,
+      bankAccount,
     } = user;
 
     setData({
@@ -82,6 +87,8 @@ const CreateEmployee = ({
       issuedBy,
       signingDate,
       workingDate,
+      bank,
+      bankAccount,
     });
   }, [open, user]);
 
@@ -89,7 +96,7 @@ const CreateEmployee = ({
     const { value } = event.target;
     setData((prevData) => ({
       ...prevData,
-      // gender: value,
+      gender: value,
     }));
   };
 
@@ -149,7 +156,7 @@ const CreateEmployee = ({
     }));
   };
 
-  const handleIssueOnChange = (event) => {
+  const handleIssuedOnChange = (event) => {
     const { value } = event.target;
     setData((prevData) => ({
       ...prevData,
@@ -157,7 +164,7 @@ const CreateEmployee = ({
     }));
   };
 
-  const handleIssueByChang = (event) => {
+  const handleIssuedByChang = (event) => {
     const { value } = event.target;
     setData((prevData) => ({
       ...prevData,
@@ -184,6 +191,23 @@ const CreateEmployee = ({
     setData((prevData) => ({
       ...prevData,
       positionId: value,
+    }));
+  };
+
+  const handlebankAccountChange = (event) => {
+    const { value } = event.target;
+    setData((prevData) => ({
+      ...prevData,
+      bankAccount: value,
+    }));
+  };
+
+  const handlebankChange = (event) => {
+    const { value } = event.target;
+    console.log('bank', value);
+    setData((prevData) => ({
+      ...prevData,
+      bank: value,
     }));
   };
 
@@ -219,6 +243,16 @@ const CreateEmployee = ({
     }
   };
 
+  // const methods = useForm();
+  // const {
+  //   formState: { errors },
+  // } = methods;
+
+  // const onSubmit = methods.handleSubmit((data) => {
+  //   console.log('data: ', data);
+  //   handleCreateUser();
+  // });
+
   return (
     <StyledDialog
       open={open}
@@ -230,6 +264,12 @@ const CreateEmployee = ({
       <DialogContent>
         <DialogContentText id="alert-dialog-description">
           <Box sx={{ width: '100%' }}>
+            {/* <FormProvider {...methods}>
+              <form onSubmit={(e) => e.preventDefault()} noValidate>
+               
+              </form>
+            </FormProvider> */}
+
             <Grid
               container
               rowSpacing={1}
@@ -238,19 +278,23 @@ const CreateEmployee = ({
               <Grid xs={6}>
                 <div className="input-accountfirst">
                   <div>
-                    <span>{t('Họ và tên')}</span>
+                    <span>{t('name')}</span>
                     <span className="requied">*</span>
                   </div>
                   <TextField
                     id="outlined-basic"
-                    className=""
+                    // inputRef={methods.register('name', {
+                    //   required: true,
+                    // })}
+                    name="name"
                     variant="outlined"
                     value={data.name}
                     onChange={handleNameChange}
                   />
+                  {/* {errors.name && <p>Name is required.</p>} */}
                 </div>
                 <div className="input-account">
-                  <span>{t('Giới tính')}</span>
+                  <span>{t('gender')}</span>
                   <FormControl sx={{ m: 1, minWidth: 120 }}>
                     <Select
                       className="select-gender"
@@ -268,21 +312,26 @@ const CreateEmployee = ({
                 </div>
                 <div className="input-account">
                   <div>
-                    <span>{t('Ngày cấp')}</span>
+                    <span>{t('issuedOn')}</span>
                     <span className="requied">*</span>
                   </div>
                   <LocalizationProvider
                     dateAdapter={AdapterDayjs}
-                    value={data.issuedBy}
+                    value={data.issuedOn}
+                    onChange={handleIssuedOnChange}
+                    // inputRef={methods.register('issuedOn', {
+                    //   required: true,
+                    // })}
                   >
                     <DemoItem>
                       <DatePicker views={['year', 'month', 'day']} />
                     </DemoItem>
                   </LocalizationProvider>
+                  {/* {errors.issuedOn && <p className="validate"> required</p>} */}
                 </div>
                 <div className="input-account">
                   <div>
-                    <span>{t('Địa chỉ')}</span>
+                    <span>{t('address')}</span>
                     <span className="requied">*</span>
                   </div>
                   <TextField
@@ -291,11 +340,15 @@ const CreateEmployee = ({
                     variant="outlined"
                     value={data.address}
                     onChange={handleAddressChange}
+                    // inputRef={methods.register('address', {
+                    //   required: true,
+                    // })}
                   />
+                  {/* {errors.address && <p className="validate"> required</p>} */}
                 </div>
                 <div className="input-account">
                   <div>
-                    <span>{t('Số điện thoại')}</span>
+                    <span>{t('phoneNumber')}</span>
                     <span className="requied">*</span>
                   </div>
                   <TextField
@@ -305,11 +358,15 @@ const CreateEmployee = ({
                     value={data.phoneNumber}
                     onChange={handlePhoneChange}
                     type="tel"
+                    // inputRef={methods.register('phoneNumber', {
+                    //   required: true,
+                    // })}
                   />
+                  {/* {errors.phoneNumber && <p className="validate"> required</p>} */}
                 </div>
                 <div className="input-account">
                   <div>
-                    <span>{t('Phòng ban')}</span>
+                    <span>{t('deparment')}</span>
                   </div>
                   <JoySelect
                     className="select-deparment"
@@ -334,18 +391,67 @@ const CreateEmployee = ({
                 </div>
                 <div className="input-account">
                   <div>
-                    <span>{t('Ngày làm việc')}</span>
+                    <span>{t('datestart')}</span>
                     <span className="requied">*</span>
                   </div>
                   <LocalizationProvider
                     dateAdapter={AdapterDayjs}
                     value={data.workingDate}
                     onChange={handleDateWorkChange}
+                    // inputRef={methods.register('workingDate', {
+                    //   required: true,
+                    // })}
                   >
                     <DemoItem>
                       <DatePicker views={['year', 'month', 'day']} />
                     </DemoItem>
                   </LocalizationProvider>
+                  {/* {errors.workingDate && <p className="validate"> required</p>} */}
+                </div>
+                <div className="input-account">
+                  <div>
+                    <span>{t('idBank')}</span>
+                    <span className="requied">*</span>
+                  </div>
+                  <TextField
+                    id="outlined-basic"
+                    label=""
+                    value={data.bankAccount}
+                    onChange={handlebankAccountChange}
+                    // inputRef={methods.register('bankAccount', {
+                    //   required: true,
+                    // })}
+                  />
+                  {/* {errors.bankAccount && <p className="validate"> required</p>} */}
+                </div>
+                <div className="input-account">
+                  <div>
+                    <span>{t(' bank')}</span>
+                    <span className="requied">*</span>
+                  </div>
+
+                  <FormControl sx={{ m: 1, minWidth: 120 }}>
+                    <Select
+                      className="select-gender"
+                      value={data.bank}
+                      onChange={handlebankChange}
+                      displayEmpty
+                      // inputRef={methods.register('bank', {
+                      //   required: true,
+                      // })}
+                    >
+                      <MenuItem value="VCB">Ngân hành Vietcombank</MenuItem>
+                      <MenuItem value="MB">
+                        Ngân hàng quân đội Việt Nam
+                      </MenuItem>
+                      <MenuItem value="Tech">Ngân hàng Techcombank</MenuItem>
+                      <MenuItem value="Agribank">
+                        Ngân hàng phát triển nông thôn
+                      </MenuItem>
+                      <MenuItem value="Viettin">Ngân hàng Viettin</MenuItem>
+                    </Select>
+                  </FormControl>
+                  {/* {errors.bank && <p className="validate"> required</p>} */}
                 </div>
               </Grid>
               <Grid xs={6}>
@@ -359,15 +465,21 @@ const CreateEmployee = ({
                       dateAdapter={AdapterDayjs}
                       value={data.dateOfBirth}
                       onChange={handleDateBirthChange}
+                      // inputRef={methods.register('dateOfBirth', {
+                      //   required: true,
+                      // })}
                     >
                       <DemoItem>
                         <DatePicker views={['year', 'month', 'day']} />
                       </DemoItem>
                     </LocalizationProvider>
+                    {/* {errors.dateOfBirth && (
+                      <p className="validate"> required</p>
+                    )} */}
                   </div>
                   <div className="input-account">
                     <div>
-                      <span>{t('Số CMND')}</span>
+                      <span>{t('identityNumber')}</span>
                       <span className="requied">*</span>
                     </div>
                     <TextField
@@ -377,24 +489,34 @@ const CreateEmployee = ({
                       value={data.identityNumber}
                       onChange={handleNumberChange}
                       type="tel"
+                      // inputRef={methods.register('indentityNumber', {
+                      //   required: true,
+                      // })}
                     />
+                    {/* {errors.indentityNumber && (
+                      <p className="validate"> required</p>
+                    )} */}
                   </div>
                   <div className="input-account">
                     <div>
-                      <span>{t('Nơi cấp')}</span>
+                      <span>{t('issuedBy')}</span>
                       <span className="requied">*</span>
                     </div>
                     <TextField
                       id="outlined-basic"
                       className=""
                       variant="outlined"
-                      value={data.issuedOn}
-                      onChange={handleIssueOnChange}
+                      value={data.issuedBy}
+                      onChange={handleIssuedByChang}
+                      // inputRef={methods.register('issuedBy', {
+                      //   required: true,
+                      // })}
                     />
+                    {/* {errors.issuedBy && <p className="validate"> required</p>} */}
                   </div>
                   <div className="input-account">
                     <div>
-                      <span>{t('Email')}</span>
+                      <span>{t('email')}</span>
                       <span className="requied">*</span>
                     </div>
                     <TextField
@@ -404,11 +526,20 @@ const CreateEmployee = ({
                       type="email"
                       value={data.email}
                       onChange={handleEmailChange}
+                      // inputRef={methods.register('email', {
+                      //   required: true,
+                      //   pattern: /\S+@\S+\.\S+/,
+                      // })}
                     />
+                    {/* {errors.email && errors.email.type === 'required' && (
+                      <span className="error-message">
+                        This is required field
+                      </span>
+                    )} */}
                   </div>
                   <div className="input-account">
                     <div>
-                      <span>{t('Chức vụ')}</span>
+                      <span>{t('position')}</span>
                     </div>
                     <JoySelect
                       className="select-deparment"
@@ -433,7 +564,7 @@ const CreateEmployee = ({
                   </div>
                   <div className="input-account">
                     <div>
-                      <span>{t('Ngày ký hợp đồng')}</span>
+                      <span>{t('datesign')}</span>
                     </div>
                     <LocalizationProvider
                       dateAdapter={AdapterDayjs}
@@ -445,6 +576,19 @@ const CreateEmployee = ({
                       </DemoItem>
                     </LocalizationProvider>
                   </div>
+                  {/* <div className="input-education">
+                  <div>
+                    <span>{t('Học vấn')}</span>
+                    <span className="requied">*</span>
+                  </div>
+                  <TextField
+                    id="outlined-basic"
+                    className=""
+                    variant="outlined"
+                    value={data.address}
+                    onChange={handleAddressChange}
+                  />
+                </div> */}
                 </div>
               </Grid>
             </Grid>
@@ -463,6 +607,7 @@ const CreateEmployee = ({
         </Button>
         <Button
           id="save"
+          // onClick={onSubmit}
           onClick={handleCreateUser}
           color="primary"
           variant="contained"

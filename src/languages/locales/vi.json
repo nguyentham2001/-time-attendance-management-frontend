@@ -13,6 +13,7 @@
   "dateofBirth": "Ngày sinh",
   "address":"Địa chỉ",
   "edit":"Chỉnh sửa",
+  "employee list":"Danh sách nhân viên",
 
   "position":"Chức vụ",
   "workplace":"Nơi làm việc",
@@ -71,8 +72,25 @@
   "afternoon":"Buổi chiều",
   "account":"Tên tài khoản",
   "name-employee":"Tên nhân viên",
-  "update-successful":"Cập nhật thành công"
-
+  "update-successful":"Cập nhật thành công",
+  "over-time":"Tăng ca",
+  "create-overtime":"Tạo phiếu tăng ca",
+  "overtime-type":"Loại tăng ca",
+  "overtime":"Tăng ca",
+  "over-night":"Qua đêm",
+  "time":"Thời gian",
+  "overtime-list":"Danh sách phiếu tăng ca",
+  "date":"Ngày",
+  "to":"Từ",
+  "from":"Đến",
+  "place-of-origin":"Quê quán",
+  "add-deparment":"Thêm phòng ban",
+  "deparment-name":"Tên phòng ban",
+  "delete-department-successfully":"Xóa bộ phận thành công",
+  "add-deparment-successful":"Thêm phòng ban thành công",
+  "manage-department-lists":"Quản lý danh sách phòng ban",
+  "search-for-departments":"Tìm kiếm phòng ban",
+  "department-list":"Danh sách phòng ban"
 
 }
 

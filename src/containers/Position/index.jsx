@@ -26,7 +26,8 @@ import apis from 'src/apis';
 const columns = [
   { id: 'no', label: 'STT', minWidth: 170 },
   { id: 'name', label: 'Name', minWidth: 170 },
-  {id: 'actions', label: 'Actions', minWidth: 170,},
+  { id: 'rank', label: 'Rank', minWidth: 170 },
+  { id: 'actions', label: 'Actions', minWidth: 170 },
 ];
 
 const Position = () => {
@@ -35,10 +36,9 @@ const Position = () => {
   const { enqueueSnackbar } = useSnackbar();
 
   const [open, setOpen] = React.useState(false);
-  const [ positionSelected, setPositionSelected ] = useState(null);
-  const[ showConfirmDeletePosition, setShowConfirmDeletePosition ] = useState(false);
-
- 
+  const [positionSelected, setPositionSelected] = useState(null);
+  const [showConfirmDeletePosition, setShowConfirmDeletePosition] =
+    useState(false);
 
   const handleOpenDialog = (item) => {
     setPositionSelected(item);
@@ -74,44 +74,41 @@ const Position = () => {
     onParamsChange({ limit: newLimit, pageNum: 1 });
   };
 
- 
-
   const handleSearchChange = (event) => {
     const { value } = event.target;
-    debounce(onParamsChange)({search: value.trim()});
+    debounce(onParamsChange)({ search: value.trim() });
   };
-  
-  const handleOpenDelete = (position) =>{
+
+  const handleOpenDelete = (position) => {
     setPositionSelected(position);
     setShowConfirmDeletePosition(true);
   };
 
-  const handleCloseConfirmDelete= () => {
+  const handleCloseConfirmDelete = () => {
     setPositionSelected();
     setShowConfirmDeletePosition(false);
   };
 
   const handleConfirmDeletePosition = async () => {
-    try{
+    try {
       const res = await apis.position.deletePosition(positionSelected.id);
-      if(!res) throw new Error('serverError');
+      if (!res) throw new Error('serverError');
       enqueueSnackbar({
-        variant : 'success',
-        message : 'Xoa bo phan thanh cong',
+        variant: 'success',
+        message: 'Xoa bo phan thanh cong',
       });
 
-      if(data.length <= 1 && currentPage !==1){
+      if (data.length <= 1 && currentPage !== 1) {
         onPageChange(currentPage - 1);
-
-      }else{
+      } else {
         handleReloadData();
       }
     } catch (error) {
       enqueueSnackbar({
-        variant : 'error',
-        message : t('messaga'),
+        variant: 'error',
+        message: t('messaga'),
       });
-    };
+    }
   };
 
   const actions = [
@@ -127,9 +124,7 @@ const Position = () => {
   return (
     <StyledPosition>
       <div className="position-home">
-        <span className="title-position">
-          {t('Quản lý danh sách chức vụ')}
-          </span>
+        <span className="title-position">{t('Quản lý danh sách chức vụ')}</span>
         <div className="position-container">
           <div className="search-position">
             <TextField
@@ -176,53 +171,52 @@ const Position = () => {
                     </TableRow>
                   </TableHead>
                   <TableBody>
-                    {data.map((row,index) => {
+                    {data.map((row, index) => {
                       const item = data[index];
-                        return (
-                          <TableRow
-                            hover
-                            role="checkbox"
-                            tabIndex={-1}
-                            key={row.code}
-                          >
-                            {columns.map((column) => {
-                              let value = row[column.id];
-                              if (column.id == 'no'){
-                                value = (currentPage - 1) * limit + index + 1;
-                              }
-                              if (column.id === 'actions'){
-                                return (
-                                  <TableCell>
-                                    {actions.map((action) => (
-                                      <IconButton
-                                        className="icon-button"
-                                        onClick={() => action.onClick(item)}
-                                        disabled={
-                                          typeof action.disable === 'function'
-                                            ? action.disable(item)
-                                            : action.disable
-                                        }
-                                      >
-                                        {typeof action.icon === 'function'
-                                          ? action.icon(item)
-                                          : action.icon}
-                                      </IconButton>
-                                    ))}
-                                  </TableCell>
-                                );
-                              }
+                      return (
+                        <TableRow
+                          hover
+                          role="checkbox"
+                          tabIndex={-1}
+                          key={row.code}
+                        >
+                          {columns.map((column) => {
+                            let value = row[column.id];
+                            if (column.id == 'no') {
+                              value = (currentPage - 1) * limit + index + 1;
+                            }
+                            if (column.id === 'actions') {
                               return (
-                                <TableCell key={column.id} align={column.align}>
-                                  {column.format && typeof value === 'number'
-                                    ? column.format(value)
-                                    : value}
+                                <TableCell>
+                                  {actions.map((action) => (
+                                    <IconButton
+                                      className="icon-button"
+                                      onClick={() => action.onClick(item)}
+                                      disabled={
+                                        typeof action.disable === 'function'
+                                          ? action.disable(item)
+                                          : action.disable
+                                      }
+                                    >
+                                      {typeof action.icon === 'function'
+                                        ? action.icon(item)
+                                        : action.icon}
+                                    </IconButton>
+                                  ))}
                                 </TableCell>
                               );
-                             
-                            })}
-                          </TableRow>
-                        );
-                      })}
+                            }
+                            return (
+                              <TableCell key={column.id} align={column.align}>
+                                {column.format && typeof value === 'number'
+                                  ? column.format(value)
+                                  : value}
+                              </TableCell>
+                            );
+                          })}
+                        </TableRow>
+                      );
+                    })}
                   </TableBody>
                 </Table>
               </TableContainer>
@@ -246,12 +240,12 @@ const Position = () => {
         handleReloadData={handleReloadData}
       />
       <Popup
-      open = {showConfirmDeletePosition}
-      onOk = {handleConfirmDeletePosition}
-      onClose = {handleCloseConfirmDelete}
-      title = {'Delete Position'}
-      okMessage = {'Delete'}
-      content = {'Are you sure you want to delete this position'}
+        open={showConfirmDeletePosition}
+        onOk={handleConfirmDeletePosition}
+        onClose={handleCloseConfirmDelete}
+        title={'Delete Position'}
+        okMessage={'Delete'}
+        content={'Are you sure you want to delete this position'}
       />
     </StyledPosition>
   );

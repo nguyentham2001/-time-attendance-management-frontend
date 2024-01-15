@@ -94,7 +94,7 @@ const Deparment = () => {
 
       enqueueSnackbar({
         variant: 'success',
-        message: t('Xoa bo phan thanh cong'),
+        message: t('delete-department-successfully'),
       });
 
       if (data.length <= 1 && currentPage !== 1) {
@@ -124,15 +124,13 @@ const Deparment = () => {
   return (
     <StyledDeparment>
       <div className="deparment-home">
-        <span className="title-deparment">
-          {t('Quản lý danh sách phòng ban')}
-        </span>
+        <span className="title-deparment">{t('manage-department-lists')}</span>
         <div className="deparment-footer">
           <div className="search-deparment">
             <TextField
               id="search-employee"
               variant="outlined"
-              placeholder={t('Tìm kiếm phòng ban')}
+              placeholder={t('search-for-departments')}
               type="text"
               className="input-employee"
               onChange={handleSearchChange}
@@ -159,7 +157,7 @@ const Deparment = () => {
             <div className="icon-list">
               <MenuIcon />
             </div>
-            <span className="title-list">{t('Danh sách phòng ban')}</span>
+            <span className="title-list">{t('department-list')}</span>
           </div>
           <div className="table-deparment">
             <Paper sx={{ width: '100%' }}>
@@ -167,9 +165,9 @@ const Deparment = () => {
                 <Table stickyHeader aria-label="sticky table">
                   <TableHead>
                     <TableRow>
-                      <TableCell>STT</TableCell>
-                      <TableCell>Tên phòng ban</TableCell>
-                      <TableCell>Thao tác</TableCell>
+                      <TableCell>{t('no')}</TableCell>
+                      <TableCell>{t('department-name')}</TableCell>
+                      <TableCell>{t('actions')}</TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>

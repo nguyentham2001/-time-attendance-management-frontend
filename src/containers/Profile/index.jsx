@@ -158,32 +158,6 @@ const Profile = () => {
     }));
   };
 
-  // const handleUpadateEditProfile = async () => {
-  //   if (name.trim().leghth == 0) return;
-  //   try {
-  //     let res;
-  //     const data ={name};
-  //     if(!profile){
-  //       res = await apis.user.updateProfile(profile.id, data);
-
-  //     }
-  //     if (!res) throw new Error("serverError");
-  //     enqueueSnackbar({
-  //       variant: "success",
-  //       message: profile
-  //       ? t('Cap nhat thanh cong')
-  //     });
-  //     handleReloadData();
-  //       handleClose();
-  //   }catch(error){
-  //     const{message} = error;
-  //     enqueueSnackbar({
-  //       variant: 'error',
-  //       message: t(message),
-  //     });
-  //   }
-  // };
-
   return (
     <StyledProfile>
       <div className="profile-home">
@@ -450,7 +424,7 @@ const Profile = () => {
                 </div>
                 <div className="profile-country">
                   <div>
-                    <span>{t('Quê quán')}</span>
+                    <span>{t('place-of-origin')}</span>
                   </div>
                   <TextField
                     id="filled-helperText"

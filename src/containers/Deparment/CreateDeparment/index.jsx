@@ -30,7 +30,7 @@ const CreateDepartment = ({
       setName('');
       return;
     }
-
+    console.log(deparment);
     const { name: initName = '' } = deparment || {};
     setName(initName);
   }, [open, deparment]);
@@ -58,8 +58,8 @@ const CreateDepartment = ({
       enqueueSnackbar({
         variant: 'success',
         message: deparment
-          ? t('Cap nhat bo phan thanh cong')
-          : t('Them bo phan thanh cong'),
+          ? t('update-successful')
+          : t('add-deparment-successful'),
       });
 
       handleReloadData();
@@ -81,11 +81,11 @@ const CreateDepartment = ({
       aria-describedby="alert-dialog-description"
     >
       <DialogTitle id="alert-dialog-title" className="title-create">
-        {t('Thêm phòng ban')}
+        {t('add-deparment')}
       </DialogTitle>
       <DialogContent>
         <DialogContentText id="alert-dialog-description">
-          <span>{t('Tên phòng ban')}</span>
+          <span>{t('deparment-name')}</span>
           <div className="input-createdeparment">
             <TextField
               id="outlined-basic"

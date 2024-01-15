@@ -14,54 +14,56 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import { useSnackbar } from 'notistack';
 import apis from 'src/apis';
 
-const CreatePosition = ({ 
-  open,
-  position ,
-  handleClose, 
-  handleReloadData
- }) => {
+const CreatePosition = ({ open, position, handleClose, handleReloadData }) => {
   const { t } = useTranslation();
 
   const { enqueueSnackbar } = useSnackbar();
 
-  const [name, setName] = useState(' ');
+  const [name, setName] = useState();
+
+  const [level, setLevel] = useState();
 
   useEffect(() => {
     if (!open) {
       setName('');
+      setLevel('');
       return;
     }
-    
-    const { name: initName = '' } = position || {};
-  setName(initName);
-  }, [open, position]);
 
-  
- 
+    console.log(position);
+    const { name: initName = '', level: initLevel = 1 } = position || {};
+    setName(initName);
+    setLevel(initLevel);
+  }, [open, position]);
 
   const handleNameChange = (event) => {
     const { value } = event.target;
     setName(value);
   };
 
+  const handleLevelChange = (event) => {
+    const { value } = event.target;
+    setLevel(value);
+  };
+
   const handleCreatePosition = async () => {
     if (name.trim().length == 0) return;
     try {
-     let res;
-     const data = {name};
-     
-     if(!position) {
-      res = await apis.position.createPosition(data);
-     }else{
-      res = await apis.position.updatePosition(position.id, data);
-     }
-     if (!res) throw new Error('serverError');
+      let res;
+      const data = { name, rank: level };
+
+      if (!position) {
+        res = await apis.position.createPosition(data);
+      } else {
+        res = await apis.position.updatePosition(position.id, data);
+      }
+      if (!res) throw new Error('serverError');
 
       enqueueSnackbar({
         variant: 'success',
-        message: position 
-        ? t('Cap nhat bo phan thanh cong')
-        : t('Them bo phan thanh cong'),
+        message: position
+          ? t('Cap nhat bo phan thanh cong')
+          : t('Them bo phan thanh cong'),
       });
       handleReloadData();
       handleClose();
@@ -86,14 +88,29 @@ const CreatePosition = ({
       </DialogTitle>
       <DialogContent>
         <DialogContentText id="alert-dialog-description">
-          <span>{t('Tên chức vụ')}</span>
-          <div className="input-createdeparment">
-            <TextField
-              id="outlined-basic"
-              className="input-create"
-              variant="outlined"
-              onChange={handleNameChange}
-            />
+          <div>
+            <span>{t('Tên chức vụ')}</span>
+            <div className="input-createdeparment">
+              <TextField
+                id="outlined-basic"
+                className="input-create"
+                variant="outlined"
+                value={name}
+                onChange={handleNameChange}
+              />
+            </div>
+          </div>
+          <div className="position-level">
+            <span>{t('level')}</span>
+            <div className="input-level">
+              <TextField
+                id="outlined-basic"
+                className="input-create"
+                variant="outlined"
+                value={level}
+                onChange={handleLevelChange}
+              />
+            </div>
           </div>
         </DialogContentText>
       </DialogContent>
